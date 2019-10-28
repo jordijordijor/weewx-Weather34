@@ -1,4 +1,5 @@
 # Weather34 Home Weather Station weather website skin for WeeWX versions 3.9.0 or later
+# Version WX-HWS-HVN
 # (Packaged for installation using wee_extension ulility)
 
 This repository contains the current WeeWX version of Brian Underdown's Home Weather Station weather website template set. Brian's main website is https://weather34.com/homeweatherstation/index.html In January, 2019, Brian asked others to distribute/maintain his code. 
