@@ -1,5 +1,7 @@
-# Installer for WX-HWS template
-# Steepleian, 2019
+# $Id: install.py 1782 2018-01-27 18:17:02Z mwall $
+# installer for exfoliation
+# Copyright 2014-2017 Matthew Wall
+# Modified for Weather34 skin by Ian Millard <steepleian@gmail.com> 2019
 
 from setup import ExtensionInstaller
 
