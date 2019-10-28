@@ -22,60 +22,30 @@ IMPORTANT. After installing PHP please make sure you install all the PHP modules
 	
 	VERY IMPORTANT. It is crucial that the '[CumulusRealTime]' unit_system is set to METRIC as in the snippet above. If US or METRICWX setting is used, the resulting display will be un-predictable and even nonsensical! 
 
-	
-	Finally go to the '[StdReport]' section and add this: -
-
-		[[w34skinReport]]
-    			# The w34skinReport uses the 'w34skin' skin, which contains the
-    			# templates for the WX-HWS charts.
-    			skin = w34skin
-    			enable = true
-				
-				[[[Units]]]
-            			# The following section sets the units for w34skin.
-            			# IMPORTANT do not change in any circumstance.
-            				
-					[[[[Groups]]]]
-                				group_altitude = meter    
-                				group_degree_day = degree_C_day   
-                				group_pressure = hPa    
-                				group_rain = mm   
-                				group_rainrate = mm_per_hour    
-                				group_speed = km_per_hour     
-                				group_speed2 = km_per_hour2     
-                				group_temperature = degree_C    
-                				mbar = "mb"
-                				hPa = "hPa"
-                				inHg = "in"
-                				mm_per_hour = "mm"
-                				cm_per_hour = "cm"
-                				inch_per_hour = "in"
-               	 				km_per_hour = "km/h"
-                				knot = "kts"
-                				meter_per_second ="m/s"
-                				mile_per_hour ="mph"
-			
-	Once completed, make sure you save weewx.conf
+Once completed, make sure you save weewx.conf
 
 
-* Download the current version of WX-HWS-master zip file at https://github.com/steepleian/WX-HWS
+* Download the current version of WX-HWS-master zip file at https://github.com/steepleian/WX-HWS to your bin folder (/home/weewx/bin for a setup.py install or /usr/bin for a DEB install).
 
-This new version will require a clean install. Extract the .zip file into the root of your webserver and rename the resultant folder to a name of your choice, eg 'pws'
+* From the command line run the following code: -
 
-* Important. Depending on the configuration of your server, you may have to change your file permissions. Change all files and folders recursively in the root of your server to 0775 using CHMOD and user to your Linux login name and groups to www-data using CHOWN, either via the CLI or your server Control Panel (if you employ one). I use Webmin http://www.webmin.com/deb.html, an open source control panel which will make your tasks much easier.
+		cd /home/weewx/bin (or cd /usr/bin)
+		sudo ./wee_extension --install WX-HWS-master.zip	
 
-* In the download you will find a folder called 'copy_folder_inside_into_skins_folder'. Inside is a folder called 'w34skin'. Copy or move the w34skin folder and its contents into your skins folder. In the '[CheetahGenerator]' section you will need to edit the skin.conf file in this folder to insert your own path to the folder in which the template is installed. For example /[YOUR_OWN_PATH]/mbcharts might typically be '/var/www/html/pws/mbcharts'.
+* Restart WeeWX.
 
-* You will also find a folder called 'copy_files_inside_to_user_folder'. Copy the files inside, stats.py and lastrain.py, into your weewx/bin/user folder.
+* After around 5min your should find that folder the weather34 folder has been created in the weewx folder. [your_path]/weewx/weather34 will now be the location of the Weather34 skin in your web server.
+
+* Stop WeeWX and change all files and folders recursively in the root of your server to 0775 using CHMOD and user to your Linux login name and groups to www-data using CHOWN, either via the CLI or your server Control Panel (if you employ one). I use Webmin http://www.webmin.com/deb.html, an open source control panel which will make your tasks much easier.
 
 # IMPORTANT
 
-* Once complete and everyting is saved, please restart weeWX.
+* Restart weeWX.
 
-You can now test that the template is working by opening it up in your browser. Initially you will see random demo data. Click on the menu button at the top-left corner and select settings. This will open up a web form in which you apply your own settings. Pay particular attention to the location of the realtime.txt file being generated on a loop cycle by weeWX. The default location is “/[html_root]/weewx/realtime.txt” (for example /var/www/html/weewx/realtime.txt).
+* You can now test that the template is working by opening it up in your browser. Initially you will see random demo data. Click on the menu button at the top-left corner and select settings. This will open up a web form in which you apply your own settings. Pay particular attention to the location of the realtime.txt file being generated on a loop cycle by weeWX. The default location is “/[html_root]/weewx/realtime.txt” (for example /var/www/html/weewx/realtime.txt).
 
-For an in depth guide on configuring a remote server please refer to 'taylormia_remote_server_setup.pdf'
+* For an in depth guide on configuring a remote server please refer to 'taylormia_remote_server_setup.pdf'
 
-Finally re-start weewx and refresh your browser and you should see your own live weather station data. If things go wrong, check your settings carefully ensuring that the realtime.txt file and API keys and tokens have been correctly entered. 
+* Finally re-start weewx and refresh your browser and you should see your own live weather station data. If things go wrong, check your settings carefully ensuring that the realtime.txt file and API keys and tokens have been correctly entered. 
 
-If you have any issues please raise directly with steepleian@gmail.com.
+* If you have any issues please raise directly with steepleian@gmail.com.
