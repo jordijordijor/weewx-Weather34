@@ -20,7 +20,7 @@ class ExfoliationInstaller(ExtensionInstaller):
                 'StdReport': {
                     'Weather34Report': {
                         'skin':'Weather34',
-                        'HTML_ROOT':'pws'
+                        'HTML_ROOT':'weather34'
                     }
                 }
             },
