@@ -91,7 +91,7 @@ update_file($ch4, $complete_save_loc4);
 }
 ?>
 <?php
-// Meteoalarm rss feed based for future use
+// Meteoalarm rss feed based
 
 // $filename3='jsondata/meteoalarm.txt';
 // if(file_stale($filename3)){
@@ -99,7 +99,7 @@ update_file($ch4, $complete_save_loc4);
 
 ?>
 <?php
-// Cloud Cover for future use
+// Cloud Cover
 // exec ("wget -r -O /var/www/pws/sat1temp.png https://api.sat24.com/crop?type=visual5hdcomplete\&lat=51.940\&lon=-0.987\&width=300\&height=300\&zoom=1.00\&continent=eu");
 
 // exec ("wget -r -O /var/www/pws/sat2temp.png https://api.sat24.com/crop?type=infraPolair\&lat=51.940\&lon=-0.987\&width=300\&height=300\&zoom=1.00\&continent=eu");
