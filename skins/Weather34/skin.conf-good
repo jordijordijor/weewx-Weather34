@@ -1,0 +1,131 @@
+###############################################################################
+# W34SKIN SKIN CONFIGURATION FILE                                             #
+# Copyright (c) 2018 Tom Keffer <tkeffer@gmail.com> and Matthew Wall          #
+# See the file LICENSE.txt for your rights.                                   #
+###############################################################################
+
+skin_semantics = 2
+
+###############################################################################
+
+[Defaults]
+        
+        [[Units]]
+            
+            # The following section sets what unit to use for each unit group.
+            # NB: The unit is always in the singular. I.e., 'mile_per_hour',
+            # NOT 'miles_per_hour'
+            [[[Groups]]]
+                
+                group_altitude = meter    # Options are 'foot' or 'meter'
+                group_degree_day = degree_C_day    # Options are 'degree_F_day' or 'degree_C_day'
+                group_pressure = hPa    # Options are 'inHg', 'mmHg', 'mbar', or 'hPa'
+                group_rain = mm    # Options are 'inch', 'cm', or 'mm'
+                group_rainrate = mm_per_hour    # Options are 'inch_per_hour', 'cm_per_hour', or 'mm_per_hour'
+                group_speed = km_per_hour    # Options are 'mile_per_hour', 'km_per_hour', 'knot', or 'meter_per_second'
+                group_speed2 = km_per_hour2    # Options are 'mile_per_hour2', 'km_per_hour2', 'knot2', or 'meter_per_second2'
+                group_temperature = degree_C    # Options are 'degree_F' or 'degree_C'
+                mbar = "mb"
+                hPa = "hPa"
+                inHg = "in"
+                mm_per_hour = "mm"
+                cm_per_hour = "cm"
+                inch_per_hour = "in"
+                km_per_hour = "km/h"
+                knot = "kts"
+                meter_per_second ="m/s"
+                mile_per_hour ="mph"
+
+
+
+	[[Labels]]
+                
+                day = " day", " days"
+                hour = " hour", " hours"
+                minute = " minute", " minutes"
+                second = " second", " seconds"
+                NONE = ""
+
+    # Override some labels. No need to identify these as a "Battery"
+    # or "Voltage", because that is included in the template.
+    [[Generic]]
+        	txBatteryStatus      = Transmitter
+        	windBatteryStatus    = Wind
+        	rainBatteryStatus    = Rain
+        	outTempBatteryStatus = Outside Temperature
+        	inTempBatteryStatus  = Inside Temperature
+        	consBatteryVoltage   = Console
+        	heatingVoltage       = Heating
+        	supplyVoltage        = Supply
+        	referenceVoltage     = Reference
+
+        # Some specialized labels
+        	rain_today           = Rain Today
+        	wind                 = Wind
+
+
+###############################################################################
+
+# The CheetahGenerator creates files from templates.  This section
+# specifies which files will be generated from which template.
+
+[CheetahGenerator]
+
+	 # Possible encodings are 'html_entities', 'utf8', or 'strict_ascii'
+    encoding = html_entities
+    search_list_extensions = user.stats.MyStats, user.lastrain.lastRainTags
+
+            
+    [[WXCHARTDATA]]
+   
+                
+    # Charts that plot "by day"
+           [[[DAILYCHARTS]]]
+                encoding = strict_ascii	
+                template = result.csv.tmpl
+                HTML_ROOT = /var/www/pws/mbcharts            
+
+    # Charts that plot "by month"
+            [[[MONTHLYCHARTS]]]
+                encoding = strict_ascii
+                template = MMYYYY.csv.tmpl
+                HTML_ROOT = /var/www/pws/mbcharts/chartdata
+                
+              
+
+    # Charts that plot "by year"
+            [[[YEARLYCHARTS]]]
+                encoding = strict_ascii
+                template = YYYY.csv.tmpl
+                HTML_ROOT = /var/www/pws/mbcharts/chartdata
+                
+    
+    [[WXSTATS]]
+    
+    # Generates data for various W34 Statistics
+            [[[W34STATS]]]
+                 encoding = strict_ascii
+                 template = w34stats.php.tmpl
+                 HTML_ROOT = /var/www/pws
+                 
+                
+###############################################################################
+
+# The CopyGenerator copies files from one location to another.
+
+[CopyGenerator]
+
+    # List of files to be copied only the first time the generator runs
+    copy_once = Weather34/Pws/js/*.*, Weather34/Pws/jsondata/*.*, Weather34/Pws/languages/*.*, Weather34/Pws/mbcharts/*.*, Weather34/Pws/metar/*.*, Weather34/Pws/wrnimages/*.*, Weather34/Pws/img/flags/*.svg, Weather34/Pws/img/*.json, Weather34/Pws/img/*.svg, Weather34/Pws/img/*.png, Weather34/Pws/img/*.xml, Weather34/Pws/img/*.txt, Weather34/Pws/img/*.ico, Weather34/Pws/*.html, Weather34/Pws/*.md, Weather34/Pws/*.yml, Weather34/Pws/*.php, Weather34/Pws/*.txt, Weather34/Pws/*.pdf, Weather34/Pws/css/*.css, Weather34/Pws/css/aqi/*.svg, Weather34/Pws/css/darkskyicons/*.svg, Weather34/Pws/css/fonts/*.*, Weather34/Pws/css/icons/*.svg, Weather34/Pws/css/mouse/*.png, Weather34/Pws/css/rain/*.svg, Weather34/Pws/css/windicons/*.svg, Weather34/Pws/css/wrnimages/*.jpg, Weather34/Pws/css/wuicons/*.svg
+
+    # List of files to be copied each time the generator runs
+    # copy_always = 
+ 
+   
+
+###############################################################################
+
+[Generators]
+        # The list of generators that are to be run:
+        generator_list = weewx.cheetahgenerator.CheetahGenerator, weewx.reportengine.CopyGenerator
+        

@@ -1,0 +1,29 @@
+#errorCatcher Echo
+#set $YM="%Y %m"
+#set $D=" %Y-%m-%d %H:%M:%S "
+#set $M=" %b"
+#set $DY= " %d %b "
+#set $HR= " %H:%M"
+#set $Time=" %H:%M"
+#set $NODAY=" N/A"
+#set $Temp="%6.1f"
+#set $Wind="%6.1f"
+#set $DR=0
+#set $ID=0
+#set $Count="%6d"
+#set $NONE="  "
+#if $unit.unit_type_dict.group_rain == "mm"
+#set $Rain="%6.1f"
+#else
+#set $Rain="%6.2f"
+#end if
+ID,time,outsideTemp,barometer,raintoday,UV,windgustmph,windSpeed,radiation,dewpoint,rainrate,direction,cloudCover,date,timestamp,lightning,unit_temp,unit_wind,unit_pressure,unit_rain
+#for $_span in $day.spans(interval=300)
+#if $_span.barometer.count.raw
+#set $DR=$DR+($_span.rain.sum.raw)
+#set $ID=$ID+1
+$ID,$_span.start.format($HR),$_span.outTemp.max.raw,$_span.barometer.max.raw,$_span.rain.sum.raw,$_span.UV.max.raw,$_span.windGust.max.raw,$_span.windSpeed.max.raw,$_span.radiation.max.raw,$_span.dewpoint.min.raw,$_span.rainRate.max.raw,$_span.windDir.avg.raw,$_span.rxCheckPercent.max.raw,$_span.start.format($DY),$_span.start.format($D),$NONE,$unit.label.outTemp,$unit.label.windSpeed,$unit.label.barometer,$unit.label.rain
+#else
+$NONE
+#end if
+#end for

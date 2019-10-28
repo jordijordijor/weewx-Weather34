@@ -1,0 +1,24 @@
+#errorCatcher Echo
+#set $YM="%Y %m"
+#set $D="%Y-%m-%d"
+#set $M="%d %b"
+#set $Time=" %H:%M"
+#set $NODAY=" N/A"
+#set $Temp="%6.1f"
+#set $Wind="%6.1f"
+#set $Dir="%6.0f"
+#set $Count="%6d"
+#set $NONE=" "
+#if $unit.unit_type_dict.group_rain == "mm"
+#set $Rain="%6.1f"
+#else
+#set $Rain="%6.2f"
+#end if                
+#for $day in $year.days
+#if $day.barometer.count.raw
+## Date,TemperatureHighC,TemperatureLowC,DewpointHighC,DewpointLowC,PrecipitationSumCM,GustSpeedMaxKMH,WindSpeedMaxKMH,PressureMaxhPa,PressureMinhPa,unit_temp,unit_wind,unit_pressure,unit_rain
+$day.dateTime.format($M),$day.outTemp.max.raw,$day.outTemp.min.raw,$day.dewpoint.max.raw,$day.dewpoint.min.raw,$day.rain.sum.raw,$day.windGust.max.raw,$day.windSpeed.max.raw,$day.radiation.max.raw,$day.barometer.max.raw,$day.barometer.min.raw,$unit.label.outTemp,$unit.label.windSpeed,$unit.label.barometer,$unit.label.rain
+#else
+$NONE
+#end if
+#end for
