@@ -10,7 +10,7 @@ This version is assembled as an install package and uses the WeeWX utility wee_e
 
 If you are happy to use Weather Underground as a source of data for chart generation you are strongly recommended to use the Ken True CU-HWS version (https://github.com/ktrue/CU-HWS) as your first choice which can be configured out-of-the-box to be used with WeeWX.
 
-# What's New in this Version WX-HWS-UB40-RRW
+# What's New in this Version WX-HWS-UB40-HVN
 
 Built on the current Meteobridge Version MB-UB40-RRW giving an identical experience.
 
