@@ -16,7 +16,7 @@
 	####################################################################################################
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
-	$weatherfile = date('Y');
+	$weatherfile = date('mY');
 
   $conv = 1;
 	if ($pressureunit == 'mb' || $pressureunit == 'hPa') {
