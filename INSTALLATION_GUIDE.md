@@ -12,7 +12,7 @@ IMPORTANT. After installing PHP please make sure you install all the PHP modules
 
 * Install PyePhem (https://rhodesmill.org/pyephem/). Typically for a Debian based distro use 'sudo apt-get install python-ephem'
 
-* To enable WeeWX to communicate with the weather34 dashboard template, you must install the CRT plugin, (stands for Cumulus Real Time). Please follow the detailed instructions at https://github.com/weewx/weewx/wiki/crt. After installation edit the weewx-conf file. Go to the  [CumulusRealTime] which will likely be near the end of the script. Change this section to reflect the following: -
+* To enable WeeWX to communicate with the Weather34 skin, you must install the CRT plugin, (stands for Cumulus Real Time). Please follow the detailed instructions at https://github.com/weewx/weewx/wiki/crt. After installation edit the weewx-conf file. Go to the  [CumulusRealTime] which will likely be near the end of the script. Change this section to reflect the following: -
 
 		[CumulusRealTime]
     			filename = /var/www/html/weewx/realtime.txt
