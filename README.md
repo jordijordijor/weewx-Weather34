@@ -43,7 +43,7 @@ Dark or light chart colour theme (set by Default Theme Colour in Settings).
 
 Choice of 24hr 12hr station main clock.
 
-# Important  for those using Weather Underground for chart data, unfortunately this is no longer supported. This is not a template issue, the issue lies with Weather Underground and it looks like they may have discontinued this facility. If it returns in some form it may be possible to use again but it will have to be a tried and tested feature of Weather Underground before re-introducing it into the template.
+# Important. The Weather34 skin no longer supports the use of Weather Underground data to generate weather charts. All chart data is obtained directly from your existing integrated WeeWX database.
 
 # Demo
 
