@@ -29,9 +29,7 @@ class ExfoliationInstaller(ExtensionInstaller):
                                 ]
                     ),
                    ('skins/Weather34', ['skins/Weather34/skin.conf',
-                                        'skins/Weather34/result.csv.tmpl',
-                                        'skins/Weather34/MMYYYY.csv.tmpl',
-                                        'skins/Weather34/YYYY.csv.tmpl',
+                                        
                                         'skins/Weather34/w34stats.php.tmpl'
                                          ]
                     ),
@@ -644,6 +642,10 @@ class ExfoliationInstaller(ExtensionInstaller):
 														'skins/Weather34/mbcharts/yearlywindspeedgustmedium.php'
                                                 		
                                                        		]),
+		   												'skins/Weather34/mbcharts/chardata/result.csv.tmpl',
+                                        									'skins/Weather34/mbcharts/chardata/MMYYYY.csv.tmpl',
+                                       										'skins/Weather34mbcharts/chardata//YYYY.csv.tmpl',
+		   
 
 					('skins/Weather34/metar',   	['skins/Weather34/metar/metar34get.php'	
 														]),									   
