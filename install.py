@@ -644,7 +644,7 @@ class ExfoliationInstaller(ExtensionInstaller):
                                                        		]),
 		   			('skins/Weather34/mbcharts/chartdata', 					['skins/Weather34/mbcharts/chartdata/result.csv.tmpl',
                                         									'skins/Weather34/mbcharts/chartdata/MMYYYY.csv.tmpl',
-                                       										'skins/Weather34mbcharts/chartdata//YYYY.csv.tmpl'
+                                       										'skins/Weather34/mbcharts/chartdata//YYYY.csv.tmpl'
 		   												]),
 
 					('skins/Weather34/metar',   						['skins/Weather34/metar/metar34get.php'	
