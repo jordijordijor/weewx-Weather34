@@ -7,41 +7,13 @@ This version requires WeeWX version 3.9.0 or later software with the CRT extensi
 
 This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-HVN which is now maintained by Lightmaster (Meteobridge-Weather34-Template). A key metric for this project is to maintain design, functional and performance parity with the MB-UB40 parent. Although not an absolute guarantee, the aim is to update WX-HWS within 24 hours of the parent being updated.
 
-This version is assembled as an install package and uses the WeeWX utility wee_extension to install. Depending on your own WeeWX setup, minor edits may be required to be made to weewx.conf and Weather34 skin.conf files. Please see the Weather34 skin Installation Guide for detailed instructions.
+This version is assembled as an install package and uses the WeeWX utility wee_extension to install. This greatly simplifies the installation process from that of previous versions. Depending on your own WeeWX setup, minor edits may be required to be made to weewx.conf and Weather34 skin.conf files. Please see the Weather34 skin Installation Guide for detailed instructions.
 
 If you are happy to use Weather Underground as a source of data for chart generation you are strongly recommended to use the Ken True CU-HWS version (https://github.com/ktrue/CU-HWS) as your first choice which can be configured out-of-the-box to be used with WeeWX.
 
 # What's New in this Version WX-HWS-UB40-HVN
 
-Built on the current Meteobridge Version MB-UB40-RRW giving an identical experience.
-
-Latest design features.
-
-New w34 skin
-
-Harnesses the power of the WeeWX database to generate graphs and statiscal data.
-
-New style pop-up weather almanacs.
-
-Rainfall almanac reflects rain year settings in weewx.conf file.
-
-Introduces the concept of a WeeWX-api.
-
-Meteobridge to WeeWX variable look-up table.
-
-New addition charts.
-
-New addition wind map.
-
-New addition pop-up window links now visible in phone mode.
-
-Auto adjusting pop-up windows for better viewing experience on smart phones and smaller tablet devices.
-
-Enhanced chart freatures.
-
-Dark or light chart colour theme (set by Default Theme Colour in Settings).
-
-Choice of 24hr 12hr station main clock.
+Now follows a more standardised install process using WeeWX utility wee_extension.
 
 # Important. The Weather34 skin no longer supports the use of Weather Underground data to generate weather charts. All chart data is obtained directly from your existing integrated WeeWX database.
 
