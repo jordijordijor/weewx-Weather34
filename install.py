@@ -603,8 +603,8 @@ class ExfoliationInstaller(ExtensionInstaller):
 														'skins/Weather34/languages/lang.pl.php',
 														'skins/Weather34/languages/lang.sp.php',
 														'skins/Weather34/languages/lang.sw.php',
-														'skins/Weather34/languages/lang.tr.php',
-                                                		'skins/Weather34/languages/translations.js'
+														'skins/Weather34/languages/lang.tr.php'
+                                                		
                                                        		]),
 
 					('skins/Weather34/mbcharts',   						['skins/Weather34/mbcharts/canvasJs.js',
