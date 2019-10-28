@@ -1,5 +1,5 @@
 # Weather34 Home Weather Station weather website skin for WeeWX versions 3.9.0 or later
-# Version WX-HWS-HVN
+# Version WX-HWS-IHVN
 # (Packaged for installation using wee_extension ulility)
 
 This repository contains the current WeeWX version of Brian Underdown's Home Weather Station weather website template set. Brian's main website is https://weather34.com/homeweatherstation/index.html In January, 2019, Brian asked others to distribute/maintain his code. 
@@ -12,7 +12,7 @@ This version is assembled as an install package and uses the WeeWX utility wee_e
 
 If you are happy to use Weather Underground as a source of data for chart generation you are strongly recommended to use the Ken True CU-HWS version (https://github.com/ktrue/CU-HWS) as your first choice which can be configured out-of-the-box to be used with WeeWX.
 
-# What's New in this Version WX-HWS-UB40-HVN
+# What's New in this Version WX-HWS-UB40-IHVN
 
 Now follows a more standardised install process using WeeWX utility wee_extension.
 
