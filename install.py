@@ -607,8 +607,8 @@ class ExfoliationInstaller(ExtensionInstaller):
                                                 		'skins/Weather34/languages/translations.js'
                                                        		]),
 
-					('skins/Weather34/mbcharts',   ['skins/Weather34/mbcharts/canvasJs.js',
-                                                        'skins/Weather34/mbcharts/chart_theme.php',
+					('skins/Weather34/mbcharts',   						['skins/Weather34/mbcharts/canvasJs.js',
+                                                        							'skins/Weather34/mbcharts/chart_theme.php',
 														'skins/Weather34/mbcharts/chartslivedata.php',
 														'skins/Weather34/mbcharts/conversion.php',
 														'skins/Weather34/mbcharts/empty.php',
@@ -642,12 +642,12 @@ class ExfoliationInstaller(ExtensionInstaller):
 														'skins/Weather34/mbcharts/yearlywindspeedgustmedium.php'
                                                 		
                                                        		]),
-		   												'skins/Weather34/mbcharts/chardata/result.csv.tmpl',
+		   			('skins/Weather34/mbcharts/chardata', 					['skins/Weather34/mbcharts/chardata/result.csv.tmpl',
                                         									'skins/Weather34/mbcharts/chardata/MMYYYY.csv.tmpl',
-                                       										'skins/Weather34mbcharts/chardata//YYYY.csv.tmpl',
-		   
+                                       										'skins/Weather34mbcharts/chardata//YYYY.csv.tmpl'
+		   												]),
 
-					('skins/Weather34/metar',   	['skins/Weather34/metar/metar34get.php'	
+					('skins/Weather34/metar',   						['skins/Weather34/metar/metar34get.php'	
 														]),									   
 
 
