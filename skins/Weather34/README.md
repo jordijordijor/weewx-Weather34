@@ -1,46 +1,22 @@
-# Home Weather Station weather website template for WeeWX versions 3.9.2 or later
+# Weather34 Home Weather Station weather website skin for WeeWX versions 3.9.2 or later
+# Version WX-HWS-IHVN
+# (Packaged for installation using wee_extension ulility)
 
 This repository contains the current WeeWX version of Brian Underdown's Home Weather Station weather website template set. Brian's main website is https://weather34.com/homeweatherstation/index.html In January, 2019, Brian asked others to distribute/maintain his code. 
 
-This version requires WeeWX version 3.9.2 or later software with the CRT extension to denerate data feeds for the conditions from your personal weather station. WeeWX is available at http://weewx.com
+This version requires WeeWX version 3.9.0 or later software with the CRT extension to denerate data feeds for the conditions from your personal weather station. WeeWX is available at http://weewx.com
 
-This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-RRW which is now maintained by Lightmaster (Meteobridge-Weather34-Template). A key metric for this project is to maintain design, functional and performance parity with the MB-UB40 parent. Although not an absolute guarantee, the aim is to update WX-HWS within 24 hours of the parent being updated.
+This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-HVN which is now maintained by Lightmaster (Meteobridge-Weather34-Template). A key metric for this project is to maintain design, functional and performance parity with the MB-UB40 parent. Although not an absolute guarantee, the aim is to update WX-HWS within 24 hours of the parent being updated.
+
+This version is assembled as an install package and uses the WeeWX utility wee_extension to install. This greatly simplifies the installation process from that of previous versions. Depending on your own WeeWX setup, minor edits may be required to be made to weewx.conf and Weather34 skin.conf files. Please see the Weather34 skin Installation Guide for detailed instructions.
 
 If you are happy to use Weather Underground as a source of data for chart generation you are strongly recommended to use the Ken True CU-HWS version (https://github.com/ktrue/CU-HWS) as your first choice which can be configured out-of-the-box to be used with WeeWX.
 
-# What's New in this Version WX-HWS-UB40-RRW
+# What's New in this Version WX-HWS-UB40-IHVN
 
-Built on the current Meteobridge Version MB-UB40-RRW giving an identical experience.
+Now follows a more standardised install process using WeeWX utility wee_extension.
 
-Latest design features.
-
-New w34 skin
-
-Harnesses the power of the WeeWX database to generate graphs and statiscal data.
-
-New style pop-up weather almanacs.
-
-Rainfall almanac reflects rain year settings in weewx.conf file.
-
-Introduces the concept of a WeeWX-api.
-
-Meteobridge to WeeWX variable look-up table.
-
-New addition charts.
-
-New addition wind map.
-
-New addition pop-up window links now visible in phone mode.
-
-Auto adjusting pop-up windows for better viewing experience on smart phones and smaller tablet devices.
-
-Enhanced chart freatures.
-
-Dark or light chart colour theme (set by Default Theme Colour in Settings).
-
-Choice of 24hr 12hr station main clock.
-
-# Important  for those using Weather Underground for chart data, unfortunately this is no longer supported. This is not a template issue, the issue lies with Weather Underground and it looks like they may have discontinued this facility. If it returns in some form it may be possible to use again but it will have to be a tried and tested feature of Weather Underground before re-introducing it into the template.
+# Important. The Weather34 skin no longer supports the use of Weather Underground data to generate weather charts. All chart data is obtained directly from your existing integrated WeeWX database.
 
 # Demo
 
