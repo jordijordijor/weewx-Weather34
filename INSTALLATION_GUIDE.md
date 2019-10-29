@@ -38,6 +38,8 @@ Once completed, make sure you save weewx.conf
 
 * Stop WeeWX and change all files and folders recursively in the root of your server to 0775 using CHMOD and user to your Linux login name and groups to www-data using CHOWN, either via the CLI or your server Control Panel (if you employ one). I use Webmin http://www.webmin.com/deb.html, an open source control panel which will make your tasks much easier.
 
+* Finally you need to make a small edit to your Weather34 skin.conf file. Find the line towards the end of the file which starts copy_once = ....... and comment this line out by placing a hash symbol in front.
+
 # IMPORTANT
 
 * Restart weeWX.
