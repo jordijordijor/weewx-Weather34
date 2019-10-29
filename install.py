@@ -91,8 +91,8 @@ class ExfoliationInstaller(ExtensionInstaller):
                                                 'skins/Weather34/rainfallalmanac.php',
                                                 'skins/Weather34/rainfallf-year-month.php',
                                                 'skins/Weather34/settings.php',
-                                                'skins/Weather34/settings1_default.php',
-					      	'skins/Weather34/settings1.php',
+                                                'skins/Weather34/settings1.default.php',
+					      	
                                                 'skins/Weather34/shared.php',
                                                 'skins/Weather34/solaralmanac.php',
                                                 'skins/Weather34/solaruvds.php',
