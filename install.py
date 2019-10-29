@@ -578,17 +578,8 @@ class ExfoliationInstaller(ExtensionInstaller):
                                                 		'skins/Weather34/js/oldjquery.js'
                                                        		]), 
 
-					('skins/Weather34/jsondata',   ['skins/Weather34/jsondata/almanac.txt',
-                                                        'skins/Weather34/jsondata/aqi.txt',
-														'skins/Weather34/jsondata/darksky.txt',
-														'skins/Weather34/jsondata/eqnotification.txt',
-														'skins/Weather34/jsondata/kindex.txt',
-														'skins/Weather34/jsondata/metar34.txt',
-														'skins/Weather34/jsondata/meteoalarm.txt',
-														'skins/Weather34/jsondata/purpleair.txt',
-														'skins/Weather34/jsondata/weatherflow.txt',
-                                                		'skins/Weather34/jsondata/wuforecast.txt'
-                                                       		]),
+					('skins/Weather34/jsondata',   						['skins/Weather34/jsondata/.readme'
+                                                       								]),
 
 					('skins/Weather34/languages',   ['skins/Weather34/languages/lang.blank.php',
                                                         'skins/Weather34/languages/lang.cat.php',
