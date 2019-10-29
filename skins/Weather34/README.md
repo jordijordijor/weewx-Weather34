@@ -1,8 +1,8 @@
-# Home Weather Station weather website template for WeeWX versions 3.9.0 or later
+# Home Weather Station weather website template for WeeWX versions 3.9.2 or later
 
 This repository contains the current WeeWX version of Brian Underdown's Home Weather Station weather website template set. Brian's main website is https://weather34.com/homeweatherstation/index.html In January, 2019, Brian asked others to distribute/maintain his code. 
 
-This version requires WeeWX version 3.9.0 or later software with the CRT extension to denerate data feeds for the conditions from your personal weather station. WeeWX is available at http://weewx.com
+This version requires WeeWX version 3.9.2 or later software with the CRT extension to denerate data feeds for the conditions from your personal weather station. WeeWX is available at http://weewx.com
 
 This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-RRW which is now maintained by Lightmaster (Meteobridge-Weather34-Template). A key metric for this project is to maintain design, functional and performance parity with the MB-UB40 parent. Although not an absolute guarantee, the aim is to update WX-HWS within 24 hours of the parent being updated.
 
