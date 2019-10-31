@@ -491,7 +491,8 @@ WeeWX Software Path to Data file</div><p>
 </svg>
 
 WeeWX Chart Data (WU history charts no longer supported)</div><p>
-      <div class= "stationvalue">Select mbcharts or w34highcharts</div>
+      <div class= "stationvalue">Select mbcharts or w34highcharts (w34highcharts requires Highcharts-for-Weather34)</div>
+	
       <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M12 30 L24 16 12 2" />
 </svg><svg id="i-chevron-bottom" viewBox="0 0 32 32" width="10" height="10" fill="#777" stroke="#777" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
