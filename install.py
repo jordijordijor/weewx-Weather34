@@ -11,9 +11,9 @@ def loader():
 class ExfoliationInstaller(ExtensionInstaller):
     def __init__(self):
         super(ExfoliationInstaller, self).__init__(
-            version="1.0.0",
+            version="02",
             name='WX-HWS',
-            description='WeeWX version of weather34 dashboard template',
+            description='Weather34 skin',
             author="Steepleian",
             author_email="steepleian@gmail.com",
           	process_services='user.weather34.Weather34RealTime',
