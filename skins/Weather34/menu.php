@@ -297,7 +297,7 @@
         </a>
       </li>
       <li>
-        <a href="https://github.com/lightmaster/Meteobridge-Weather34-Template" title="Weather34" target="_blank">
+        <a href="https://weather34.com/homeweatherstation" title="Weather34" target="_blank">
           <weather34menumarkerbluegrey></weather34menumarkerbluegrey> Designed by weather34.com
         </a>
       </li>
