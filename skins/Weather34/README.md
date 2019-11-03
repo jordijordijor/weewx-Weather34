@@ -1,18 +1,19 @@
-# Weather34 Weather Station website skin with Live Data for WeeWX versions 3.9.2 or later
-# Version WX-HWS-IHVN
-# (Packaged for installation using wee_extension ulility)
+# Weather34 WeeWX
+Weather Station website skin with Live Data for WeeWX versions 3.9.2 or later.
 
-This repository contains the current WeeWX version of Brian Underdown's Home Weather Station weather website template set. Brian's main website is https://weather34.com/homeweatherstation/index.html In January, 2019, Brian asked others to distribute/maintain his code. 
+Version WX-UB40-IHVN-002.
 
-This version requires WeeWX version 3.9.0 or later software with the CRT extension to denerate data feeds for the conditions from your personal weather station. WeeWX is available at http://weewx.com
+Packaged for installation using wee_extension ulility
 
-This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-HVN which is now maintained by Lightmaster (Meteobridge-Weather34-Template). A key metric for this project is to maintain design, functional and performance parity with the MB-UB40 parent. Although not an absolute guarantee, the aim is to update WX-HWS within 24 hours of the parent being updated.
+This repository contains the latest WeeWX version of Brian Underdown's Weather34 website template set. Brian's main website is https://weather34.com/homeweatherstation/index.html In January, 2019, Brian asked others to distribute/maintain his code. 
+
+This version requires WeeWX version 3.9.2 or later software. WeeWX is available at http://weewx.com
+
+This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-IHVN which is now maintained by Lightmaster (Meteobridge-Weather34-Template). A key metric for this project is to maintain design, functional and performance parity with the MB-UB40 parent. Although not an absolute guarantee, the aim is to update Weather34 WeeWX within 24 hours of the parent being updated.
 
 This version is assembled as an install package and uses the WeeWX utility wee_extension to install. This greatly simplifies the installation process from that of previous versions. Depending on your own WeeWX setup, minor edits may be required to be made to weewx.conf and Weather34 skin.conf files. Please see the Weather34 skin Installation Guide for detailed instructions.
 
-If you are happy to use Weather Underground as a source of data for chart generation you are strongly recommended to use the Ken True CU-HWS version (https://github.com/ktrue/CU-HWS) as your first choice which can be configured out-of-the-box to be used with WeeWX.
-
-# What's New in this Version WX-HWS-UB40-IHVN
+# What's New in this Version WX-UB40-IHVN-002
 
 Now follows a more standardised install process using WeeWX utility wee_extension.
 
@@ -20,7 +21,7 @@ Now follows a more standardised install process using WeeWX utility wee_extensio
 
 # Demo
 
-A live example of WX-HWS template can be seen at https://claydonsweather.org.uk
+A live example of Weather34 WeeWX skin can be seen at https://claydonsweather.org.uk
 
 # Weather34 Historic Timeline of design 2014-2019 
 https://weather34.com/homeweatherstation/weather34timeline/weather34timeline.html
@@ -39,7 +40,7 @@ https://weather34.com/homeweatherstation/weather34timeline/weather34timeline.htm
 # Setup
 
 Follow the instructions in the 'installation guide' (INSTALLATION_GUIDE.md) to install the template.
-Browse to http://your.website/easywxsetup.php
+Browse to http://your/path/to/weewx/weather34/easywxsetup.php
 There is no initial password when the page prompts the first time -- just press LOGIN to enter the page.
 IMPORTANT set a password in the screen for future use -- your browser can remember it. This will make future updates    reasonably secure so only you can do the updates to the configuration.
 Make setting entries in the easyweathersetup.php page and SAVE. The next time you run it, use the password you set in the step above.
