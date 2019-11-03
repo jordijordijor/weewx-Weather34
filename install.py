@@ -16,16 +16,23 @@ class ExfoliationInstaller(ExtensionInstaller):
             description='WeeWX version of weather34 dashboard template',
             author="Steepleian",
             author_email="steepleian@gmail.com",
+          	process_services='user.weather34.Weather34RealTime',
             config={
                 'StdReport': {
                     'Weather34Report': {
                         'skin':'Weather34',
                         'HTML_ROOT':'weather34'
                     }
-                }
+                },
+            	'Weather34RealTime' : {
+                    'filename': '/var/www/html/weewx/weather34/w34realtime.txt',
+              		'unit_system':'METRIC',
+    				'binding':'loop'
+            }
             },
             files=[('bin/user', ['bin/user/lastrain.py',
-                                 'bin/user/stats.py'
+                                 'bin/user/stats.py',
+                                 'bin/user/weather34.py'
                                 ]
                     ),
                    ('skins/Weather34', ['skins/Weather34/skin.conf',
