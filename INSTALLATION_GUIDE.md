@@ -30,15 +30,20 @@ Once completed, make sure you save weewx.conf
 * From the command line run the following code: -
 
 		cd /home/weewx/bin (or cd /usr/bin)
-		sudo ./wee_extension --install WX-HWS-master.zip	
+		sudo ./wee_extension --install WX-HWS-master.zip
+		
+* After installation edit the weewx-conf file. Go to the  [Weather34RealTime] stanza which will likely be near the end of the script. Change this section to reflect the following: -
+
+		[Weather34RealTime]
+    			filename = /[ADD_YOUR_PATH_HERE]/weewx/weather34/realtime.txt
+    			unit_system = METRIC
+			binding = loop
 
 * Restart WeeWX.
 
 * After around 5min your should find that folder the weather34 folder has been created in the weewx folder. [your_path]/weewx/weather34 will now be the location of the Weather34 skin in your web server.
 
 * Stop WeeWX and change all files and folders recursively in the root of your server to 0775 using CHMOD and user to your Linux login name and groups to www-data using CHOWN, either via the CLI or your server Control Panel (if you employ one). I use Webmin http://www.webmin.com/deb.html, an open source control panel which will make your tasks much easier.
-
-* Finally you need to make a small edit to your Weather34 skin.conf file. Find the line towards the end of the file which starts copy_once = ....... and comment this line out by placing a hash symbol in front.
 
 # IMPORTANT
 
