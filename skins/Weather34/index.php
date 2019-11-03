@@ -231,7 +231,7 @@ else if ($weatherhardware== "Ecowitt GW-1000"){echo '<img src="img/ecowitt.svg" 
 else echo '<a href="https://weather34.com/homeweatherstation/" title="https://weather34.com/homeweatherstation/" target="_blank"><br><img src="img/weather34logo.svg" width="40px" alt="https://weather34.com/homeweatherstation/" class="homeweatherstationlogo" ><weather34>designed by weather34 2015-'.date('Y').'</weather34></a>';?> </div>
 <div class=footertext>
 &nbsp;<?php echo $info?>&nbsp;(<value><?php echo $templateversion?></value>)&nbsp;
-<?php echo $mbplatform;?>-(<value><maxred><?php echo $weather["swversion"];echo "</maxred>-",$weather["build"]?></value>)&nbsp;
+<?php echo $mbplatform;?>-(<value><maxred><?php echo $weather["swversion"];?></value>)&nbsp;
 <?php echo $info."&nbsp;".$weatherhardware;?></div> 
 <div class=footertext><?php echo $info;?>&nbsp;<?php echo $stationlocation ;?> Weather Station &nbsp; <img src="img/flags/<?php echo $flag ;?>.svg" width="20px" ></div>
 </div></div>
