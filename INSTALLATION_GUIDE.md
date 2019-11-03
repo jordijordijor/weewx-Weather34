@@ -15,6 +15,8 @@ IMPORTANT. After installing PHP please make sure you install all the PHP modules
 
 Once completed, make sure you save weewx.conf
 
+* If you have have the crt extension (Cumulus Real-Time) extension installed, remove it now. (sudo ./wee_extension --uninstall crt)
+
 
 * Download the current version of WX-HWS-master zip file at https://github.com/steepleian/WX-HWS to your bin folder (/home/weewx/bin for a setup.py install or /usr/bin for a DEB install).
 
