@@ -2,7 +2,7 @@
 
 This installation guide assumes that you are already reasonably familiar with WeeWX and that it is already installed on your computer along with a webserver, php and curl. For a light-touch webserver, Lighttpd is a good choice. A good guide for installing PHP 7.0 and Lighttpd on a RaspberryPi can be found at https://pimylifeup.com/raspberry-pi-lighttpd/
 
-If you have not already done so, you must update your WeeWX installation to version 3.9.2 or later. This is required to facillitate nested copying required during the skin install process. Follow the various installation type links on this page http://www.weewx.com/docs/ for instructions on updating.
+If you have not already done so, you must update your WeeWX installation to version 3.9.2 or later. This is required to facillitate nested copying during the skin install process. Follow the various installation type links on this page http://www.weewx.com/docs/ for instructions on updating.
 
 If you are carrying out a fresh install of WeeWX, you are strongly recommended to use the setup.py method (http://www.weewx.com/docs/setup.htm)
 
