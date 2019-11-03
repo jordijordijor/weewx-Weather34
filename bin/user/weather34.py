@@ -6,7 +6,7 @@
 Put this file in bin/user , then add this to your weewx.conf:
 
 [Weather34RealTime]
-    filename = /path/to/w34realtime.txt
+    filename = /your/path/to/w34realtime.txt
 
 [Engine]
     [[Services]]
