@@ -1,6 +1,6 @@
 # Installation Guide
 
-Before you start, it is a wise precaution to backup your databases, settings1.php and any customised files you wish to retain.
+Before you start, it is a wise precaution to backup your databases, configuration files, settings1.php and any customised files you wish to retain.
 
 This installation guide assumes that you are already reasonably familiar with WeeWX and that it is already installed on your computer along with a webserver, php and curl. For a light-touch webserver, Lighttpd is a good choice. A good guide for installing PHP 7.0 and Lighttpd on a RaspberryPi can be found at https://pimylifeup.com/raspberry-pi-lighttpd/
 
