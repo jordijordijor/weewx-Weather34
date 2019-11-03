@@ -20,12 +20,12 @@ Once completed, make sure you save weewx.conf
 * If you have have the CRT extension (Cumulus Real-Time) extension installed, unless you require it for another purposes, you can remove it now. (sudo ./wee_extension --uninstall crt)
 
 
-* Download the current version of WX-HWS-master zip file at https://github.com/steepleian/WX-HWS to your bin folder (/home/weewx/bin for a setup.py install or /usr/bin for a DEB install).
+* Download the current version of weewx-Weather34-master.zip file at https://github.com/steepleian/weewx-Weather34 to your bin folder (/home/weewx/bin for a setup.py install or /usr/bin for a DEB install).
 
 * From the command line run the following code: -
 
 		cd /home/weewx/bin (or cd /usr/bin)
-		sudo ./wee_extension --install WX-HWS-master.zip
+		sudo ./wee_extension --install weewx-Weather34-master.zip
 		
 * After installation edit the weewx-conf file. Go to the  [Weather34RealTime] stanza which will likely be near the end of the script. If your path to your web root is different from below, please amend the path in front of 'weewx/weather34/w34realtime.txt' accordingly.
 
