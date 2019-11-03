@@ -1,6 +1,8 @@
 # Weather34 WeeWX
 Weather Station website skin with Live Data for WeeWX versions 3.9.2 or later.
+
 Version WX-UB40-IHVN-002.
+
 Packaged for installation using wee_extension ulility
 
 This repository contains the latest WeeWX version of Brian Underdown's Weather34 website template set. Brian's main website is https://weather34.com/homeweatherstation/index.html In January, 2019, Brian asked others to distribute/maintain his code. 
