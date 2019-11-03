@@ -32,12 +32,14 @@ Once completed, make sure you save weewx.conf
 		cd /home/weewx/bin (or cd /usr/bin)
 		sudo ./wee_extension --install WX-HWS-master.zip
 		
-* After installation edit the weewx-conf file. Go to the  [Weather34RealTime] stanza which will likely be near the end of the script. Change this section to reflect the following: -
+* After installation edit the weewx-conf file. Go to the  [Weather34RealTime] stanza which will likely be near the end of the script. If your path to your web root is different from below, please amend the path in front of 'weewx/weather34/w34realtime.txt' accordingly.
 
 		[Weather34RealTime]
-    			filename = /[ADD_YOUR_PATH_HERE]/weewx/weather34/realtime.txt
+    			filename = /var/www/html/weewx/weather34/realtime.txt
     			unit_system = METRIC
 			binding = loop
+			
+			
 
 * Restart WeeWX.
 
