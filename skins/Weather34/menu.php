@@ -287,8 +287,8 @@
       <!--credits | download info-->
       <?php // please do not remove this and if so no support is given and your domain will be blacklisted from support it is not much to ask //?>
       <li>
-        <a href="https://github.com/steepleian/WX-HWS/" title="Weather34's WX-HWS on Github" target="_blank">
-          <weather34menumarkerbluegrey></weather34menumarkerbluegrey> Download WeeWX HWS
+        <a href="https://github.com/steepleian/weewx-Weather34/" title="Weather34 skin for WeeWX on Github" target="_blank">
+          <weather34menumarkerbluegrey></weather34menumarkerbluegrey> Download Weather34 skin for WeeWX
         </a>
       </li>
       <li>
