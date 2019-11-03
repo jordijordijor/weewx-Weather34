@@ -30,7 +30,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 	
 		$year = substr($meteobridgeapi[0], 6);
-	if ($livedataFormat == 'WeeWX-CRT') {
+	if ($livedataFormat == 'WeeWX-W34') {
 		// For Meteobridge api, remove decimal places from indoor humidity March 30th 2017
 		if (isset($meteobridgeapi[23])) {
 			$meteobridgeapi[23] = (float)(1*$meteobridgeapi[23]);
