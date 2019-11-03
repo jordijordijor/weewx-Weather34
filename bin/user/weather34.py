@@ -1,4 +1,4 @@
-# $Id: weather34.py edited by Ian Millard based on crt.py by mwall $
+# $Id: weather34.py mofied for Weather34 by Ian Millard based on crt.py by mwall $
 # Copyright 2013-2016 Matthew Wall
 
 """Emit loop data to file in Weather34 realtime format.
