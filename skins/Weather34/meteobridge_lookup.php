@@ -32,9 +32,9 @@ $meteobridgeapi[23]=	$cumulus[23];//$nowinhum; //current indoor humidity  ;//$we
 $meteobridgeapi[24]=	$cumulus[24];//$nowwindchill; //current windchill //$weather["windchill"]          = $meteobridgeapi[24];
 $meteobridgeapi[25]=	$last60mintempmax; // $meteobridgeapi[123]
 $meteobridgeapi[26]=	$daymaxtemp; //temp max today $weather["temp_today_high"]    = $daymaxtemp; //temp max today $meteobridgeapi[26];
-$meteobridgeapi[27]=	(int)$daymaxtemptime;//date($timeFormatShort, $meteobridgeapi[27]);
+$meteobridgeapi[27]=	$daymaxtemptime;//date($timeFormatShort, $meteobridgeapi[27]);
 $meteobridgeapi[28]=	$daymintemp; //temp min today  $weather["temp_today_low"]     = $daymintemp; //temp min today $meteobridgeapi[28];
-$meteobridgeapi[29]=	(int)$daymintemptime; //date($timeFormatShort, $meteobridgeapi[29]);
+$meteobridgeapi[29]=	$daymintemptime; //date($timeFormatShort, $meteobridgeapi[29]);
 $meteobridgeapi[30]=	$daymaxwind; //$weather["wind_speed_max"]     = $meteobridgeapi[30];		
 $meteobridgeapi[31]=	$daymaxwindtime; //$weather["maxwindtime"]        = $windavgdmaxtime; //date($timeFormatShort, strtotime($meteobridgeapi[31]));
 $meteobridgeapi[32]=	$daymaxgust; //wind max today 
