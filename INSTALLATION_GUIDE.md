@@ -1,6 +1,6 @@
 # Installation Guide
 
-Before you start, it is a wise precaution to backup your databases, configuration files, settings1.php and any customised files you wish to retain.
+Before you start it is a wise precaution to backup your databases, settings1.php and any customised files you wish to keep.
 
 This installation guide assumes that you are already reasonably familiar with WeeWX and that it is already installed on your computer along with a webserver, php and curl. For a light-touch webserver, Lighttpd is a good choice. A good guide for installing PHP 7.0 and Lighttpd on a RaspberryPi can be found at https://pimylifeup.com/raspberry-pi-lighttpd/
 
@@ -48,7 +48,7 @@ Once completed, make sure you save weewx.conf
 
 * Restart weeWX.
 
-* You can now test that the template is working by opening it up in your browser. Initially you will see random demo data. Click on the menu button at the top-left corner and select settings. This will open up a web form in which you apply your own settings. Pay particular attention to the location of the w34realtime.txt file being generated on a loop cycle by weeWX. The default location is “/[html_root]/weewx/weather34/34realtime.txt” (for example /var/www/html/weewx/weather34/w34realtime.txt).
+* You can now test that the template is working by opening it up in your browser. Initially you will see random demo data. Click on the menu button at the top-left corner and select settings. This will open up a web form in which you apply your own settings. Pay particular attention to the location of the w34realtime.txt file being generated on a loop cycle by weeWX. The default location is “/[html_root]/weewx/weather34/w34realtime.txt” (for example /var/www/html/weewx/weather34/w34realtime.txt).
 
 * For an in depth guide on configuring a remote server please refer to 'taylormia_remote_server_setup.pdf'
 
