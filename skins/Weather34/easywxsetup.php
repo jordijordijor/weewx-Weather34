@@ -466,7 +466,7 @@ WeeWX Software Path to Data file</div><p>
         
         </p>
         
-    <div class= "stationvalue">Add Your Path to data file (e.g. /var/www/html/weewx/weather34/w34realtime.txt)</div> 
+    <div class= "stationvalue">Add Your Path to data file (e.g. /var/www/html/weewx/w34realtime.txt)</div> 
     <svg id="i-chevron-bottom" viewBox="0 0 32 32" width="10" height="10" fill="#777" stroke="#777" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M30 12 L16 24 2 12" /></svg><br>
 
