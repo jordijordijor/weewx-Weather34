@@ -25,9 +25,8 @@ class ExfoliationInstaller(ExtensionInstaller):
                     }
                 },
             	'Weather34RealTime' : {
-                    'filename': '/var/www/html/weewx/w34realtime.txt',
-              		'unit_system':'METRIC',
-    				'binding':'loop'
+                    		'filename': '/var/www/html/weewx/w34realtime.txt',
+              			'binding':'loop'
             }
             },
             files=[('bin/user', ['bin/user/lastrain.py',
