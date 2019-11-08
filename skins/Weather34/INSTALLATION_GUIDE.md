@@ -36,8 +36,7 @@ Once completed, make sure you save weewx.conf
 
 		[Weather34RealTime]
     			filename = /var/www/html/weewx/w34realtime.txt
-    			unit_system = METRIC
-			binding = loop
+				binding = loop
 			
 * Once completed, make sure you save weewx.conf
 			
@@ -47,7 +46,7 @@ Once completed, make sure you save weewx.conf
 
 * Stop WeeWX and change all files and folders recursively in the root of your server to 0775 using CHMOD and user to your Linux login name and groups to www-data using CHOWN, either via the CLI or your server Control Panel (if you employ one). I use Webmin http://www.webmin.com/deb.html, an open source control panel which will make your tasks much easier.
 
-# IMPORTANT
+### IMPORTANT
 
 * Restart weeWX.
 
