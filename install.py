@@ -25,7 +25,7 @@ class ExfoliationInstaller(ExtensionInstaller):
                     }
                 },
             	'Weather34RealTime' : {
-                    'filename': '/var/www/html/weewx/weather34/w34realtime.txt',
+                    'filename': '/var/www/html/weewx/w34realtime.txt',
               		'unit_system':'METRIC',
     				'binding':'loop'
             }
