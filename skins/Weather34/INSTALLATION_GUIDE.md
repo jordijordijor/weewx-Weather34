@@ -12,7 +12,10 @@ If you are carrying out a fresh install of WeeWX, you are strongly recommended t
 
 IMPORTANT. After installing PHP please make sure you install all the PHP modules appropriate for your version of PHP. Failure to due so may mean that forecasts and current conditions fail to update. This is an example for PHP7.3 modules on a Debian based distribution: -
 
-	apt-get install php7.3-curl php7.3-dev php7.3-gd php7.3-mbstring php7.3-zip php7.3-mysql php7.3-xml
+	sudo apt-get install php-cli php-fpm php-json php-pdo php-sqlite3 php-zip php-gd  php-mbstring php-curl php-xml php-pear php-bcmath
+	sudo apt-get install libapache2-mod-php
+	sudo a2enmod php7.3
+	sudo systemctl restart apache2
 
 * Install PyePhem (https://rhodesmill.org/pyephem/). Typically for a Debian based distro use 'sudo apt-get install python-ephem'
 
