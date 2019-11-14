@@ -354,6 +354,7 @@ Choose the default Language to display and use..</div>
            <option><?php echo $flag ;?></option>
            <option>ar</option>
            <option>aus</option>
+           <option>be</option>
            <option>en</option>
            <option>can</option>  
            <option>cat</option> 
