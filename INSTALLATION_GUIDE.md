@@ -6,7 +6,7 @@ This installation guide assumes that you are already reasonably familiar with We
 
 If you have not already done so, you must update your WeeWX installation to version 3.9.2 or later. This is required to facillitate nested copying during the skin install process. Follow the various installation type links on this page http://www.weewx.com/docs/ for instructions on updating.
 
-If you are carrying out a fresh install of WeeWX, you are strongly recommended to use the setup.py method (http://www.weewx.com/docs/setup.htm)
+If you are carrying out a fresh install of WeeWX, my own personal preference is to use the setup.py method (http://www.weewx.com/docs/setup.htm). However, this increases the chances of requiring more path edits in the configuration files. Alternatively use one of the dedicated packaged installs (http://www.weewx.com/docs/debian.htm, http://www.weewx.com/docs/redhat.htm, http://www.weewx.com/docs/suse.htm or http://www.weewx.com/docs/macos.htm).
 
 * Please familiarise yourself with the location of your WeeWX system files including your bin/user folder, skins folder and weewx.conf file. If you are unsure where to find these, please refer to the installation processes here: - http://www.weewx.com/docs/ which shows various WeeWX installation scenarios.
 
