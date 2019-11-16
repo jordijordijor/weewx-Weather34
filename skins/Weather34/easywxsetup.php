@@ -354,11 +354,11 @@ Choose the default Language to display and use..</div>
            <option><?php echo $flag ;?></option>
            <option>ar</option>
            <option>aus</option>
-           <option>be</option>
+           <option>be</option>			
            <option>en</option>
            <option>can</option>  
            <option>cat</option> 
-           <option>ch-switzerland</option>        
+           <option>ch</option>        
            <option>dk</option>
            <option>dl</option>
            <option>fi</option>  
@@ -394,7 +394,7 @@ Choose the default Language to display and use..</div>
  <label name="language"></label>
       <select id="language" name="language" class="choose1">
            <option><?php echo $language ;?></option>
-           <option>en</option>
+           <option>en</option>   
            <option>bg</option>
            <option>bs</option>
            <option>ca</option> 
@@ -458,7 +458,7 @@ WeeWX Software Path to Data file</div><p>
  <label name="livedataFormat"></label>
         <select id="livedataFormat" name="livedataFormat" class="choose1">
            <option ><?php echo $livedataFormat ;?></option>  
-            <option>WeeWX-CRT</option>
+            <option>WeeWX-W34</option>
            
           
            
@@ -476,12 +476,12 @@ WeeWX Software Path to Data file</div><p>
   <br><br>
        
 	<strong><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg></strong><span style="color:#777;"> WEEWX-CRT path example: http://yourdomain/weewx/realtime.txt</span><br>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg></strong><span style="color:#777;"> WEEWX-W34 path example: http://yourdomain/weewx/realtime.txt</span><br>
 	
         <br>
     <span style="color:rgba(86, 95, 103, 1.000)">
     <strong> <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> getting the path correct is essential for live realtime data display (mbridge/MBrealtimeupload.txt)</strong></span>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> getting the path correct is essential for live realtime data display</strong></span>
 <p>
 
 
