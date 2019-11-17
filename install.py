@@ -29,6 +29,10 @@ class ExfoliationInstaller(ExtensionInstaller):
                     		'filename':'/var/www/html/weewx/w34realtime.txt',
 				'unit_system':'METRIC',
               			'binding':'loop'
+            
+            },
+                 'RetainLoopValues' : {
+                                     'exclude_fields':'rain'
             }
             },
             files=[('bin/user', ['bin/user/lastrain.py',
