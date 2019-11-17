@@ -37,7 +37,8 @@ class ExfoliationInstaller(ExtensionInstaller):
             },
             files=[('bin/user', ['bin/user/lastrain.py',
                                  'bin/user/stats.py',
-                                 'bin/user/weather34.py'
+                                 'bin/user/weather34.py''
+				 'bin/user/remain.py'
                                 ]
                     ),
                    ('skins/Weather34', ['skins/Weather34/skin.conf',
