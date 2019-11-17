@@ -11,11 +11,12 @@ def loader():
 class ExfoliationInstaller(ExtensionInstaller):
     def __init__(self):
         super(ExfoliationInstaller, self).__init__(
-            version="02",
+            version="04",
             name='WX-HWS',
             description='Weather34 skin',
             author="Steepleian",
             author_email="steepleian@gmail.com",
+                archive_services='user.retain.RetainLoopValues',
           	process_services='user.weather34.Weather34RealTime',
             config={
                 'StdReport': {
