@@ -16,7 +16,7 @@ class ExfoliationInstaller(ExtensionInstaller):
             description='Weather34 skin',
             author="Steepleian",
             author_email="steepleian@gmail.com",
-          	process_services='user.weather34.Weather34RealTime',
+          	process_services='user.weather34.Weather34RealTime, user.weather34.RetainLoopValues',
             config={
                 'StdReport': {
                     'Weather34Report': {
