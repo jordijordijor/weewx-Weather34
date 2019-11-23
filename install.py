@@ -553,6 +553,7 @@ class ExfoliationInstaller(ExtensionInstaller):
                                                 			'skins/Weather34/img/flags/ar.svg',
                                                 			'skins/Weather34/img/flags/aus.svg',
                                                 			'skins/Weather34/img/flags/b.svg',
+                                                                        'skins/Weather34/img/flags/be.svg',
                                                 			'skins/Weather34/img/flags/c.svg',
                                                 			'skins/Weather34/img/flags/can.svg',
                                                 			'skins/Weather34/img/flags/cat.svg',
