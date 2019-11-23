@@ -11,8 +11,8 @@ def loader():
 class ExfoliationInstaller(ExtensionInstaller):
     def __init__(self):
         super(ExfoliationInstaller, self).__init__(
-            version="04",
-            name='WX-HWS',
+            version="05",
+            name='Weather34',
             description='Weather34 skin',
             author="Steepleian",
             author_email="steepleian@gmail.com",
