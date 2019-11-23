@@ -26,6 +26,7 @@ class RetainLoopValues(StdService):
         	except Exception as e:
 			syslog.syslog(syslog.LOG_INFO, str(e))	
         event.originalPacket = event.packet
+        syslog.syslog(syslog.LOG_INFO, "RetainLoopValues: event packet: %s" % (event.packet,))
         # replace the values in the retained packet if they have a value other than None or the field is listed in excludeFields
         self.retainedLoopValues.update( dict((k,v) for k,v in event.packet.iteritems() if (v is not None or k in self.excludeFields)) )
         # if the new packet doesn't contain one of the excludeFields then remove it from the retainedLoopValues
@@ -38,5 +39,4 @@ class RetainLoopValues(StdService):
         		out_file.write(str(self.retainedLoopValues))
         except Exception as e:
 		syslog.syslog(syslog.LOG_INFO, str(e))	
-
 
