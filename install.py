@@ -33,7 +33,9 @@ class ExfoliationInstaller(ExtensionInstaller):
             
             },
                  'RetainLoopValues' : {
-                                     'exclude_fields':'rain'
+                                     'exclude_fields':'rain',
+              			     'cache_directory':'/tmp',
+        			     'cache_stale_time':'900'
             }
             },
             files=[('bin/user', ['bin/user/lastrain.py',
