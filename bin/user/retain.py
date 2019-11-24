@@ -1,4 +1,6 @@
 import syslog
+import os
+import time
 import weewx
 import weeutil.weeutil
 from weewx.wxengine import StdService
@@ -11,9 +13,20 @@ class RetainLoopValues(StdService):
     def __init__(self, engine, config_dict):
         super(RetainLoopValues, self).__init__(engine, config_dict)
         self.bind(weewx.NEW_LOOP_PACKET, self.newLoopPacket)
+	self.cache_stale_time = 900
+	self.cache_file = '/tmp/RetainedLoopValues.txt'
         self.retainedLoopValues = {}
         self.excludeFields = set([])
         if 'RetainLoopValues' in config_dict:
+            if 'cache_stale_time' in config_dict['RetainLoopValues']:
+		self.cache_stale_time = int(config_dict['RetainLoopValues'].get('cache_stale_time')) 
+            if 'cache_directory' in config_dict['RetainLoopValues']:
+		path = config_dict['RetainLoopValues'].get('cache_directory') 
+		if os.path.isdir(path):
+			self.cache_file = os.path.join(path, 'RetainedLoopValues.txt')
+		else:
+			syslog.syslog(syslog.LOG_ERR, 'RetainLoopValues: Invalid cache_directory')	
+
             if 'exclude_fields' in config_dict['RetainLoopValues']:
                 self.excludeFields = set(weeutil.weeutil.option_as_list(config_dict['RetainLoopValues'].get('exclude_fields', [])))
                 syslog.syslog(syslog.LOG_INFO, "RetainLoopValues: excluding fields: %s" % (self.excludeFields,))
@@ -21,12 +34,15 @@ class RetainLoopValues(StdService):
     def newLoopPacket(self, event):
 	if self.retainedLoopValues == None or len(self.retainedLoopValues) == 0:
         	try:
-        		with open("/etc/weewx/RetainLoopValues.txt", 'r') as in_file:
-        			self.retainedLoopValues = eval(in_file.read())
+			if (time.time() - os.path.getmtime(self.cache_file)) < self.cache_stale_time: 
+        			with open(self.cache_file, 'r') as in_file:
+        				self.retainedLoopValues = eval(in_file.read())
+			else:
+				syslog.syslog(syslog.LOG_INFO, 'RetainLoopValues: Cache values not use since they are past the sell by date')	
         	except Exception as e:
-			syslog.syslog(syslog.LOG_INFO, str(e))	
+			syslog.syslog(syslog.LOG_ERR, str(e))	
         event.originalPacket = event.packet
-        syslog.syslog(syslog.LOG_INFO, "RetainLoopValues: event packet: %s" % (event.packet,))
+        #syslog.syslog(syslog.LOG_INFO, "RetainLoopValues: event packet: %s" % (event.packet,))
         # replace the values in the retained packet if they have a value other than None or the field is listed in excludeFields
         self.retainedLoopValues.update( dict((k,v) for k,v in event.packet.iteritems() if (v is not None or k in self.excludeFields)) )
         # if the new packet doesn't contain one of the excludeFields then remove it from the retainedLoopValues
@@ -35,8 +51,8 @@ class RetainLoopValues(StdService):
                 self.retainedLoopValues.pop(k)
         event.packet = self.retainedLoopValues.copy()
         try:
-        	with open("/etc/weewx/RetainLoopValues.txt", 'w') as out_file:
+        	with open(self.cache_file, 'w') as out_file:
         		out_file.write(str(self.retainedLoopValues))
         except Exception as e:
-		syslog.syslog(syslog.LOG_INFO, str(e))	
+		syslog.syslog(syslog.LOG_ERR, str(e))	
 
