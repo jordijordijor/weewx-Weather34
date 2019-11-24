@@ -1,23 +1,22 @@
-# $Id: install.py 1782 2018-01-27 18:17:02Z mwall $
-# installer for exfoliation
-# Copyright 2014-2017 Matthew Wall
+# installer for Weather34 skin
+# based on installer for exfoliation
+# by Matthew Wall
 # Modified for Weather34 skin by Ian Millard <steepleian@gmail.com> 2019
 
 from setup import ExtensionInstaller
 
 def loader():
-    return ExfoliationInstaller()
+    return Weather34Installer()
 
-class ExfoliationInstaller(ExtensionInstaller):
+class Weather34Installer(ExtensionInstaller):
     def __init__(self):
-        super(ExfoliationInstaller, self).__init__(
-            version="05",
+        super(Weather34Installer, self).__init__(
+            version="06",
             name='Weather34',
             description='Weather34 skin',
             author="Steepleian",
             author_email="steepleian@gmail.com",
-          	process_services=['user.weather34.Weather34RealTime', 'user.retain.RetainLoopValues'],
-		
+            process_services=['user.weather34.Weather34RealTime', 'user.retain.RetainLoopValues'],
 		
             config={
                 'StdReport': {
@@ -33,15 +32,15 @@ class ExfoliationInstaller(ExtensionInstaller):
             
             },
                  'RetainLoopValues' : {
-                                     'exclude_fields':'rain',
-              			     'cache_directory':'/tmp',
-        			     'cache_stale_time':'900'
+                                    'exclude_fields':'rain',
+              						'cache_directory':'/tmp',
+        							'cache_stale_time':'900'
             }
             },
             files=[('bin/user', ['bin/user/lastrain.py',
                                  'bin/user/stats.py',
                                  'bin/user/weather34.py',
-				 'bin/user/retain.py'
+				 				 'bin/user/retain.py'
                                 ]
                     ),
                    ('skins/Weather34', ['skins/Weather34/skin.conf',
