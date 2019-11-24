@@ -1,3 +1,6 @@
+# based on original code https://bitbucket.org/lirpa/mesowx/src/default/extra/weewx/retain.py
+# significantly adapted for weewx-Weather34 skin by Jerry Dietrich
+# this version maintained by Ian Millard (steepleian@gmail.com)
 import syslog
 import os
 import time
