@@ -16,7 +16,7 @@ class Weather34Installer(ExtensionInstaller):
             description='Weather34 skin',
             author="Steepleian",
             author_email="steepleian@gmail.com",
-            process_services=['user.weather34.Weather34RealTime', 'user.retain.RetainLoopValues'],
+            process_services=['user.retain.RetainLoopValues', 'user.weather34.Weather34RealTime'],
 		
             config={
                 'StdReport': {
