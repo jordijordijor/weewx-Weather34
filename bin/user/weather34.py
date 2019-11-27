@@ -1,5 +1,6 @@
 # $Id: weather34.py mofied for Weather34 by Ian Millard based on crt.py by mwall $
 # Copyright 2013-2016 Matthew Wall
+# Inclusion of retained loop data coding bt Jerry Dietrich
 
 """Emit loop data to file in Weather34 realtime format.
 
@@ -35,6 +36,7 @@ are not directly provided by weewx in a LOOP packet.
 #        necessary after the first invocation
 
 import math
+import os
 import time
 import syslog
 from distutils.version import StrictVersion
@@ -361,11 +363,9 @@ class ZambrettiForecast():
 
 
 class Weather34RealTime(StdService):
-  
- 
-
-  
-  
+    """Service retains previous loop packet values updating any value that isn't None from new
+    packets. It then replaces the original packet with a new packet that contains all of the values; 
+    the original unmodified packet will be stored on the event in a property named 'originalPacket'."""
 
     def __init__(self, engine, config_dict):
         super(Weather34RealTime, self).__init__(engine, config_dict)
@@ -414,6 +414,25 @@ class Weather34RealTime(StdService):
         self.forecast = ZambrettiForecast(config_dict)
         loginf("zambretti forecast: %s" % self.forecast.is_installed())
 
+        # setup caching
+        self.cache_stale_time = 900
+        self.cache_file = '/tmp/RetainedLoopValues.txt'
+        self.retainedLoopValues = {}
+        self.excludeFields = set([])
+        if 'RetainLoopValues' in config_dict:
+            if 'cache_stale_time' in config_dict['RetainLoopValues']:
+		self.cache_stale_time = int(config_dict['RetainLoopValues'].get('cache_stale_time')) 
+            if 'cache_directory' in config_dict['RetainLoopValues']:
+		path = config_dict['RetainLoopValues'].get('cache_directory') 
+		if os.path.isdir(path):
+			self.cache_file = os.path.join(path, 'RetainedLoopValues.txt')
+		else:
+			logerr('Invalid cache_directory using default location tmp')	
+            if 'exclude_fields' in config_dict['RetainLoopValues']:
+                self.excludeFields = set(weeutil.weeutil.option_as_list(config_dict['RetainLoopValues'].get('exclude_fields', [])))
+                logdbg("excluding fields: %s" % (self.excludeFields,))
+        self.bind(weewx.NEW_LOOP_PACKET, self.newLoopPacket)
+
         # configure the binding
         binding = d.get('binding', 'loop').lower()
         loginf("binding is %s" % binding)
@@ -421,6 +440,32 @@ class Weather34RealTime(StdService):
             self.bind(weewx.NEW_LOOP_PACKET, self.handle_new_loop)
         else:
             self.bind(weewx.NEW_ARCHIVE_RECORD, self.handle_new_archive)
+
+    def newLoopPacket(self, event):
+	if self.retainedLoopValues == None or len(self.retainedLoopValues) == 0:
+        	try:
+			if (time.time() - os.path.getmtime(self.cache_file)) < self.cache_stale_time: 
+        			with open(self.cache_file, 'r') as in_file:
+        				self.retainedLoopValues = eval(in_file.read())
+			else:
+				loginf("Cache values not use since they are past the sell by date")	
+        	except Exception as e:
+			logerr(str(e))	
+        event.originalPacket = event.packet
+        logdbg("Event packet before: %s" % (event.packet,))
+        # replace the values in the retained packet if they have a value other than None or the field is listed in excludeFields
+        self.retainedLoopValues.update( dict((k,v) for k,v in event.packet.iteritems() if (v is not None or k in self.excludeFields)) )
+        # if the new packet doesn't contain one of the excludeFields then remove it from the retainedLoopValues
+        for k in self.excludeFields - set(event.packet.keys()):
+            if k in self.retainedLoopValues:
+                self.retainedLoopValues.pop(k)
+        event.packet = self.retainedLoopValues.copy()
+        logdbg("Event packet after: %s" % (event.packet,))
+        try:
+        	with open(self.cache_file, 'w') as out_file:
+        		out_file.write(str(self.retainedLoopValues))
+        except Exception as e:
+		logerr(str(e))	
 
     def handle_new_loop(self, event):
         self.handle_data(event.packet)
@@ -769,3 +814,4 @@ class CachedValues(object):
         for k in self.values:
             pkt[k] = self.get_value(k, ts, stale_age)
         return pkt
+
