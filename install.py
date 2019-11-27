@@ -11,12 +11,12 @@ def loader():
 class Weather34Installer(ExtensionInstaller):
     def __init__(self):
         super(Weather34Installer, self).__init__(
-            version="06",
+            version="07",
             name='Weather34',
             description='Weather34 skin',
             author="Steepleian",
             author_email="steepleian@gmail.com",
-            process_services=['user.retain.RetainLoopValues', 'user.weather34.Weather34RealTime'],
+            process_services='user.weather34.Weather34RealTime',
 		
             config={
                 'StdReport': {
@@ -28,19 +28,17 @@ class Weather34Installer(ExtensionInstaller):
             	'Weather34RealTime' : {
                     		'filename':'/var/www/html/weewx/w34realtime.txt',
 				'unit_system':'METRIC',
-              			'binding':'loop'
-            
+              			'binding':'loop',
+				'exclude_fields':'rain',
+            			'cache_directory':'/tmp',
+				'cache_stale_time':'900'
+		}
             },
-                 'RetainLoopValues' : {
-                                    'exclude_fields':'rain',
-              						'cache_directory':'/tmp',
-        							'cache_stale_time':'900'
-            }
-            },
+                
             files=[('bin/user', ['bin/user/lastrain.py',
                                  'bin/user/stats.py',
-                                 'bin/user/weather34.py',
-				 				 'bin/user/retain.py'
+                                 'bin/user/weather34.py'
+				 
                                 ]
                     ),
                    ('skins/Weather34', ['skins/Weather34/skin.conf',
@@ -326,7 +324,7 @@ class Weather34Installer(ExtensionInstaller):
                                                 			'skins/Weather34/css/icons/uvdark.svg',
                                                 			'skins/Weather34/css/icons/uvhigh.svg',
                                                 			'skins/Weather34/css/icons/uvnormal.svg',
-                                                       		'skins/Weather34/css/icons/uvstrong.svg',
+                                                       			'skins/Weather34/css/icons/uvstrong.svg',
                                                 			'skins/Weather34/css/icons/volcanoe.svg',
                                                 			'skins/Weather34/css/icons/warm.svg',
                                                 			'skins/Weather34/css/icons/wind.svg',
