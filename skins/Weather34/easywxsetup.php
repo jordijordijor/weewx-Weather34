@@ -2023,7 +2023,7 @@ General template settings with options to choose which type of module to display
     <path d="M12 30 L24 16 12 2" />
 </svg>
     <input name="wuapi" type="text" id="wuapi" value="<?php echo $apikey ;?>" class="chooseapi">
-<br/> <span style="color:#777;">enter your <strong>DarkSky</strong> <strong>API key</strong> this is the most common mistake made be careful when cut and paste often an hidden space is either inserted before or after causing the <strong>API key</strong> to fail. </span>
+<br/> <span style="color:#777;">enter your <strong>DarkSky</strong> <strong>API key</strong> this is the most common mistake made be careful when cut and paste often a hidden space is either inserted before or after causing the <strong>API key</strong> to fail. </span>
 <br/><br/>
 
     <div class="stationvalue">
