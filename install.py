@@ -11,7 +11,7 @@ def loader():
 class Weather34Installer(ExtensionInstaller):
     def __init__(self):
         super(Weather34Installer, self).__init__(
-            version="07",
+            version="08",
             name='Weather34',
             description='Weather34 skin',
             author="Steepleian",
