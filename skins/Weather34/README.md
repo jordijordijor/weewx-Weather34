@@ -1,7 +1,7 @@
 # Weather34 WeeWX
 Weather Station website skin with Live Data for WeeWX versions 3.9.2 or later.
 
-Version WX-UB40-IHVN-007.
+Version WX-UB40-IHVN-008.
 
 Packaged for installation using wee_extension ulility
 
@@ -16,7 +16,8 @@ This version is assembled as an install package and uses the WeeWX utility wee_e
 # What's New in this Version WX-UB40-IHVN-007
 
 Now follows a more standardised install process using WeeWX utility wee_extension.
-Uses cached loop packet data to augment incomplete loop data which prevents the display of null contents in sensor modules.
+Uses cached loop packet data to augment incomplete loop data which prevents the display of null contents in sensor modules (07).
+Extra menu links added to settings (08).
 
 # Important. The Weather34 skin no longer supports the use of Weather Underground data to generate weather charts. All chart data is obtained directly from your existing integrated WeeWX database.
 
