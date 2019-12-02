@@ -1,5 +1,18 @@
  <?php //original weather34 script original css/svg/php by weather34 2015-2019 // 
- include('livedata.php');date_default_timezone_set($TZ);?>
+include('livedata.php');date_default_timezone_set($TZ);$json_string = file_get_contents("jsondata/darksky.txt");
+$parsed_json = json_decode($json_string);
+$alerttype = $parsed_json->{'alerts'}[0]->{"title"};
+$type = explode(" ", $alerttype);
+$alertlevel = $type[0];
+//$alertlevel = "Yellow";
+$alerttype = $type[1];
+$alerttime = $parsed_json->{'alerts'}[0]->{"expires"};
+
+$alertexp = date('H:i d M',$alerttime);
+$alertiss = $parsed_json->{'alerts'}[0]->{"time"};
+
+$alertissued = date('H:i d M',$alertiss);
+?>
  
 <?php 
 if ($position6=="forecast3wularge.php" || $position6=="forecast3wu.php"){
@@ -35,12 +48,24 @@ $parsed_weather34wujson = json_decode($weather34wuurl,false);
 	 
 	 }}?>
 
-<div class="wulargeforecasthome"><div class="wulargediv">
-<div class="eqcirclehomeregional"><div class="eqtexthomeregional">
 
-<?php  
+
+
+<div class="wulargeforecasthome"><div class="wulargediv">
+<div class="eqcirclehomeregional"><div class="eqtexthomeregional" style="background-color:yellow;">
+<?php
+///METEOALARM
+if (strpos($alertlevel,'Yellow') !== false)
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><?php echo $chartinfo?><yellow>Yellow '.$alert.' Alert <br>'.$alerttype.' </yellow></a><br>Expires '.$alertexp.'</alertvalue>
+   </spanelightning></div></div></div>';}
+else if (strpos($alertlevel,'Orange') !== false)
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><?php echo $chartinfo?><orange>Amber '.$alert.' Alert <br>'.$alerttype.' </orange></a><br>Expires '.$alertexp.'</alertvalue>
+  </spanelightning></div></div></div>';}
+else if (strpos($alertlevel,'Red') !== false)
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><?php echo $chartinfo?><red>Red '.$alert.' Alert <br>'.$alerttype.' </red></a><br>Expires '.$alertexp.'</alertvalue>
+  </spanelightning></div></div></div>';}  
     //weather34 //forecast3wularge wu alerts storms 
-  if ($wuskythunder1>0 && $position6=="forecast3wularge.php"){echo '<spanelightning><alertvalue>Expect<orange> Thunder Storms</orange> This Week <alertadvisory>'.$newalert.'</alertadvisory>
+else if ($wuskythunder1>0 && $position6=="forecast3wularge.php"){echo '<spanelightning><alertvalue>Expect<orange> Thunder Storms</orange> This Week <alertadvisory>'.$newalert.'</alertadvisory>
    </spanelightning></div></div></div>';}
     else if ($wuskythunder2>0 && $position6=="forecast3wularge.php"){echo '<spanelightning><alertvalue>Expect<orange> Thunder Storms</orange> This Week <alertadvisory>'.$newalert.'</alertadvisory>
    </spanelightning></div></div></div>';}
