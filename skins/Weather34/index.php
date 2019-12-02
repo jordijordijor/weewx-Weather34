@@ -1,3 +1,22 @@
+<?php //original weather34 script original css/svg/php by weather34 2015-2019 // 
+ include('livedata.php');date_default_timezone_set($TZ);
+$json_string = file_get_contents("jsondata/darksky.txt");
+$parsed_json = json_decode($json_string);
+$alerttype = $parsed_json->{'alerts'}[0]->{"title"};
+$type = explode(" ", $alerttype);
+$alertlevel = $type[0];
+$meteoalert = "noAlert";
+if ($alertlevel = "yellow") {$meteoalert = "yellowAlert";}
+else if ($alertlevel = "orange") {$meteoalert = "orangeAlert";}
+else if ($alertlevel = "red") {$meteoalert = "redAlert";}
+$meteoalert = "noAlert";
+$alerttype = $type[1];
+$alerttime = $parsed_json->{'alerts'}[0]->{"expires"};
+
+$alertexp = date('H:i d M',$alerttime);
+$alertiss = $parsed_json->{'alerts'}[0]->{"time"};
+
+$alertissued = date('H:i d M',$alertiss);?>
 <?php header('Content-type: text/html; charset=utf-8');error_reporting(0);
 function downloadfromgit($filename) {
     if (!is_readable($filename) || filesize($filename) < 100) {
@@ -53,7 +72,7 @@ if (!empty($check)) {
 #   https://weather34.com/homeweatherstation/index.html                                            #
 #  WEATHER STATION TEMPLATE 2017-2018-2019 Meteobridge.     									   #
 #  Weatherflow Meteobridge Version  April 2019  									               #
-#   https://github.com/lightmaster/Weather34-Weatherflow                                             #
+#   https://github.com/weather34/Weather34-Weatherflow                                             #
 ####################################################################################################
 //original weather34 script original css/svg/php by weather34 2015-2019 clearly marked as original by weather34//
 include_once('livedata.php');include_once('common.php');include_once('settings1.php'); date_default_timezone_set($TZ);?>
@@ -61,6 +80,7 @@ include_once('livedata.php');include_once('common.php');include_once('settings1.
 <html>
 <head>
 <title><?php echo $stationlocation; ?> Home Weather Station</title>
+<meta http-equiv="refresh" content="300">  
 <meta content="Home weather station providing current weather conditions for <?php echo $stationlocation;?>" name="description">
 <!--Google / Search Engine Tags -->
 <meta itemprop="name" content="Home Weather Station <?php echo $stationlocation;?>">
@@ -81,7 +101,7 @@ include_once('livedata.php');include_once('common.php');include_once('settings1.
 <link rel="preload" href="css/fonts/clock3-webfont.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="css/fonts/verbatim-regular.woff" as="font" type="font/woff" crossorigin>
 <link href="css/main.<?php echo $theme;?>.css?version=<?php echo filemtime('css/main.'.$theme.'.css');?>" rel="stylesheet prefetch">
-<script>
+ <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js')
@@ -93,7 +113,7 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-</script>
+</script>   
 </head>
 <body>
 <!-- begin top layout for homeweatherstation template-->
@@ -106,9 +126,11 @@ if ('serviceWorker' in navigator) {
   <!-- position3--->
   <div class="weather34box earthquake"> <div class="title"><?php echo $info?> <?php echo $position3title ;?> </div><div class="value"><div id="position3"></div></div></div>
   <!-- position4--->
-  <div class="weather34box alert"><div class="title"><?php echo $info;?> <?php echo $position4title ;?> </div><div class="value"><div id="position4"></div></div></div>
+   <div class="weather34box alert"><div class="alertBackdrop <?php echo $meteoalert?>" style="width: 236px; margin-top: 15px; margin-left: -5px; height: 61px; color: black;"></div>
+    <div class="title"><?php echo $info;?> <?php echo $position4title ;?> </div><div class="value"><div id="position4"></div></div></div>
   </div></div></div></div>
 <!--end position section for homeweatherstation template-->
+<!--begin outside/station data section for homeweatherstation template-->
 <!--begin outside/station data section for homeweatherstation template-->
 <div class="weather-container"><div class="weather-item"><div class="chartforecast">
 <span class="yearpopup">  <a alt="almanac temperature" title="almanac temperature" href="tempalmanac.php" data-lity > <?php echo $chartinfo?> Almanac </a></span>
@@ -124,8 +146,11 @@ if ('serviceWorker' in navigator) {
 <div class="weather-item"><div class="chartforecast">
 <span class="yearpopup">
 <?php if ($position6=='forecast3ds.php'){echo'<a alt="Dark Sky Forecast " title="Dark Sky Forecast " href="outlookds.php" data-lity>'. $chartinfo. " Daily Forecast </a>";}?>
-<?php if ($position6=='forecast3wu.php' || $position6=='forecast3wularge.php') {echo ' <a alt="weather underground forecast" title="weather underground forecast" href="outlookwu.php" data-lity>'. $chartinfo. " Daily Forecast </a>";}?>
-<?php if ($position6=='forecast3ds.php' || ($dshourly=='yes' && $apikey!= '11111111111111' && ($position6=='forecast3wu.php' || $position6=='forecast3wularge.php'))) {echo '<a alt="Hourly Forecast" title="Hourly Forecast" href="forecastdshour.php" data-lity>&nbsp;'. $chartinfo. " Hourly Forecast</a>";}?></span>
+<?php if ($position6=='forecast3wu.php' || $position6=='forecast3wularge.php') {echo ' <a alt="weather underground forecast" title="weather underground forecast" href="outlookwu.php" data-lity>'. $chartinfo. " Daily F.cast </a>";}?>
+<?php if ($position6=='forecast3ds.php' || ($dshourly=='yes' && $apikey!= '11111111111111' && ($position6=='forecast3wu.php' || $position6=='forecast3wularge.php'))) {echo '<a alt="Hourly Forecast" title="Hourly Forecast" href="forecastdshour.php" data-lity>&nbsp;'. $chartinfo. " Hourly F.cast</a>";}?></span>
+<span class="monthpopup"><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><?php echo $chartinfo?> Meteoalarm</a></span>
+
+  
       </div>
   <span class='moduletitle'>
     <?php echo $position6title ;?>  (<valuetitleunit>&deg;<?php echo $weather["temp_units"] ;?></valuetitleunit>)  </span><br />
@@ -136,6 +161,8 @@ if ('serviceWorker' in navigator) {
   <span class="yearpopup"> <a alt="nearby metar station" title="nearby metar station" href="metarnearby.php" data-lity><?php echo $chartinfo?> <?php echo 'Nearby Metar';?> <?php if(filesize('jsondata/metar34.txt')<160){echo "(<ored>Offline</ored>)";}else echo "" ?></a></span>
   <span class="monthpopup"><a href="windyradar.php" title="Windy.com Radar" alt="Windy.com Radar" data-lity><?php echo $chartinfo?> Radar</a></span>
   <span class="monthpopup"><a href="windywind.php" title="Windy.com Wind Map" alt="Windy.com Wind Map" data-lity><?php echo $chartinfo?> Wind Map</a></span>
+  
+  
   </div>
   <span class='moduletitle'><?php echo $lang['Currentsky'];?></span><br />
   <div id="currentsky"></div></div></div>
@@ -165,6 +192,9 @@ if ('serviceWorker' in navigator) {
 <a alt="moonphase" title="moonphase" href=mooninfo.php data-lity><?php echo $chartinfo?> <?php echo $lang['Moon'],"Info";}?></a></span>  
 <span class="yearpopup"><a alt="meteor showers" title="meteor showers" href="meteorshowers.php" data-lity><?php echo $meteorinfo;?> &nbsp;<?php if ($meteor_default=='No Meteor') {echo "Meteor Showers";} else {	echo $meteor_default;}?></a></span>
 <span class="yearpopup"><a alt="aurora information" title="aurora information" href=aurora.php data-lity><?php echo $info;?> Aurora <?php if ($kp>=5) {echo '<oorange>Active</oorange>';}else {echo "";}?></a></span>
+<span class="yearpopup">  <a alt="records" title="records" href="recordspopup.php" data-lity ><?php echo $chartinfo?>WX Records </a></span>
+<span class="yearpopup">  <a alt="reports" title="reports" href="reportspopup.php" data-lity ><?php echo $chartinfo?>WX Reports </a></span>
+
 
 </div>
 <span class='moduletitle'><?php echo $lang['Daylight']. " | ". $lang['Darkness'];?></span><br />
@@ -177,39 +207,43 @@ if ('serviceWorker' in navigator) {
 <span class="todaypopup"> <a alt="today rainfall" title="today rainfall" href="<?php echo $chartsource ;?>/todayrainfall.php" data-lity ><?php echo $menucharticonpage?> <?php echo $lang['Today']; ?> </a></span>
       </div>
   <span class='moduletitle'><?php echo $lang['Rainfalltoday']," (<valuetitleunit>".$weather["rain_units"]?></valuetitleunit>)</span><br />
-         <div id="rainfall"></div></div>        
+         <div id="rainfall"></div></div>       
          
   <!--position 12th module (second to last) for homeweatherstation template-->
   <div class="weather-item"><div class="chartforecast" >
   <span class="yearpopup">
-<?php if ($position12=='webcamsmall.php' OR $position12=='indoortemperature.php' OR $position12=='moonphase.php'){echo'<span class="yearpopup"><a alt="Webcam " title="Webcam " href="cam.php" data-lity>'. $webcamicon. ' Live Webcam </a></span>
-  <span class="yearpopup"> <a alt="Indoor Guide" title="Indoor Guide" href="homeindoor.php" data-lity>'. $chartinfo. ' Indoor Guide </a></span>
+<?php if ($position12=='webcamsmall.php' OR $position12=='indoortemperature.php' OR $position12=='moonphase.php'){
+if(!(empty($webcamurl)&&empty($videoWeatherCamURL))) {echo'<span class="yearpopup"><a alt="Webcam " title="Webcam " href="cam.php" data-lity>'. $webcamicon. ' Live Webcam </a></span>';}
+echo'  <span class="yearpopup"> <a alt="Indoor Guide" title="Indoor Guide" href="homeindoor.php" data-lity>'. $chartinfo. ' Indoor Guide </a></span>
   <span class="yearpopup"> <a alt="Moon Info" title="Moon Info" href="mooninfo.php" data-lity>'. $chartinfo. ' Moon Info </a></span>';}
 if ($position12=='airqualitymodule.php') {echo ' <span class="yearpopup"><a alt="air quality information" title="air quality information" href="purpleair.php" data-lity>'. $chartinfo. " Air Quality | Cloudbase </a></span>";}
-if ($position12=='weather34uvsolar.php') {echo ' <span class="yearpopup"><a alt="UV Guide" title="UV Guide" href="uvindex.php" data-lity>'. $chartinfo. " UV Guide  </a></span>";} 
-if ($position12=='weather34uvsolar.php') {echo ' <span class="yearpopup"><a alt="UV Almanac" title="UV Almanac" href="uvalmanac.php" data-lity>&nbsp;'. $chartinfo. " UV Almanac </a></span>";}
-if ($position12=='weather34uvsolar.php') {echo '<span class="yearpopup"> <a alt="Solar Almanac" title="Solar Almanac" href="solaralmanac.php" data-lity>'. $chartinfo. " Solar Almanac </a></span>";}
+if ($position12=='weather34uvsolar.php') {echo ' <span class="yearpopup"><a alt="UV Guide" title="UV Info" href="uvindex.php" data-lity>'. $chartinfo. " UV Info  </a></span>";} 
+if ($position12=='weather34uvsolar.php') {echo ' <span class="yearpopup"><a alt="UV Alamanac" title="UV Alamanac" href="w34uvalmanac.php" data-lity>&nbsp;'. $chartinfo. " UV Alamanac </a></span>";}
+if ($position12=='weather34uvsolar.php') {echo '<span class="yearpopup"> <a alt="Solar Alamanac" title="Solar Alamanac" href="w34solaralmanac.php" data-lity>'. $chartinfo. " Solar Alamanac </a></span>";}
 if ($position12=='solaruvds.php') {echo ' <span class="yearpopup"><a alt="UV Guide" title="UV Guide" href="uvindexds.php" data-lity>'. $chartinfo. " UV Guide </a></span>";}
-if ($position12=='solaruvds.php') {echo ' <span class="yearpopup"><a alt="Solar Almanac" title="Solar Almanac" href="solaralmanac.php" data-lity>'. $chartinfo. " Solar Almanac </a></span>";}
+if ($position12=='solaruvds.php') {echo ' <span class="yearpopup"><a alt="Solar Alamanac" title="Solar Alamanac" href="w34solaralmanac.php" data-lity>'. $chartinfo. " Solar Alamanac </a></span>";}
 if ($position12=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="UV Guide" title="UV Guide" href="uvindexwu.php" data-lity>'. $chartinfo. " UV Guide </a></span>";}
-if ($position12=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="Solar Almanac" title="Solar Almanac" href="solaralmanac.php" data-lity>'. $chartinfo. " Solar Almanac </a></span>";}
+if ($position12=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="Solar Alamanac" title="Solar Alamanac" href="w34solaralmanac.php" data-lity>'. $chartinfo. " Solar Alamanac </a></span>";}
 if ($position12=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="Solar Chart" title="Solar Chart" href="mbcharts/todaysolar.php" data-lity>&nbsp;'. $menucharticonpage. " Solar chart </a></span>";}
 if ($position12=='eq.php') {echo ' <span class="yearpopup"><a alt="Earthquakes Worldwide" title="Earthquakes Worldwide" href="eqlist.php" data-lity>'. $chartinfo. " Worldwide Earthquakes </a></span>";}?>
-</div><span class='moduletitle'><?php echo $position12title?></span></span><div id="solar"></div></div>
+<span class="todaypopup"> <a alt="Solar UV" title="Solar UV" href="<?php echo $chartsource;?>/<?php echo $theme1;?>-charts.html?chart='raduvplot'&span='yearly'&temp='<?php echo $weather['temp_units'];?>'&pressure='<?php echo $weather['barometer_units'];?>'&wind='<?php echo $weather['wind_units'];?>'&rain='<?php echo $weather['rain_units']?>" data-lity ><?php echo $menucharticonpage?> Solar UV </a></span>
+
+  </div><span class='moduletitle'><?php echo $position12title?></span></span><div id="solar"></div></div>
  <!--position last module for homeweatherstation template-->
   <div class="weather-item"><div class="chartforecast" >
   <span class="yearpopup">
-<?php if ($positionlastmodule=='webcamsmall.php' OR $positionlastmodule=='indoortemperature.php' OR $positionlastmodule=='moonphase.php'){echo'<span class="yearpopup"><a alt="Webcam " title="Webcam " href="cam.php" data-lity>'. $webcamicon. ' Live Webcam </a></span>
-  <span class="yearpopup"> <a alt="Indoor Guide" title="Indoor Guide" href="homeindoor.php" data-lity>'. $chartinfo. ' Indoor Guide </a></span>
+<?php if ($positionlastmodule=='webcamsmall.php' OR $positionlastmodule=='indoortemperature.php' OR $positionlastmodule=='moonphase.php'){
+if(!(empty($webcamurl)&&empty($videoWeatherCamURL))) { echo'<span class="yearpopup"><a alt="Webcam " title="Webcam " href="cam.php" data-lity>'. $webcamicon. ' Live Webcam </a></span>';}
+echo'  <span class="yearpopup"> <a alt="Indoor Guide" title="Indoor Guide" href="homeindoor.php" data-lity>'. $chartinfo. ' Indoor Guide </a></span>
   <span class="yearpopup"> <a alt="Moon Info" title="Moon Info" href="mooninfo.php" data-lity>'. $chartinfo. ' Moon Info </a></span>';}
 if ($positionlastmodule=='airqualitymodule.php') {echo ' <span class="yearpopup"><a alt="air quality" title="air quality" href="purpleair.php" data-lity>'. $chartinfo. " Air Quality | Cloudbase </a></span>";}
 if ($positionlastmodule=='weather34uvsolar.php') {echo ' <span class="yearpopup"><a alt="UV Guide" title="UV Guide" href="uvindex.php" data-lity>'. $chartinfo. " UV Guide  </a></span>";}
-if ($positionlastmodule=='weather34uvsolar.php') {echo ' <span class="yearpopup"><a alt="UV Almanac" title="UV Almanac" href="uvalmanac.php" data-lity>&nbsp;'. $chartinfo. " UV Almanac </a></span>";}
-if ($positionlastmodule=='weather34uvsolar.php') {echo '<span class="yearpopup"> <a alt="Solar Almanac" title="Solar Almanac" href="solaralmanac.php" data-lity>'. $chartinfo. " Solar Almanac </a></span>";}
+if ($positionlastmodule=='weather34uvsolar.php') {echo ' <span class="yearpopup"><a alt="UV Alamanac" title="UV Alamanac" href="w34uvalmanac.php" data-lity>&nbsp;'. $chartinfo. " UV Alamanac </a></span>";}
+if ($positionlastmodule=='weather34uvsolar.php') {echo '<span class="yearpopup"> <a alt="Solar Alamanac" title="Solar Alamanac" href="w34solaralmanac.php" data-lity>'. $chartinfo. " Solar Alamanac </a></span>";}
 if ($positionlastmodule=='solaruvds.php') {echo ' <span class="yearpopup"><a alt="UV Guide" title="UV Guide" href="uvindexds.php" data-lity>'. $chartinfo. " UV Guide </a></span>";}
-if ($positionlastmodule=='solaruvds.php') {echo ' <span class="yearpopup"><a alt="Solar Almanac" title="Solar Almanac" href="solaralmanac.php" data-lity>'. $chartinfo. " Solar Almanac </a></span>";}
+if ($positionlastmodule=='solaruvds.php') {echo ' <span class="yearpopup"><a alt="Solar Alamanac" title="Solar Alamanac" href="w34solaralmanac.php" data-lity>'. $chartinfo. " Solar Alamanac </a></span>";}
 if ($positionlastmodule=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="UV Guide" title="UV Guide" href="uvindexwu.php" data-lity>'. $chartinfo. " UV Guide </a></span>";}
-if ($positionlastmodule=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="Solar Almanac" title="Solar Almanac" href="solaralmanac.php" data-lity>'. $chartinfo. " Solar Almanac </a></span>";}
+if ($positionlastmodule=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="Solar Alamanac" title="Solar Alamanac" href="w34solaralmanac.php" data-lity>'. $chartinfo. " Solar Alamanac </a></span>";}
 if ($positionlastmodule=='solaruvwu.php') {echo ' <span class="yearpopup"><a alt="Solar Chart" title="Solar Chart" href="mbcharts/todaysolar.php" data-lity>&nbsp;' .$menucharticonpage. " Solar chart </a></span>";}
 if ($positionlastmodule=='eq.php') {echo ' <span class="yearpopup"><a alt="Earthquakes Worldwide" title="Earthquakes Worldwide" href="eqlist.php" data-lity>'. $chartinfo. " Worldwide Earthquakes </a></span>";}
 if ($positionlastmodule=='airqualitymodule.php') {echo '<span class="yearpopup"><a alt="Earthquakes Worldwide" title="Earthquakes Worldwide" href="eqlist.php" data-lity>'. $chartinfo. " Worldwide Earthquakes </a></span>";}?>
@@ -219,27 +253,19 @@ if ($positionlastmodule=='airqualitymodule.php') {echo '<span class="yearpopup">
   <!--footer area for homeweatherstation template warning dont mess with this below this line unless you really know what you are doing-->
 <div class=weatherfooter-container><div class=weatherfooter-item> 
 <div class=hardwarelogo1>
-<a href="http://www.weewx.com" alt="http://weewx.com" title="http://weewx.com">
-<?php
-if ($mbplatform== "WeeWX"){echo '<img src="img/icon-weewx.svg" alt="WeeWX" title="WeeWX"  width="140px" height="45px" ><div class=hardwarelogo1text></div>';}
+<a href="http://weewx.com" alt="http://weewx.com" title="http://weewx.com">
+  <?php
+if ($mbplatform== "WeeWX"){echo '<img src="img/icon-weewx.svg" alt="WeeWX" title="WeeWX"  width="150px" height="55px" ><div class=hardwarelogo1text></div>';}
 ?></a> </div>
 <div class=hardwarelogo2 ><?php
 if ($weatherhardware== "Davis Vantage Vue"){echo '<img src="img/designedfordavisvue.svg" alt="Davis Instruments-Meteobridge" title="Davis Instruments-Meteobridge"  width="160px" height="65px" >';}
 else if ($weatherhardware== "Davis Envoy8x"){echo '<img src="img/designedfordavisenvoy8x.svg" alt="Davis Instruments-Meteobridge" title="Davis Instruments-Meteobridge"  width="160px" height="65px" >';}
 else if ($davis=="Yes"){echo '<img src="img/designedfor-1.svg" alt="Davis Instruments-Meteobridge" title="Davis Instruments-Meteobridge"  width="160px" height="65px" >';}else if ($weatherhardware=='Weatherflow Air-Sky'){echo '<a href="http://weatherflow.com/" title="http://weatherflow.com/" target="_blank"><img src="img/wflogo.svg" width="125px" height=65px alt="http://weatherflow.com/" ></a>';}
-else if ($weatherhardware== "Ecowitt GW-1000"){echo '<img src="img/ecowitt.svg" alt="Ecowitt GW-1000-Meteobridge" title="Ecowitt GW1000-Meteobridge"  width="160px" height="65px" >';}
 else echo '<a href="https://weather34.com/homeweatherstation/" title="https://weather34.com/homeweatherstation/" target="_blank"><br><img src="img/weather34logo.svg" width="40px" alt="https://weather34.com/homeweatherstation/" class="homeweatherstationlogo" ><weather34>designed by weather34 2015-'.date('Y').'</weather34></a>';?> </div>
 <div class=footertext>
 &nbsp;<?php echo $info?>&nbsp;(<value><?php echo $templateversion?></value>)&nbsp;
 <?php echo $mbplatform;?>-(<value><maxred><?php echo $weather["swversion"];?></value>)&nbsp;
 <?php echo $info."&nbsp;".$weatherhardware;?></div> 
-<div class=footertext><?php echo $info;?>&nbsp;<?php echo $stationlocation ;?> Weather Station &nbsp; <img src="img/flags/<?php echo $flag ;?>.svg" width="20px" ></div>
+<div class=footertext><?php echo $github;?>&nbsp;<?php echo "WeeWX Version Repository at https://github.com/steepleian/WX-HWS";?>  &nbsp; <img src="img/flags/<?php echo $flag ;?>.svg" width="20px" ></div>   
 </div></div>
-<div id=lightningalert></div></body>
-<?php include_once('updater.php');
-include_once('menu.php');
-
-# call notification
-include_once('notify.php');
-?></html>
-
+<div id=lightningalert></div></body><?php include_once('updater.php');include_once('menu.php')?></html>
