@@ -150,7 +150,8 @@ class Weather34Installer(ExtensionInstaller):
                    
                    ('skins/Weather34/css',   ['skins/Weather34/css/main.dark.css',
                                                 'skins/Weather34/css/main.light.css',
-                                                'skins/Weather34/css/wuoutlook.css'
+                                                'skins/Weather34/css/wuoutlook.css',
+					      	'skins/Weather34/css/easyweathersetup.css'
                                               ]
                     ),                    
                    ('skins/Weather34/css/aqi',   ['skins/Weather34/css/aqi/cold.svg',
