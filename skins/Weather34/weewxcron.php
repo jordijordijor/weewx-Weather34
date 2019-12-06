@@ -55,7 +55,7 @@ if ($position6=="forecast3wu.php" || $position6=="forecast3wularge.php"){
 $wuapikey=trim($wuapikey);
 $filename4c = 'jsondata/wuforecast.txt';
 if($wuapikey && file_stale($filename4c)){
-$url4c = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode='.$lat.','.$lon.'&language=en-US&format=json&units='.$wuapiunit.'&apiKey='.$wuapikey ;
+$url4c = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode='.$lat.','.$lon.'&language=en-US&format=json&units='.$wuapiunit.'&apiKey='.$wuapikey.'' ;
 $ch4c = curl_init($url4c);
 $complete_save_loc4c = $filename4c;
 update_file($ch4c, $complete_save_loc4c);
