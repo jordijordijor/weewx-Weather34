@@ -5,11 +5,14 @@ $parsed_json = json_decode($json_string);
 $alerttype = $parsed_json->{'alerts'}[0]->{"title"};
 $type = explode(" ", $alerttype);
 $alertlevel = $type[0];
-$meteoalert = "noAlert";
-if ($alertlevel = "yellow") {$meteoalert = "yellowAlert";}
-else if ($alertlevel = "orange") {$meteoalert = "orangeAlert";}
-else if ($alertlevel = "red") {$meteoalert = "redAlert";}
-$meteoalert = "noAlert";
+if (empty($alertlevel)) {$meteoalert = "transparent";}
+else if ($alertlevel = "yellow") {$meteoalert = "yellow";}
+else if ($alertlevel = "orange") {$meteoalert = "orange";}
+else if ($alertlevel = "red") {$meteoalert = "red";}
+//$meteoalert = "transparent";
+//$meteoalert = "yellow";
+//$meteoalert = "orange";
+//$meteoalert = "red";
 $alerttype = $type[1];
 $alerttime = $parsed_json->{'alerts'}[0]->{"expires"};
 
@@ -126,7 +129,7 @@ if ('serviceWorker' in navigator) {
   <!-- position3--->
   <div class="weather34box earthquake"> <div class="title"><?php echo $info?> <?php echo $position3title ;?> </div><div class="value"><div id="position3"></div></div></div>
   <!-- position4--->
-   <div class="weather34box alert"><div class="alertBackdrop <?php echo $meteoalert?>" style="width: 236px; margin-top: 15px; margin-left: -5px; height: 61px; color: black;"></div>
+   <div class="weather34box alert" style="color: black"><div class="alertBackdrop" style="width: 236px; margin-top: 15px; margin-left: -5px; height: 61px; color: black; background-color: <?php echo $meteoalert;?>"></div>
     <div class="title"><?php echo $info;?> <?php echo $position4title ;?> </div><div class="value"><div id="position4"></div></div></div>
   </div></div></div></div>
 <!--end position section for homeweatherstation template-->
