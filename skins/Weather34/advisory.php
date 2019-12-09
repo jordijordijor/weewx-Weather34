@@ -52,17 +52,17 @@ $parsed_weather34wujson = json_decode($weather34wuurl,false);
 
 
 <div class="wulargeforecasthome"><div class="wulargediv">
-<div class="eqcirclehomeregional"><div class="eqtexthomeregional" style="background-color:yellow;">
+<div class="eqcirclehomeregional"><div class="eqtexthomeregional">
 <?php
 ///METEOALARM
 if (strpos($alertlevel,'Yellow') !== false)
-  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><?php echo $chartinfo?><yellow>Yellow '.$alert.' Alert <br>'.$alerttype.' </yellow></a><br>Expires '.$alertexp.'</alertvalue>
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity>Yellow Alert '.$alerttype.' '.$alert.'<br>Expires '.$alertexp.'</alertvalue>
    </spanelightning></div></div></div>';}
 else if (strpos($alertlevel,'Orange') !== false)
-  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><?php echo $chartinfo?><orange>Amber '.$alert.' Alert <br>'.$alerttype.' </orange></a><br>Expires '.$alertexp.'</alertvalue>
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity>Amber Alert '.$alerttype.' '.$alert.' <br>Expires '.$alertexp.'</alertvalue>
   </spanelightning></div></div></div>';}
 else if (strpos($alertlevel,'Red') !== false)
-  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><?php echo $chartinfo?><red>Red '.$alert.' Alert <br>'.$alerttype.' </red></a><br>Expires '.$alertexp.'</alertvalue>
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><Red Alert '.$alerttype.' '.$alert.' <br>Expires '.$alertexp.'</alertvalue>
   </spanelightning></div></div></div>';}  
     //weather34 //forecast3wularge wu alerts storms 
 else if ($wuskythunder1>0 && $position6=="forecast3wularge.php"){echo '<spanelightning><alertvalue>Expect<orange> Thunder Storms</orange> This Week <alertadvisory>'.$newalert.'</alertadvisory>
