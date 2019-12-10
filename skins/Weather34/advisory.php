@@ -4,7 +4,6 @@ $parsed_json = json_decode($json_string);
 $alerttype = $parsed_json->{'alerts'}[0]->{"title"};
 $type = explode(" ", $alerttype);
 $alertlevel = $type[0];
-//$alertlevel = "Yellow";
 $alerttype = $type[1];
 $alerttime = $parsed_json->{'alerts'}[0]->{"expires"};
 
@@ -56,13 +55,13 @@ $parsed_weather34wujson = json_decode($weather34wuurl,false);
 <?php
 ///METEOALARM
 if (strpos($alertlevel,'Yellow') !== false)
-  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><black>Yellow Alert '.$alerttype.'<br>Until '.$alertexp.'</black><alertadvisory>'.$newalertcold.'</alertadvisory>
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><yellow>Yellow Alert '.$alerttype.'<br>Until '.$alertexp.'</yellow><alertadvisory>'.$newalertcold.'</alertadvisory>
    </spanelightning></div></div></div>';}
 else if (strpos($alertlevel,'Orange') !== false)
-  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><black>Amber Alert '.$alerttype.'<br>Expires '.$alertexp.'</black><alertadvisory>'.$newalert.'</alertadvisory>
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><orange>Amber Alert '.$alerttype.'<br>Expires '.$alertexp.'</orange><alertadvisory>'.$newalert.'</alertadvisory>
   </spanelightning></div></div></div>';}
 else if (strpos($alertlevel,'Red') !== false)
-  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><black>Red Alert '.$alerttype.'<br>Expires '.$alertexp.'</black><alertadvisory>'.$newalert.'</alertadvisory>
+  {echo '<spanelightning><alertvalue><a href="meteoalarm.php" title="Meteoalarm" alt="Meteoalarm" data-lity><red>Red Alert '.$alerttype.'<br>Expires '.$alertexp.'</red><alertadvisory>'.$newalert.'</alertadvisory>
   </spanelightning></div></div></div>';}  
     //weather34 //forecast3wularge wu alerts storms 
 else if ($wuskythunder1>0 && $position6=="forecast3wularge.php"){echo '<spanelightning><alertvalue>Expect<orange> Thunder Storms</orange> This Week <alertadvisory>'.$newalert.'</alertadvisory>
