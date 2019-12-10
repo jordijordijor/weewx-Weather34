@@ -129,7 +129,7 @@ if ('serviceWorker' in navigator) {
   <!-- position3--->
   <div class="weather34box earthquake"> <div class="title"><?php echo $info?> <?php echo $position3title ;?> </div><div class="value"><div id="position3"></div></div></div>
   <!-- position4--->
-   <div class="weather34box alert" style="color: black"><div class="alertBackdrop" style="width: 236px; margin-top: 15px; margin-left: -5px; height: 61px; color: black; background-color: <?php echo $meteoalert;?>"></div>
+   <div class="weather34box alert" style="color: <?php echo $meteoalert;?>"><div class="alertBackdrop" style="border: 10px solid <?php echo $meteoalert;?>; width: 236px; margin-top: 15px; margin-left: -5px; height: 61px; color: black; "></div>
     <div class="title"><?php echo $info;?> <?php echo $position4title ;?> </div><div class="value"><div id="position4"></div></div></div>
   </div></div></div></div>
 <!--end position section for homeweatherstation template-->
@@ -269,3 +269,4 @@ else echo '<a href="https://weather34.com/homeweatherstation/" title="https://we
 <div class=footertext><?php echo $github;?>&nbsp;<?php echo "WeeWX Version Repository at https://github.com/steepleian/WX-HWS";?>  &nbsp; <img src="img/flags/<?php echo $flag ;?>.svg" width="20px" ></div>   
 </div></div>
 <div id=lightningalert></div></body><?php include_once('updater.php');include_once('menu.php')?></html>
+
