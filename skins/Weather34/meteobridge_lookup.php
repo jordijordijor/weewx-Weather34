@@ -15,8 +15,8 @@ $meteobridgeapi[6]=	$cumulus[6];//$nowwindgust; //current wind gust spped //$wea
 $meteobridgeapi[7]=	$cumulus[7];//$nowwinddir; //current wind direction //$weather["wind_direction"]     = number_format($meteobridgeapi[7],0);
 $meteobridgeapi[8]=	$cumulus[8];//$nowrainrate; //current rainrate //$weather["rain_rate"]          = $meteobridgeapi[8];
 $meteobridgeapi[9]=	$cumulus[9];//$dayrainsum;    //today rain sum
-$meteobridgeapi[10]=	$nowbarom; //current barometer //$weather["barometer"]          = $meteobridgeapi[10];$weather["barotrend"] =   $meteobridgeapi[10] -  $barotrend[0];	$weather['barometer6h'] = $meteobridgeapi[10] - $meteobridgeapi[73];
-$meteobridgeapi[11]=	$meteobridgeapi[7];//current wind direction
+$meteobridgeapi[10]=	$cumulus[10];//$nowbarom; //current barometer //$weather["barometer"]          = $meteobridgeapi[10];$weather["barotrend"] =   $meteobridgeapi[10] -  $barotrend[0];	$weather['barometer6h'] = $meteobridgeapi[10] - $meteobridgeapi[73];
+$meteobridgeapi[11]=	$cumulus[11];//$meteobridgeapi[7];//current wind direction
 $meteobridgeapi[12]=	$cumulus[12];//$nowbeaufort; //current wind beaufort //$weather["wind_speed_bft"]     = $meteobridgeapi[12];
 $meteobridgeapi[13]=	$cumulus[13];//$windunits;//N/A PROBABLY WIND UNITS
 $meteobridgeapi[14]=	$cumulus[14];//N/A PROBABLY TEMP UNITS
@@ -27,8 +27,8 @@ $meteobridgeapi[18]=	$last60minbaromavg;//1 hour barometer average $weather["bar
 $meteobridgeapi[19]=	$cumulus[19];//$monthrainsum; //month rain
 $meteobridgeapi[20]=	$cumulus[20];//$yearrainsum; //year rain sum
 $meteobridgeapi[21]=	$cumulus[21];//$yesterdayrainsum; //yesterday rain sun//N/A
-$meteobridgeapi[22]=	$nowintemp; //current indoor temp //$weather["temp_indoor"]        = $meteobridgeapi[22];
-$meteobridgeapi[23]=	$nowinhum; //current indoor humidity  ;//$weather["humidity_indoor"]    = $meteobridgeapi[23];$weather["temp_humidity_trend"] = number_format($meteobridgeapi[23],1) - number_format($meteobridgeapi[71],1);//indoor$weather["temp_indoor_feel"]   = heatIndex($meteobridgeapi[22], $meteobridgeapi[23]); 
+$meteobridgeapi[22]=	$cumulus[22];//$nowintemp; //current indoor temp //$weather["temp_indoor"]        = $meteobridgeapi[22];
+$meteobridgeapi[23]=	$cumulus[23];//$nowinhum; //current indoor humidity  ;//$weather["humidity_indoor"]    = $meteobridgeapi[23];$weather["temp_humidity_trend"] = number_format($meteobridgeapi[23],1) - number_format($meteobridgeapi[71],1);//indoor$weather["temp_indoor_feel"]   = heatIndex($meteobridgeapi[22], $meteobridgeapi[23]); 
 $meteobridgeapi[24]=	$cumulus[24];//$nowwindchill; //current windchill //$weather["windchill"]          = $meteobridgeapi[24];
 $meteobridgeapi[25]=	$last60mintempmax; // $meteobridgeapi[123]
 $meteobridgeapi[26]=	$daymaxtemp; //temp max today $weather["temp_today_high"]    = $daymaxtemp; //temp max today $meteobridgeapi[26];
@@ -181,3 +181,4 @@ $meteobridgeapi[184]=   $yearavgtemp;  //year avg temp
 $meteobridgeapi[185]=   $yearavgwindgust;  //year avg wind gust  
 }
 ?>
+
