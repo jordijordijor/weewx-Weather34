@@ -266,7 +266,7 @@ else echo '<a href="https://weather34.com/homeweatherstation/" title="https://we
 &nbsp;<?php echo $info?>&nbsp;(<value><?php echo $templateversion?></value>)&nbsp;
 <?php echo $mbplatform;?>-(<value><maxred><?php echo $weather["swversion"];?></value>)&nbsp;
 <?php echo $info."&nbsp;".$weatherhardware;?></div> 
-<div class=footertext><?php echo $github;?>&nbsp;<?php echo "WeeWX Version Repository at https://github.com/steepleian/WX-HWS";?>  &nbsp; <img src="img/flags/<?php echo $flag ;?>.svg" width="20px" ></div>   
+<div class=footertext><?php echo $github;?>&nbsp;<?php echo "WeeWX Version Repository at https://github.com/steepleian/weewx-Weather34";?>  &nbsp; <img src="img/flags/<?php echo $flag ;?>.svg" width="20px" ></div>   
 </div></div>
 <div id=lightningalert></div></body><?php include_once('updater.php');include_once('menu.php')?></html>
 
