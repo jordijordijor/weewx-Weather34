@@ -50,7 +50,7 @@
 	$weather["barometer_units"]    = $meteobridgeapi[15]; // mb or hPa or in
 	//$weather["barometer_units"]    = 'mmHg'; // mmHg
 	$weather["barometer_trend"]    = $meteobridgeapi[10] - $meteobridgeapi[18];
-	$weather["temp_units"]         = 'C'; // C
+	$weather["temp_units"]         = $meteobridgeapi[14]; // C
 	$weather["temp_indoor"]        = $meteobridgeapi[22];
 	$weather["temp_indoor_feel"]   = heatIndex($meteobridgeapi[22], $meteobridgeapi[23]); // must set temp_units first
 	$weather["temp_indoormax"]     = $meteobridgeapi[120];
@@ -88,14 +88,14 @@
 	$weather["wind_speed_bft"]     = $meteobridgeapi[12];
 	$weather["wind_speed_max"]     = $meteobridgeapi[30];	
 	$weather["wind_gust_speed_max"]= $meteobridgeapi[32];	
-	$weather["wind_units"]         = 'm/s'; // m/s or mph or km/h or kts
+	$weather["wind_units"]         = $meteobridgeapi[13]; // m/s or mph or km/h or kts
 	$weather["wind_speed_avg15"]   = $meteobridgeapi[72];
 	$weather["wind_speed_avg30"]   = $meteobridgeapi[73];
 	$weather["sunshine"]           = $meteobridgeapi[55];
 	$weather["maxsolar"]           = number_format($meteobridgeapi[80],0);
 	$weather["maxuv"]              = $meteobridgeapi[58];	
-	$weather["sunny"]          	   = $meteobridgeapi[57];
-	$weather["lux"] 			   = number_format($meteobridgeapi[45]/0.00809399477,0, '.', '');
+	$weather["sunny"]              = $meteobridgeapi[57];
+	$weather["lux"] 	       = number_format($meteobridgeapi[45]/0.00809399477,0, '.', '');
 	$weather["maxtemptime"]        = date($timeFormatShort, $meteobridgeapi[27]);
 	$weather["lowtemptime"]        = date($timeFormatShort, $meteobridgeapi[29]);
 	$weather["maxwindtime"]        = date($timeFormatShort, $meteobridgeapi[31]);
@@ -103,15 +103,15 @@
 	$weather["cloudbase"]          = round(($weather["temp"] - $weather["dewpoint"] ) *1000/4.4,1) ; 
 	$weather["cloudbase_units"]    = 'ft' ;	
 	$weather["wind_run"]           = number_format($weather["wind_speed"]/24,3); //10 minute wind run
-	$weather["swversion"]		   = $meteobridgeapi[38];
-	$weather["build"]			   = $meteobridgeapi[39];
-	$weather["actualhardware"]	   = $meteobridgeapi[42];
+	$weather["swversion"]	       = $meteobridgeapi[38];
+	$weather["build"]	       = $meteobridgeapi[39];
+	$weather["actualhardware"]     = $meteobridgeapi[42];
 	$weather["mbplatform"]	       = $meteobridgeapi[41];
-	$weather["uptime"]		       = $meteobridgeapi[81];//uptime in seconds
-	$weather["vpforecasttext"]	   = $meteobridgeapi1[1];//davis console forecast text
-	$weather["temp_avgtoday"]=$meteobridgeapi[152];
-	$weather['wind_speed_avg30']=$meteobridgeapi[158];
-	$weather['wind_speed_avgday']=$meteobridgeapi[158];
+	$weather["uptime"]	       = $meteobridgeapi[81];//uptime in seconds
+	$weather["vpforecasttext"]     = $meteobridgeapi1[1];//davis console forecast text
+	$weather["temp_avgtoday"]      =$meteobridgeapi[152];
+	$weather['wind_speed_avg30']   =$meteobridgeapi[158];
+	$weather['wind_speed_avgday']  =$meteobridgeapi[158];
 	//weather34 windrun
 	$windrunhr=date('G');$windrunmin=(($windrunmin=date('i')/60));
 	$windrunformula=$windrunhr=date('G')+$windrunmin;
