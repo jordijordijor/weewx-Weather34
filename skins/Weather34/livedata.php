@@ -48,7 +48,6 @@
 	$weather["barometer_max"]      = $meteobridgeapi[34];
 	$weather["barometer_min"]      = $meteobridgeapi[36];
 	$weather["barometer_units"]    = $meteobridgeapi[15]; // mb or hPa or in
-	//$weather["barometer_units"]    = 'mmHg'; // mmHg
 	$weather["barometer_trend"]    = $meteobridgeapi[10] - $meteobridgeapi[18];
 	$weather["temp_units"]         = $meteobridgeapi[14]; // C
 	$weather["temp_indoor"]        = $meteobridgeapi[22];
