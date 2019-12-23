@@ -91,7 +91,7 @@ class Weather34Installer(ExtensionInstaller):
                                                 'skins/Weather34/menu.php',
                                                 'skins/Weather34/metar34get.php',
                                                 'skins/Weather34/metarnearby.php',
-                                                'skins/Weather34/meteobridge_lookup.php',
+                                                
                                                 'skins/Weather34/meteobridgedescr.php',
                                                 'skins/Weather34/meteorshowers.php',
                                                 'skins/Weather34/mooninfo.php',
@@ -138,6 +138,7 @@ class Weather34Installer(ExtensionInstaller):
                                                 'skins/Weather34/weatherflowuvsolar.php',
                                                 'skins/Weather34/webcamsmall.php',
                                                 'skins/Weather34/weewxcron.php',
+					        'skins/Weather34/weewx_lookup.php',
                                                 'skins/Weather34/wflightning.php',
                                                 'skins/Weather34/windalmanac.php',
                                                 'skins/Weather34/windgustyear.php',
