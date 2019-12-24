@@ -1,124 +1,110 @@
 <?php 
 	####################################################################################################
-	#	HOME WEATHER STATION TEMPLATE by BRIAN UNDERDOWN 2015-2016-2017-2018-2019                      #
-	#	CREATED FOR HOMEWEATHERSTATION TEMPLATE at https://weather34.com/homeweatherstation            # 
-	# 	                                                                                               #
-	# 	                                                                                               #
-	# 	updated Mar 2019 LIVEDATA.PHP ITS WHERE A LOT HAPPENS SO DONT MESS IT UP	  		           #
-	# 	                                                                                               #
-	#   https://www.weather34.com 	                                                                   #
+	#	THE ORIGINAL LIVEDATA.PHP script by BRIAN UNDERDOWN 2015-2016-2017-2018-2019                      #
+	#	CREATED FOR HOMEWEATHERSTATION TEMPLATE at https://weather34.com/homeweatherstation               # 
+	# 	                                                                                                  #
+	# 	THIS WEEWX SPECIFIC VERSION OF LIVEDATA.PHP BY STEEPLEIAN (IAN MILLARD) FOR WEEWX DECEMBER 2019   #
+	# 	                                                                                                  #
+	#   https://claydonsweather.org.uk 	                                                                  #
 	####################################################################################################
  //original weather34 script original css/svg/php by weather34 2015-2019 clearly marked as original by weather34//
  include('settings.php');include('shared.php');error_reporting(0); 
-//meteobridge - api October 1st 2017 
+//weewx - api December 2019 
 
-///////////////////////////////////////////////////////////////////////////////
-/////MODS WEEWX HERE///////////////////////////////////////////////////////////	
-	include('meteobridge_lookup.php');
-        if (isset($meteobridgeapi)){
-	$weather["rain_alltime"] = $meteobridgeapi[151];
+	include('weewx_lookup.php');
+        if (isset($weewxapi)){
+	$weather["rain_alltime"] = $weewxapi[151];
+
+
 	
-//if ($livedataFormat == 'meteobridge-api' && $livedata) {
-//	$file_live = file_get_contents($livedata);
-//	$meteobridgeapi = explode(" ", $file_live);
-//	$meteobridgeapi1 = explode("_",$file_live);//split for davis consoe forecast
-
-
-
-////END OF MODS/////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////// 	
-	
-//meteobridge - api October 1st 2017
-	
-		$year = substr($meteobridgeapi[0], 6);
+		$year = substr($weewxapi[0], 6);
 	if ($livedataFormat == 'WeeWX-W34') {
-		// For Meteobridge api, remove decimal places from indoor humidity March 30th 2017
-		if (isset($meteobridgeapi[23])) {
-			$meteobridgeapi[23] = (float)(1*$meteobridgeapi[23]);
-			$meteobridgeapi[23] = number_format((float)$meteobridgeapi[23],0,'.','');
+		
+		if (isset($weewxapi[23])) {
+			$weewxapi[23] = (float)(1*$weewxapi[23]);
+			$weewxapi[23] = number_format((float)$weewxapi[23],0,'.','');
 		}	
 	}
-	// Meteobridge api starts record with dd/mm/yyyy hh:mm:ss
-	$recordDate = mktime(substr($meteobridgeapi[1], 0, 2), substr($meteobridgeapi[1], 3, 2), substr($meteobridgeapi[1], 6, 2),
-	substr($meteobridgeapi[0], 3, 2), substr($meteobridgeapi[0], 0, 2), $year);
+	
+	$recordDate = mktime(substr($weewxapi[1], 0, 2), substr($weewxapi[1], 3, 2), substr($weewxapi[1], 6, 2),
+	substr($weewxapi[0], 3, 2), substr($weewxapi[0], 0, 2), $year);
 	$weather["datetime"]           = $recordDate;
 	$weather["date"]               = date($dateFormat, $recordDate);
 	$weather["time"]               = date($timeFormat, $recordDate);
-	$weather["barometer"]          = $meteobridgeapi[10];
-	$weather["barometer_max"]      = $meteobridgeapi[34];
-	$weather["barometer_min"]      = $meteobridgeapi[36];
-	$weather["barometer_units"]    = $meteobridgeapi[15]; // mb or hPa or in
-	$weather["barometer_trend"]    = $meteobridgeapi[10] - $meteobridgeapi[18];
-	$weather["temp_units"]         = $meteobridgeapi[14]; // C
-	$weather["temp_indoor"]        = $meteobridgeapi[22];
-	$weather["temp_indoor_feel"]   = heatIndex($meteobridgeapi[22], $meteobridgeapi[23]); // must set temp_units first
-	$weather["temp_indoormax"]     = $meteobridgeapi[120];
-	$weather["temp_indoormin"]     = $meteobridgeapi[121];
-	$weather["humidity_indoor"]    = $meteobridgeapi[23];
-	$weather["humidity_indoor15"]=$meteobridgeapi[71];
-	$weather["humidity_indoortrend"]=$meteobridgeapi[23]-$meteobridgeapi[71];
-	$weather["rain_rate"]          = $meteobridgeapi[8];
-	$weather["dewpoint"]           = number_format($meteobridgeapi[4],1);
-	$weather["rain_today"]         = $meteobridgeapi[9];
-	$weather["rain_lasthour"]      = $meteobridgeapi[47];
-	$weather["rain_month"]         = $meteobridgeapi[19];
-	$weather["rain_year"]          = $meteobridgeapi[20];
-	$weather["rain_24hrs"]         = $meteobridgeapi[44];
-	$weather["rain_units"]         = $meteobridgeapi[16]; // mm or in
-	$weather["uv"]                 = $meteobridgeapi[43];
-	$weather["uvdatetime"]         = $recordDate;
-	$weather["solar"]              = round($meteobridgeapi[45],1);
-	$weather["temp"]               = $meteobridgeapi[2];
-	$weather["temp_feel"]          = heatIndex($meteobridgeapi[2], $meteobridgeapi[3]); // must set temp_units first
+	$weather["barometer"]          = $weewxapi[10];
+	$weather["barometer_max"]      = $weewxapi[34];
+	$weather["barometer_min"]      = $weewxapi[36];
+	$weather["barometer_units"]    = $weewxapi[15]; // mb or hPa or in
+	$weather["barometer_trend"]    = $weewxapi[10] - $weewxapi[18];
+	$weather["temp_units"]         = $weewxapi[14]; // C
+	$weather["temp_indoor"]        = $weewxapi[22];
+	$weather["temp_indoor_feel"]   = heatIndex($weewxapi[22], $weewxapi[23]); // must set temp_units first
+	$weather["temp_indoormax"]     = $weewxapi[120];
+	$weather["temp_indoormin"]     = $weewxapi[121];
+	$weather["humidity_indoor"]    = $weewxapi[23];
+	$weather["humidity_indoor15"]=$weewxapi[71];
+	$weather["humidity_indoortrend"]=$weewxapi[23]-$weewxapi[71];
+	$weather["rain_rate"]          = $weewxapi[8];
+	$weather["dewpoint"]           = number_format($weewxapi[4],1);
+	$weather["rain_today"]         = $weewxapi[9];
+	$weather["rain_lasthour"]      = $weewxapi[47];
+	$weather["rain_month"]         = $weewxapi[19];
+	$weather["rain_year"]          = $weewxapi[20];
+	$weather["rain_24hrs"]         = $weewxapi[44];
+	$weather["rain_units"]         = $weewxapi[16]; // mm or in
+	$weather["uv"]                 = $weewxapi[43];
+	$weather["solar"]              = round($weewxapi[45],1);
+	$weather["temp"]               = $weewxapi[2];
+	$weather["temp_feel"]          = heatIndex($weewxapi[2], $weewxapi[3]); // must set temp_units first
 	$weather["heat_index"]         = $weather["temp_feel"]; // must set temp_units first
-	//$weather["heat_index"]         = $meteobridgeapi[42];
-	$weather["windchill"]          = $meteobridgeapi[24];
-	$weather["humidity"]           = number_format($meteobridgeapi[3],0);	
-	$weather["temp_today_high"]    = $meteobridgeapi[26];
-	$weather["temp_today_low"]     = $meteobridgeapi[28];
-	$weather["temp_avg15"]         = $meteobridgeapi[67];
-	$weather["temp_avg"]           = $meteobridgeapi[123]; // last 60 minutes
-	$weather["wind_speed_avg"]     = $meteobridgeapi[5]; //Console's Average Wind Speed
-	$weather["wind_direction"]     = number_format($meteobridgeapi[7],0);
-	$weather["wind_direction_avg"] = number_format($meteobridgeapi[46],0);
-	$weather["wind_speed"]         = number_format($meteobridgeapi[6]); // Instant Wind Speed
-	$weather["wind_gust_10min"]    = $meteobridgeapi[40]; // Wind Speed Gust - Max speed of last 10 minutes
-	$weather["wind_gust_speed"]    = $meteobridgeapi[40]; // 
-	$weather["wind_speed_bft"]     = $meteobridgeapi[12];
-	$weather["wind_speed_max"]     = $meteobridgeapi[30];	
-	$weather["wind_gust_speed_max"]= $meteobridgeapi[32];	
-	$weather["wind_units"]         = $meteobridgeapi[13]; // m/s or mph or km/h or kts
-	$weather["wind_speed_avg15"]   = $meteobridgeapi[72];
-	$weather["wind_speed_avg30"]   = $meteobridgeapi[73];
-	$weather["sunshine"]           = $meteobridgeapi[55];
-	$weather["maxsolar"]           = number_format($meteobridgeapi[80],0);
-	$weather["maxuv"]              = $meteobridgeapi[58];	
-	$weather["sunny"]              = $meteobridgeapi[57];
-	$weather["lux"] 	       = number_format($meteobridgeapi[45]/0.00809399477,0, '.', '');
-	$weather["maxtemptime"]        = date($timeFormatShort, $meteobridgeapi[27]);
-	$weather["lowtemptime"]        = date($timeFormatShort, $meteobridgeapi[29]);
-	$weather["maxwindtime"]        = date($timeFormatShort, $meteobridgeapi[31]);
-	$weather["maxgusttime"]        = date($timeFormatShort, $meteobridgeapi[33]);
+	//$weather["heat_index"]         = $weewxapi[42];
+	$weather["windchill"]          = $weewxapi[24];
+	$weather["humidity"]           = number_format($weewxapi[3],0);	
+	$weather["temp_today_high"]    = $weewxapi[26];
+	$weather["temp_today_low"]     = $weewxapi[28];
+	$weather["temp_avg15"]         = $weewxapi[67];
+	$weather["temp_avg"]           = $weewxapi[123]; // last 60 minutes
+	$weather["wind_speed_avg"]     = $weewxapi[5]; //Console's Average Wind Speed
+	$weather["wind_direction"]     = number_format($weewxapi[7],0);
+	$weather["wind_direction_avg"] = number_format($weewxapi[46],0);
+	$weather["wind_speed"]         = number_format($weewxapi[6]); // Instant Wind Speed
+	$weather["wind_gust_10min"]    = $weewxapi[40]; // Wind Speed Gust - Max speed of last 10 minutes
+	$weather["wind_gust_speed"]    = $weewxapi[40]; // 
+	$weather["wind_speed_bft"]     = $weewxapi[12];
+	$weather["wind_speed_max"]     = $weewxapi[30];	
+	$weather["wind_gust_speed_max"]= $weewxapi[32];	
+	$weather["wind_units"]         = $weewxapi[13]; // m/s or mph or km/h or kts
+	$weather["wind_speed_avg15"]   = $weewxapi[72];
+	$weather["wind_speed_avg30"]   = $weewxapi[73];
+	$weather["sunshine"]           = $weewxapi[55];
+	$weather["maxsolar"]           = number_format($weewxapi[80],0);
+	$weather["maxuv"]              = $weewxapi[58];	
+	$weather["sunny"]              = $weewxapi[57];
+	$weather["lux"] 	       = number_format($weewxapi[45]/0.00809399477,0, '.', '');
+	$weather["maxtemptime"]        = date($timeFormatShort, $weewxapi[27]);
+	$weather["lowtemptime"]        = date($timeFormatShort, $weewxapi[29]);
+	$weather["maxwindtime"]        = date($timeFormatShort, $weewxapi[31]);
+	$weather["maxgusttime"]        = date($timeFormatShort, $weewxapi[33]);
 	$weather["cloudbase"]          = round(($weather["temp"] - $weather["dewpoint"] ) *1000/4.4,1) ; 
 	$weather["cloudbase_units"]    = 'ft' ;	
 	$weather["wind_run"]           = number_format($weather["wind_speed"]/24,3); //10 minute wind run
-	$weather["swversion"]	       = $meteobridgeapi[38];
-	$weather["build"]	       = $meteobridgeapi[39];
-	$weather["actualhardware"]     = $meteobridgeapi[42];
-	$weather["mbplatform"]	       = $meteobridgeapi[41];
-	$weather["uptime"]	       = $meteobridgeapi[81];//uptime in seconds
-	$weather["vpforecasttext"]     = $meteobridgeapi1[1];//davis console forecast text
-	$weather["temp_avgtoday"]      =$meteobridgeapi[152];
-	$weather['wind_speed_avg30']   =$meteobridgeapi[158];
-	$weather['wind_speed_avgday']  =$meteobridgeapi[158];
+	$weather["swversion"]	       = $weewxapi[38];
+	$weather["build"]	       = $weewxapi[39];
+	$weather["actualhardware"]     = $weewxapi[42];
+	$weather["mbplatform"]	       = $weewxapi[41];
+	$weather["uptime"]	       = $weewxapi[81];//uptime in seconds
+	$weather["vpforecasttext"]     = $weewxapi1[1];//davis console forecast text
+	$weather["temp_avgtoday"]      =$weewxapi[152];
+	$weather['wind_speed_avg30']   =$weewxapi[158];
+	$weather['wind_speed_avgday']  =$weewxapi[158];
 	//weather34 windrun
 	$windrunhr=date('G');$windrunmin=(($windrunmin=date('i')/60));
 	$windrunformula=$windrunhr=date('G')+$windrunmin;
 	$weather["windrun34"]=$weather['wind_speed_avg30']*number_format($windrunformula,1);
-	//weather34 meteobridge moon sun data 
-    $weather["moonphase"]=$meteobridgeapi[153];$weather["luminance"]=$meteobridgeapi[154];$weather["daylight"]=$meteobridgeapi[155];if ($meteobridgeapi[156]=='--'){$weather["moonrise"]='In Transit';}
-	else $weather["moonrise"]='Rise<moonrisecolor> '.date($timeFormatShort, strtotime($meteobridgeapi[156]));$weather["moonset"]='Set<moonsetcolor> '.date($timeFormatShort, strtotime($meteobridgeapi[157]));
-	//weather34 meteobridge real feel 02-08-2018 based on cumulus forum formula (THW)
+	//weather34 weewx moon sun data 
+    $weather["moonphase"]=$weewxapi[153];$weather["luminance"]=$weewxapi[154];$weather["daylight"]=$weewxapi[155];if ($weewxapi[156]=='--'){$weather["moonrise"]='In Transit';}
+	else $weather["moonrise"]='Rise<moonrisecolor> '.date($timeFormatShort, strtotime($weewxapi[156]));$weather["moonset"]='Set<moonsetcolor> '.date($timeFormatShort, strtotime($weewxapi[157]));
+	//weather34 weewx real feel 02-08-2018 based on cumulus forum formula (THW)
 	$weather['realfeel'] = round(($weather['temp'] + 0.33*($weather['humidity']/100)*6.105*exp(17.27*$weather['temp']/(237.7+$weather['temp']))- 0.70*$weather["wind_speed"] - 4.00),1);
 	//uptimealt
 	$convertuptimemb34 = $weather["uptime"];$uptimedays = floor($convertuptimemb34 / 86400);$uptimehours = floor(($convertuptimemb34 -($uptimedays*86400)) / 3600);
@@ -129,163 +115,163 @@
 	
 if ($weather['luminance']>99.9){$weather['luminance']=100;}
 if ($weather['luminance']<100){$weather['luminance']=$weather['luminance'];}
-//weather34 convert meteobridge lunar segment
+//weather34 convert weewx lunar segment
 if ($weather["moonphase"]==0) {$weather["moonphase"]='New Moon';}else if ($weather["moonphase"]==1) {$weather["moonphase"]='Waxing Crescent';}else if ($weather["moonphase"]==2 ) {$weather["moonphase"]='First Quarter';}else if ($weather["moonphase"]==3 ) {$weather["moonphase"]='Waxing Gibbous';}else if ($weather["moonphase"]==4 ) {$weather["moonphase"]='Full Moon';}else if ($weather["moonphase"]==5) {$weather["moonphase"]='Waning Gibbous';}else if ($weather["moonphase"]==6) {$weather["moonphase"]='Last Quarter';}else if ($weather["moonphase"]==7){$weather["moonphase"]='Waning Crescent';}
 	
 	// weatherflow lightning
-	$weather["lightning"]          = $meteobridgeapi[76];
-	$weather["lightningkm"]        = $meteobridgeapi[75];
-	$weather["lightningmax"]       = $meteobridgeapi[77];
-	$weather["lightningmaxdist"]   = $meteobridgeapi[75];
-	$weather["lightningtimeago"]   = $meteobridgeapi[76];
-	$weather["lightningmonth"]     = $meteobridgeapi[78];
-	$weather["lightningyear"]      = $meteobridgeapi[79];
+	$weather["lightning"]          = $weewxapi[76];
+	$weather["lightningkm"]        = $weewxapi[75];
+	$weather["lightningmax"]       = $weewxapi[77];
+	$weather["lightningmaxdist"]   = $weewxapi[75];
+	$weather["lightningtimeago"]   = $weewxapi[76];
+	$weather["lightningmonth"]     = $weewxapi[78];
+	$weather["lightningyear"]      = $weewxapi[79];
 	
-	$originalDate = $meteobridgeapi[83];
+	$originalDate = $weewxapi[83];
     $tempydmaxtime = date("H:i", strtotime($originalDate));
-	$originalDate1 = $meteobridgeapi[85];
+	$originalDate1 = $weewxapi[85];
     $tempydmintime = date("H:i", strtotime($originalDate1));
-	$originalDate2 = $meteobridgeapi[87];
+	$originalDate2 = $weewxapi[87];
     $tempmmaxtime = date('jS M', strtotime($originalDate2));
 	$tempmmaxtime2 = date('jS M', strtotime($originalDate2));
-	$originalDate3 = $meteobridgeapi[89];
+	$originalDate3 = $weewxapi[89];
     $tempmmintime =  date('jS M ', strtotime($originalDate3));
-	$originalDate4 = $meteobridgeapi[91];
+	$originalDate4 = $weewxapi[91];
     $tempymaxtime = date('jS M', strtotime($originalDate4));
 	$tempymaxtime2 = date('jS M', strtotime($originalDate4));
-	$originalDate5 = $meteobridgeapi[93];
+	$originalDate5 = $weewxapi[93];
     $tempymintime =  date('jS M ', strtotime($originalDate5));
 	$tempymintime2 =  date('jS M', strtotime($originalDate5));		
-	$originalDate6 = $meteobridgeapi[27];
+	$originalDate6 = $weewxapi[27];
     $tempdmaxtime = date('H:i', strtotime($originalDate6));
-	$originalDate7 = $meteobridgeapi[29];
+	$originalDate7 = $weewxapi[29];
     $tempdmintime =  date('H:i', strtotime($originalDate7));
 	
-	$originalDatea9 = $meteobridgeapi[126];
+	$originalDatea9 = $weewxapi[126];
     $tempamaxtime = date("jS M Y", strtotime($originalDatea9));
-	$weather["tempamax"]		    = $meteobridgeapi[125]; //temp alltime
+	$weather["tempamax"]		    = $weewxapi[125]; //temp alltime
 	$weather["tempamaxtime"]		= $tempamaxtime; //seconds
 	
-	$originalDatea10 = $meteobridgeapi[128];
+	$originalDatea10 = $weewxapi[128];
     $tempamintime = date("jS M Y", strtotime($originalDatea10));
-	$weather["tempamin"]		    = $meteobridgeapi[127]; //temp alltime
+	$weather["tempamin"]		    = $weewxapi[127]; //temp alltime
 	$weather["tempamintime"]		= $tempamintime; //seconds
 	
 	
 	
 	
-	$weather["tempydmax"]		    = $meteobridgeapi[82]; //temp max yesterday
+	$weather["tempydmax"]		    = $weewxapi[82]; //temp max yesterday
 	$weather["tempydmaxtime"]		= $tempydmaxtime; //seconds
-	$weather["tempydmin"]		    = $meteobridgeapi[84]; //temp min yesterday
+	$weather["tempydmin"]		    = $weewxapi[84]; //temp min yesterday
 	$weather["tempydmintime"]		= $tempydmintime; //seconds
-	$weather["tempmmax"]		    = $meteobridgeapi[86]; //temp max month
+	$weather["tempmmax"]		    = $weewxapi[86]; //temp max month
 	$weather["tempmmaxtime"]		= $tempmmaxtime; //date
 	$weather["tempmmaxtime2"]		= $tempmmaxtime2; //date
-	$weather["tempmmin"]		    = $meteobridgeapi[88]; //temp min month
+	$weather["tempmmin"]		    = $weewxapi[88]; //temp min month
 	$weather["tempmmintime"]		= $tempmmintime; //date
-	$weather["tempymax"]		    = $meteobridgeapi[90]; //temp max year
+	$weather["tempymax"]		    = $weewxapi[90]; //temp max year
 	$weather["tempymaxtime"]		= $tempymaxtime; //seconds
 	$weather["tempymaxtime2"]		= $tempymaxtime2; //seconds
-	$weather["tempymin"]		    = $meteobridgeapi[92]; //temp min year
+	$weather["tempymin"]		    = $weewxapi[92]; //temp min year
 	$weather["tempymintime"]		= $tempymintime; //seconds	
 	$weather["tempymintime2"]		= $tempymintime2; //seconds	
-	$weather["tempdmax"]		    = $meteobridgeapi[26]; //temp max today
+	$weather["tempdmax"]		    = $weewxapi[26]; //temp max today
 	$weather["tempdmaxtime"]		= $tempdmaxtime; //seconds	
-	$weather["tempdmin"]		    = $meteobridgeapi[28]; //temp max today
+	$weather["tempdmin"]		    = $weewxapi[28]; //temp max today
 	$weather["tempdmintime"]		= $tempdmintime; //seconds	
 	
 	//dewpoint year/month/yesterday alltime
 	//all time
-	$originalDatea11 = $meteobridgeapi[130];
+	$originalDatea11 = $weewxapi[130];
     $dewamaxtime = date("jS M Y", strtotime($originalDatea11));
-	$weather["dewamax"]		    = $meteobridgeapi[129]; //temp alltime
+	$weather["dewamax"]		    = $weewxapi[129]; //temp alltime
 	$weather["dewamaxtime"]		= $dewamaxtime; //seconds
 	
-	$originalDatea12 = $meteobridgeapi[132];
+	$originalDatea12 = $weewxapi[132];
     $dewamintime = date("jS M Y", strtotime($originalDatea12));
-	$weather["dewamin"]		    = $meteobridgeapi[131]; //temp alltime
+	$weather["dewamin"]		    = $weewxapi[131]; //temp alltime
 	$weather["dewamintime"]		= $dewamintime; //seconds
 	
 	
 	//dewpoint year
-	$originalDate44 = $meteobridgeapi[55];
+	$originalDate44 = $weewxapi[55];
     $dewymaxtime = date('jS M', strtotime($originalDate44));	
-	$originalDate45 = $meteobridgeapi[57];
+	$originalDate45 = $weewxapi[57];
     $dewymintime =  date('jS M', strtotime($originalDate45));	
-	$weather["dewymax"]		    = $meteobridgeapi[54]; //temp max year
+	$weather["dewymax"]		    = $weewxapi[54]; //temp max year
 	$weather["dewymaxtime"]		= $dewymaxtime; //seconds	
-	$weather["dewymin"]		    = $meteobridgeapi[56]; //temp min year
+	$weather["dewymin"]		    = $weewxapi[56]; //temp min year
 	$weather["dewymintime"]		= $dewymintime; //seconds	
 	//dewpoint today
-	$originalDate46 = $meteobridgeapi[64];
+	$originalDate46 = $weewxapi[64];
     $dewmaxtime = date('H:i', strtotime($originalDate46));	
-	$originalDate47 = $meteobridgeapi[66];
+	$originalDate47 = $weewxapi[66];
     $dewmintime =  date('H:i', strtotime($originalDate47));
-	$weather["dewmax"]		    = $meteobridgeapi[63]; //temp max year
+	$weather["dewmax"]		    = $weewxapi[63]; //temp max year
 	$weather["dewmaxtime"]		= $dewmaxtime; //seconds	
-	$weather["dewmin"]		    = $meteobridgeapi[65]; //temp min year
+	$weather["dewmin"]		    = $weewxapi[65]; //temp min year
 	$weather["dewmintime"]		= $dewmintime; //seconds
 	//dewpoint month
-	$originalDate74 = $meteobridgeapi[49];
+	$originalDate74 = $weewxapi[49];
     $dewmmaxtime = date('jS M', strtotime($originalDate74));	
-	$originalDate75 = $meteobridgeapi[51];
+	$originalDate75 = $weewxapi[51];
     $dewmmintime =  date('jS M', strtotime($originalDate75));	
-	$weather["dewmmax"]		    = $meteobridgeapi[48]; //dew max month
+	$weather["dewmmax"]		    = $weewxapi[48]; //dew max month
 	$weather["dewmmaxtime"]		= $dewmmaxtime; //seconds	
-	$weather["dewmmin"]		    = $meteobridgeapi[50]; //dew min month
+	$weather["dewmmin"]		    = $weewxapi[50]; //dew min month
 	$weather["dewmmintime"]		= $dewmmintime; //seconds	
 	//dewpoint yesterday
-	$originalDate84 = $meteobridgeapi[53];
+	$originalDate84 = $weewxapi[53];
     $dewydmaxtime = date('H:i', strtotime($originalDate84));	
-	$originalDate85 = $meteobridgeapi[121];
+	$originalDate85 = $weewxapi[121];
     $dewydmintime =  date('H:i', strtotime($originalDate85));	
-	$weather["dewydmax"]		    = $meteobridgeapi[52]; //temp max year
+	$weather["dewydmax"]		    = $weewxapi[52]; //temp max year
 	$weather["dewydmaxtime"]		= $dewydmaxtime; //seconds	
-	$weather["dewydmin"]		    = $meteobridgeapi[120]; //temp min year
+	$weather["dewydmin"]		    = $weewxapi[120]; //temp min year
 	$weather["dewydmintime"]		= $dewydmintime; //seconds	
 	
 //humidity almanac	
 //hum max
-$weather["humidity_max"]=number_format($meteobridgeapi[59],0);
-$originalDate734=$meteobridgeapi[60];
+$weather["humidity_max"]=number_format($weewxapi[59],0);
+$originalDate734=$weewxapi[60];
 $hummaxtime=date('H:i',strtotime($originalDate734));
 $weather["humidity_maxtime"]=$hummaxtime;
 //hum min
-$weather["humidity_min"]=number_format($meteobridgeapi[61],0);
-$originalDate774=$meteobridgeapi[62];
+$weather["humidity_min"]=number_format($weewxapi[61],0);
+$originalDate774=$weewxapi[62];
 $hummintime=date('H:i',strtotime($originalDate774));
 $weather["humidity_mintime"]=$hummintime;
 
 //hum year max
-$weather["humidity_ymax"]=number_format($meteobridgeapi[163],0);
-$originalDate754=$meteobridgeapi[164];
+$weather["humidity_ymax"]=number_format($weewxapi[163],0);
+$originalDate754=$weewxapi[164];
 $humymaxtime=date('jS M',strtotime($originalDate754));
 $weather["humidity_ymaxtime"]=$humymaxtime;
 //hum year min
-$weather["humidity_ymin"]=number_format($meteobridgeapi[165],0);
-$originalDate755=$meteobridgeapi[166];
+$weather["humidity_ymin"]=number_format($weewxapi[165],0);
+$originalDate755=$weewxapi[166];
 $humymintime=date('jS M',strtotime($originalDate755));
 $weather["humidity_ymintime"]=$humymintime;
 
 //hum month max
-$weather["humidity_mmax"]=number_format($meteobridgeapi[159],0);
-$originalDate756=$meteobridgeapi[160];
+$weather["humidity_mmax"]=number_format($weewxapi[159],0);
+$originalDate756=$weewxapi[160];
 $hummmaxtime=date('jS M',strtotime($originalDate756));
 $weather["humidity_mmaxtime"]=$hummmaxtime;
 //hum month min
-$weather["humidity_mmin"]=number_format($meteobridgeapi[161],0);
-$originalDate757=$meteobridgeapi[162];
+$weather["humidity_mmin"]=number_format($weewxapi[161],0);
+$originalDate757=$weewxapi[162];
 $hummmintime=date('jS M',strtotime($originalDate757));
 $weather["humidity_mmintime"]=$hummmintime;
 
 //hum yesterday max
-$weather["humidity_ydmax"]=number_format($meteobridgeapi[167],0);
-$originalDate758=$meteobridgeapi[168];
+$weather["humidity_ydmax"]=number_format($weewxapi[167],0);
+$originalDate758=$weewxapi[168];
 $humydmaxtime=date('H:i',strtotime($originalDate758));
 $weather["humidity_ydmaxtime"]=$humydmaxtime;
 //hum yesterday min
-$weather["humidity_ydmin"]=number_format($meteobridgeapi[169],0);
-$originalDate759=$meteobridgeapi[170];
+$weather["humidity_ydmin"]=number_format($weewxapi[169],0);
+$originalDate759=$weewxapi[170];
 $humydmintime=date('H:i',strtotime($originalDate759));
 $weather["humidity_ydmintime"]=$humydmintime;
 
@@ -293,159 +279,159 @@ $weather["humidity_ydmintime"]=$humydmintime;
 		
 	
 	//wind gust
-	$originalDate8 = $meteobridgeapi[95];
+	$originalDate8 = $weewxapi[95];
     $windydmaxtime = date("H:i", strtotime($originalDate8));	
-	$originalDate9 = $meteobridgeapi[97];
+	$originalDate9 = $weewxapi[97];
     $windmmaxtime = date('jS M', strtotime($originalDate9));
 	$windmmaxtime2 = date('jS M', strtotime($originalDate9));
-	$originalDate10 = $meteobridgeapi[99];
+	$originalDate10 = $weewxapi[99];
     $windymaxtime =  date('jS M', strtotime($originalDate10));   
 	$windymaxtime2 =  date('jS M', strtotime($originalDate10)); 	
-	$originalDate11 = $meteobridgeapi[33];
+	$originalDate11 = $weewxapi[33];
     $winddmaxtime =  date('H:i', strtotime($originalDate11));		
-	$originalavgDate = $meteobridgeapi[31];
+	$originalavgDate = $weewxapi[31];
     $windavgdmaxtime = date("H:i", strtotime($originalavgDate));
 	
-	$originalDate8a = $meteobridgeapi[134];
+	$originalDate8a = $weewxapi[134];
     $windamaxtime = date("jS M Y", strtotime($originalDate8a));	
-	$weather["windamax"]		    = $meteobridgeapi[133]; //wind max yesterday
+	$weather["windamax"]		    = $weewxapi[133]; //wind max yesterday
 	$weather["windamaxtime"]		= $windamaxtime; //seconds	
 	
 		
 	$weather["windavgdmaxtime"]		= $windavgdmaxtime; //seconds		
-	$weather["windydmax"]		    = $meteobridgeapi[94]; //wind max yesterday
+	$weather["windydmax"]		    = $weewxapi[94]; //wind max yesterday
 	$weather["windydmaxtime"]		= $windydmaxtime; //seconds	
-	$weather["windmmax"]		    = $meteobridgeapi[96]; //wind max month
+	$weather["windmmax"]		    = $weewxapi[96]; //wind max month
 	$weather["windmmaxtime"]		= $windmmaxtime; //seconds	
 	$weather["windmmaxtime2"]		= $windmmaxtime2; //seconds	
-	$weather["windymax"]		    = $meteobridgeapi[98]; //wind max year
+	$weather["windymax"]		    = $weewxapi[98]; //wind max year
 	$weather["windymaxtime"]		= $windymaxtime; //seconds
 	$weather["windymaxtime2"]		= $windymaxtime2; //seconds
-	$weather["winddmax"]		    = $meteobridgeapi[32]; //wind max year
+	$weather["winddmax"]		    = $weewxapi[32]; //wind max year
 	$weather["winddmaxtime"]		= $winddmaxtime ; //seconds
 	
 	//rain
-	$originalDate12 = $meteobridgeapi[102];
+	$originalDate12 = $weewxapi[102];
     $rainmmaxtime = date("jS M", strtotime($originalDate12));	
-	$originalDate13 = $meteobridgeapi[104];
+	$originalDate13 = $weewxapi[104];
     $rainymaxtime = date("jS M Y", strtotime($originalDate13));	
-	$originalDate124 = $meteobridgeapi[124];
+	$originalDate124 = $weewxapi[124];
     $rainlasttime = date("jS M Y ", strtotime($originalDate124));		
-	$originalDate25 = $meteobridgeapi[124];
+	$originalDate25 = $weewxapi[124];
     $rainlastmonth = date("M", strtotime($originalDate25));		
-	$originalDate26 = $meteobridgeapi[124];
+	$originalDate26 = $weewxapi[124];
     $rainlasttoday = date("H:i", strtotime($originalDate26));
-	$originalDate27 = $meteobridgeapi[124];
+	$originalDate27 = $weewxapi[124];
     $rainlasttoday1 = date("jS", strtotime($originalDate27));
-	$weather["rainydmax"]       = $meteobridgeapi[100]; //rain max yesterday
-	$weather["rainmmax"]        = $meteobridgeapi[101]; //wind max month
+	$weather["rainydmax"]       = $weewxapi[100]; //rain max yesterday
+	$weather["rainmmax"]        = $weewxapi[101]; //wind max month
 	$weather["rainmmaxtime"]    = $rainmmaxtime; //seconds	
-	$weather["rainymax"]        = $meteobridgeapi[103]; //wind max year
+	$weather["rainymax"]        = $weewxapi[103]; //wind max year
 	$weather["rainymaxtime"]    = $rainymaxtime; //seconds
-	$weather["rain_alltime"]    = $meteobridgeapi[151]; // Total rain, all years
+	$weather["rain_alltime"]    = $weewxapi[151]; // Total rain, all years
 	
 	
 	//pressure	
 	//yesterday
-	$baromaxoriginalDateb0 = $meteobridgeapi[136];
+	$baromaxoriginalDateb0 = $weewxapi[136];
     $baromaxtimeyest = date("H:i", strtotime($baromaxoriginalDateb0));	
-	$barominoriginalDateb1 = $meteobridgeapi[138];
+	$barominoriginalDateb1 = $weewxapi[138];
     $baromintimeyest = date("H:i", strtotime($barominoriginalDateb1));	
 	$weather["thb0seapressydmaxtime"]	= $baromaxtimeyest; //seconds	
 	$weather["thb0seapressydmintime"]	= $baromintimeyest; //seconds
-	$weather["thb0seapressydmax"]	= $meteobridgeapi[135]; //max yesterday
-	$weather["thb0seapressydmin"]	= $meteobridgeapi[137]; //min yesterday
+	$weather["thb0seapressydmax"]	= $weewxapi[135]; //max yesterday
+	$weather["thb0seapressydmin"]	= $weewxapi[137]; //min yesterday
 	
 	
 	//month
-	$baromaxoriginalDateb2 = $meteobridgeapi[140];
+	$baromaxoriginalDateb2 = $weewxapi[140];
     $baromaxtimemonth = date("jS M", strtotime($baromaxoriginalDateb2));
-	$barominoriginalDateb3 = $meteobridgeapi[142];
+	$barominoriginalDateb3 = $weewxapi[142];
     $baromintimemonth = date("jS M", strtotime($barominoriginalDateb3));		
 	$weather["thb0seapressmonthmaxtime"]	= $baromaxtimemonth; //seconds	
 	$weather["thb0seapressmonthmintime"]	= $baromintimemonth; //seconds
-	$weather["thb0seapressmmax"]	= $meteobridgeapi[139]; //max month
-	$weather["thb0seapressmmin"]	= $meteobridgeapi[141]; //min month
+	$weather["thb0seapressmmax"]	= $weewxapi[139]; //max month
+	$weather["thb0seapressmmin"]	= $weewxapi[141]; //min month
 	
 	//year
-	$baromaxoriginalDateb4 = $meteobridgeapi[144];
+	$baromaxoriginalDateb4 = $weewxapi[144];
     $baromaxtimeyear = date("jS M", strtotime($baromaxoriginalDateb4));
-	$barominoriginalDateb5 = $meteobridgeapi[146];
+	$barominoriginalDateb5 = $weewxapi[146];
     $baromintimeyear = date("jS M", strtotime($barominoriginalDateb5));		
 	$weather["thb0seapressyearmaxtime"]	= $baromaxtimeyear; //seconds	
 	$weather["thb0seapressyearmintime"]	= $baromintimeyear; //seconds
-	$weather["thb0seapressymax"]	= $meteobridgeapi[143]; //max year
-	$weather["thb0seapressymin"]	= $meteobridgeapi[145]; //min year
+	$weather["thb0seapressymax"]	= $weewxapi[143]; //max year
+	$weather["thb0seapressymin"]	= $weewxapi[145]; //min year
 	
 	//all time
-	$baromaxoriginalDateb6 = $meteobridgeapi[148];
+	$baromaxoriginalDateb6 = $weewxapi[148];
     $baromaxtimeall = date("jS M Y", strtotime($baromaxoriginalDateb6));	
-	$barominoriginalDateb7 = $meteobridgeapi[150];
+	$barominoriginalDateb7 = $weewxapi[150];
     $baromintimeall = date("jS M Y", strtotime($barominoriginalDateb7));		
 	$weather["thb0seapressamaxtime"]	= $baromaxtimeall; //seconds	
 	$weather["thb0seapressamintime"]	= $baromintimeall; //seconds
-	$weather["thb0seapressamax"]	= $meteobridgeapi[147]; //max all time
-	$weather["thb0seapressamin"]	= $meteobridgeapi[149]; //min all time
+	$weather["thb0seapressamax"]	= $weewxapi[147]; //max all time
+	$weather["thb0seapressamin"]	= $weewxapi[149]; //min all time
 	
 	
 	//today
-	$baromaxoriginalDate = $meteobridgeapi[35];
+	$baromaxoriginalDate = $weewxapi[35];
     $baromaxtime = date("H:i", strtotime($baromaxoriginalDate));	
-	$barominoriginalDate = $meteobridgeapi[37];
+	$barominoriginalDate = $weewxapi[37];
     $baromintime = date("H:i", strtotime($barominoriginalDate));	
 	$weather["thb0seapressmaxtime"]	= $baromaxtime; //seconds	
 	$weather["thb0seapressmintime"]	= $baromintime; //seconds
 	
 	//alamanac solar
-	$solaroriginalDate = $meteobridgeapi[108];
+	$solaroriginalDate = $weewxapi[108];
     $solarydmaxtime = date("H:i", strtotime($solaroriginalDate));	
-	$solaroriginalDate2 = $meteobridgeapi[110];
+	$solaroriginalDate2 = $weewxapi[110];
     $solarmmaxtime = date('jS M H:i', strtotime($solaroriginalDate2));	
-	$solaroriginalDate4 = $meteobridgeapi[112];
+	$solaroriginalDate4 = $weewxapi[112];
     $solarymaxtime = date('jS M H:i', strtotime($solaroriginalDate4));	
-	$solaroriginalDate6 = $meteobridgeapi[106];
+	$solaroriginalDate6 = $weewxapi[106];
     $solardmaxtime = date('H:i', strtotime($solaroriginalDate6));	
 	
-	$weather["solarydmax"]		    = number_format($meteobridgeapi[107],0, '.', ''); //temp max yesterday
+	$weather["solarydmax"]		    = number_format($weewxapi[107],0, '.', ''); //temp max yesterday
 	$weather["solarydmaxtime"]		= $solarydmaxtime; //seconds	
-	$weather["solarmmax"]		    = number_format($meteobridgeapi[109],0, '.', ''); //temp max month
+	$weather["solarmmax"]		    = number_format($weewxapi[109],0, '.', ''); //temp max month
 	$weather["solarmmaxtime"]		= $solarmmaxtime; //date	
-	$weather["solarymax"]		    = number_format($meteobridgeapi[111],0, '.', ''); //temp max year
+	$weather["solarymax"]		    = number_format($weewxapi[111],0, '.', ''); //temp max year
 	$weather["solarymaxtime"]		= $solarymaxtime; //seconds	
-	$weather["solardmax"]		    = number_format($meteobridgeapi[105],0, '.', ''); //temp max today
+	$weather["solardmax"]		    = number_format($weewxapi[105],0, '.', ''); //temp max today
 	$weather["solardmaxtime"]		= $solardmaxtime; //seconds	
 	
 	
 	
 	//alamanac uv	
-	$uvoriginalDate = $meteobridgeapi[115];
+	$uvoriginalDate = $weewxapi[115];
     $uvydmaxtime = date("H:i", strtotime($uvoriginalDate));	
-	$uvoriginalDate2 = $meteobridgeapi[117];
+	$uvoriginalDate2 = $weewxapi[117];
     $uvmmaxtime = date('jS M H:i', strtotime($uvoriginalDate2));	
-	$uvoriginalDate4 = $meteobridgeapi[119];
+	$uvoriginalDate4 = $weewxapi[119];
     $uvymaxtime = date('jS M H:i', strtotime($uvoriginalDate4));	
-	$uvoriginalDate6 = $meteobridgeapi[113];
+	$uvoriginalDate6 = $weewxapi[113];
     $uvdmaxtime = date('H:i', strtotime($uvoriginalDate6));	
 	
-	$weather["uvydmax"]		    = number_format($meteobridgeapi[114],1); //temp max yesterday
+	$weather["uvydmax"]		    = number_format($weewxapi[114],1); //temp max yesterday
 	$weather["uvydmaxtime"]		= $uvydmaxtime; //seconds	
-	$weather["uvmmax"]		    = number_format($meteobridgeapi[116],1); //temp max month
+	$weather["uvmmax"]		    = number_format($weewxapi[116],1); //temp max month
 	$weather["uvmmaxtime"]		= $uvmmaxtime; //date	
-	$weather["uvymax"]		    = number_format($meteobridgeapi[118],1); //temp max year
+	$weather["uvymax"]		    = number_format($weewxapi[118],1); //temp max year
 	$weather["uvymaxtime"]		= $uvymaxtime; //seconds	
-	$weather["uvdmax"]		    = number_format($meteobridgeapi[58],1); //temp max today
+	$weather["uvdmax"]		    = number_format($weewxapi[58],1); //temp max today
 	$weather["uvdmaxtime"]		= $uvdmaxtime; //seconds	
 	
 		
 	//trends will update 15 minutes after a reboot or power failure
-	$weather["temp_trend"]         =  number_format($meteobridgeapi[2],1) -  number_format($meteobridgeapi[67],1) ;
-	$weather["humidity_trend"]     =  number_format($meteobridgeapi[3],0) -  number_format($meteobridgeapi[68],0);
-	$weather["dewpoint_trend"]     =  number_format($meteobridgeapi[4],1) -  number_format($meteobridgeapi[69],1);
-	$weather["temp_indoor_trend"]  =  number_format($meteobridgeapi[22],1) - number_format($meteobridgeapi[70],1);//indoor
-	$weather["temp_humidity_trend"] = number_format($meteobridgeapi[23],1) - number_format($meteobridgeapi[71],1);//indoor
-	$weather["barotrend"] =   $meteobridgeapi[10] -  $barotrend[0];	
-	$weather['barometer6h'] = $meteobridgeapi[10] - $meteobridgeapi[73];
-	$weather['winddir6h'] =	 $meteobridgeapi[72];
+	$weather["temp_trend"]         =  number_format($weewxapi[2],1) -  number_format($weewxapi[67],1) ;
+	$weather["humidity_trend"]     =  number_format($weewxapi[3],0) -  number_format($weewxapi[68],0);
+	$weather["dewpoint_trend"]     =  number_format($weewxapi[4],1) -  number_format($weewxapi[69],1);
+	$weather["temp_indoor_trend"]  =  number_format($weewxapi[22],1) - number_format($weewxapi[70],1);//indoor
+	$weather["temp_humidity_trend"] = number_format($weewxapi[23],1) - number_format($weewxapi[71],1);//indoor
+	$weather["barotrend"] =   $weewxapi[10] -  $barotrend[0];	
+	$weather['barometer6h'] = $weewxapi[10] - $weewxapi[73];
+	$weather['winddir6h'] =	 $weewxapi[72];
 	$weather["dirtrend"] =$dirtrend[0];
 	
 	
@@ -779,11 +765,11 @@ $str = file_get_contents('jsondata/kindex.txt');$json = array_reverse(json_decod
 $file = $_SERVER["SCRIPT_NAME"];$break = Explode('/', $file);$mod34file = $break[count($break) - 1];
 
 # Convert Start times for Pro and Nano SD, Other MBs unforunately don't provide this data
-if (is_numeric($meteobridgeapi[186]) && $meteobridgeapi[186] != '--') {
-	$weather['tempStartTime']	= date('M jS Y', strtotime($meteobridgeapi[186]));
-	$weather['windStartTime']	= date('M jS Y', strtotime($meteobridgeapi[187]));
-	$weather['pressStartTime']	= date('M jS Y', strtotime($meteobridgeapi[188]));
-	$weather['rainStartSec']	= strtotime($meteobridgeapi[189]);
+if (is_numeric($weewxapi[186]) && $weewxapi[186] != '--') {
+	$weather['tempStartTime']	= date('M jS Y', strtotime($weewxapi[186]));
+	$weather['windStartTime']	= date('M jS Y', strtotime($weewxapi[187]));
+	$weather['pressStartTime']	= date('M jS Y', strtotime($weewxapi[188]));
+	$weather['rainStartSec']	= strtotime($weewxapi[189]);
 	$weather['rainStartTime']	= date('M jS Y', $weather['rainStartSec']);
 } else {
 	$weather['tempStartTime']	= 'All Time';
@@ -792,11 +778,11 @@ if (is_numeric($meteobridgeapi[186]) && $meteobridgeapi[186] != '--') {
 	$weather['rainStartTime']	= 'All Time';
 }
 
-$weather['consoleLowBattery']	= intval($meteobridgeapi[171]); # Console battery, 0 when battery is good, 1 when battery is low
-$weather['stationLowBattery']	= intval($meteobridgeapi[172]); # Station battery, 0 when battery is good, 1 when battery is low
+$weather['consoleLowBattery']	= intval($weewxapi[171]); # Console battery, 0 when battery is good, 1 when battery is low
+$weather['stationLowBattery']	= intval($weewxapi[172]); # Station battery, 0 when battery is good, 1 when battery is low
 
-#if (is_numeric($meteobridgeapi[190]){
-#	$weather['rainStartYearSec']	= $meteobridgeapi[190];
+#if (is_numeric($weewxapi[190]){
+#	$weather['rainStartYearSec']	= $weewxapi[190];
 #	if (is_numberic($weather['rainStartSec']) && ($weather['rainStartSec'] > $weather['rainStartYearSec'])) {
 #		$weather['yearStart']	= date('M Y', $weather['rainStartYearSec']);
 #	}
