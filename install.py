@@ -33,7 +33,7 @@ class Weather34Installer(ExtensionInstaller):
                                       'group_speed': 'km_per_hour',
                                       'group_speed2': 'km_per_hour2',
                                       'group_temperature': 'degree_C'
-				  }
+				  
                             },
                                  'StringFormats': {
                                       'centibar': '%.0f',
@@ -65,7 +65,7 @@ class Weather34Installer(ExtensionInstaller):
                                       'volt': '%.1f',
                                       'watt_per_meter_squared': '%.0f',
                                       'NONE': 'N/A'
-				 }
+				 
                             },'Labels': {
                                       'centibar': 'cb',
                                       'cm': 'cm',
@@ -96,7 +96,7 @@ class Weather34Installer(ExtensionInstaller):
                                       'volt': 'V',
                                       'watt_per_meter_squared': 'W/m\u00B2',
                                       'NONE':      ''
-                            }
+                            }}}
                         },
             	'Weather34RealTime' : {
                     		'filename':'/var/www/html/weewx/w34realtime.txt',
