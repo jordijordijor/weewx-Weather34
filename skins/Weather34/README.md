@@ -1,7 +1,7 @@
 # Weather34 WeeWX
 Weather Station website skin with Live Data for WeeWX versions 3.9.2 or later.
 
-Version WX-UB40-IHVN-008.
+Version WX-UB40-IHVN-009.
 
 Packaged for installation using wee_extension ulility
 
