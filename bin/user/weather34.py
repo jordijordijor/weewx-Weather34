@@ -32,8 +32,7 @@ are not directly provided by weewx in a LOOP packet.
 
 """
 
-# FIXME: consider in-memory caching so that database queries are not
-#        necessary after the first invocation
+
 
 import math
 import os
