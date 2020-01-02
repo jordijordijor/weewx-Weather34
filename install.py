@@ -33,6 +33,7 @@ class Weather34Installer(ExtensionInstaller):
                                       'group_speed': 'km_per_hour',
                                       'group_speed2': 'km_per_hour2',
                                       'group_temperature': 'degree_C'
+				  }
                             },
                                  'StringFormats': {
                                       'centibar': '%.0f',
@@ -64,6 +65,7 @@ class Weather34Installer(ExtensionInstaller):
                                       'volt': '%.1f',
                                       'watt_per_meter_squared': '%.0f',
                                       'NONE': 'N/A'
+				 }
                             },'Labels': {
                                       'centibar': 'cb',
                                       'cm': 'cm',
