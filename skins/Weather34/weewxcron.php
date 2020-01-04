@@ -1,6 +1,7 @@
 <?php //weather34 curl based scripts 
 include('settings.php');
-// extras added march 23rd 2016 //
+include('settings1.php');
+include('common.php');
 date_default_timezone_set($TZ);
 $date = date_create();
 ?>
