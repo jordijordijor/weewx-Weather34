@@ -23,7 +23,7 @@ curl_close ($ch5);
 ?>
 
 <?php //weather34 wunderground curl based
-$url = 'https://api.wunderground.com/api/'.$apikey.'/conditions_v11/forecast10day/hourly_v11/units:'.$unit.'/lang:'.$language.'/q/pws:'.$id.'.json'; 
+$url = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode='.$lat.','.$lon.'&language='.$language.'&format=json&units='.$wuapiunit.'&apiKey='.$wuapikey.''; 
 $ch = curl_init($url);
 $filename = 'jsondata/wuweatherupdate.txt';
 $complete_save_loc = $filename; 
