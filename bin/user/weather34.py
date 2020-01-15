@@ -1,4 +1,4 @@
-# $Id: weather34.py for Weather34 by Ian Millard and Jerry Dietrich building on crt.py by mwall $
+# $Id: weather34.py for Weather34 by Ian Millard and Jerry Dietrich, initially built on crt.py by mwall but heavily adapted
 # Weather34 WebServices and retained loop data caching added by Jerry Dietrich
 # Copyright 2013-2016 Matthew Wall
 
