@@ -1,4 +1,4 @@
-# $Id: weather34.py for Weather34 by Ian Millard and Jerry Dietrich, initially built on crt.py by mwall but heavily adapted
+# $Id: weather34.py for Weather34 by Ian Millard and Jerry Dietrich building on crt.py by mwall $
 # Weather34 WebServices and retained loop data caching added by Jerry Dietrich
 # Copyright 2013-2016 Matthew Wall
 
@@ -369,7 +369,7 @@ class ForecastData():
     def __init__(self, filename):
         try:
             with open(filename, "r" ) as read_file:
-                config_list = [line.rstrip('\n') for line in read_file]
+                config_list = [line.rstrip(';\n') for line in read_file]
         except Exception as err:
             logerr("Failed to open config file: %s, Error: %s" % (filename, err))
             return
@@ -388,7 +388,7 @@ class ForecastData():
         if variable == None or len(variable) == 0:
             loginf("PHP variable: %s not found" % (var,))
             return default
-        return "=".join(variable[0].split("=")[1:]).replace(" ","").replace(";","").replace('"','')
+        return "=".join(variable[0].split("=")[1:]).replace(" ","").replace('"','')
     
     def replace_variables(self, config_list, var):
         if var == None: return None
@@ -405,7 +405,7 @@ class ForecastData():
             start = data.find(delimeters[0], end)
             if start == -1: break
             end = data.find(delimeters[1], start + len(delimeters[0]))
-            if end == -1: break
+            if end == -1: end = len(data)
             res.append(data[start + len(delimeters[0]):end])
             end += len(delimeters[1])
         return res
@@ -423,7 +423,8 @@ class ForecastData():
                 response.close()
             except Exception as err:
                 logerr("Failed getting web service data. URL: %s, Error: %s" % (url, err))
-                return
+                time.sleep(int(time_interval))
+                continue
             try:
                 with open(filename, 'w+') as file:
                     file.write(page)
@@ -483,7 +484,7 @@ class Weather34RealTime(StdService):
         self.forecast = ZambrettiForecast(config_dict)
         loginf("zambretti forecast: %s" % self.forecast.is_installed())
 
-        ForecastData(config_dict.get('Weather34WebServices', {}).get('filename', '/var/www/html/weewx/weather34/settings1.php'))
+        ForecastData(config_dict.get('Weather34WebServices', {}).get('filename', '/var/www/html/weewx/settings1.php'))
         
         # setup caching
         self.cache_stale_time = 900
@@ -551,7 +552,7 @@ class Weather34RealTime(StdService):
             self.write_data(data)
         except Exception, e:
             logdbg("w34rt: Exception while handling data: %s" % e)
-            weeutil.weeutil.log_traceback('w34rt: **** ')
+            weeutil.weeutil.log_traceback('crt: **** ')
             raise
 
     def write_data(self, data):
@@ -885,5 +886,3 @@ class CachedValues(object):
         for k in self.values:
             pkt[k] = self.get_value(k, ts, stale_age)
         return pkt
-
-
