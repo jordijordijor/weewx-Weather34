@@ -105,7 +105,11 @@ class Weather34Installer(ExtensionInstaller):
 				'exclude_fields':'rain',
             			'cache_directory':'/tmp',
 				'cache_stale_time':'900'
-		}
+		},
+		    'Weather34WebServices' : {
+                    	'filename':'/var/www/html/weewx/weather34/settings1.php'
+						
+		}	
             },
                 
             files=[('bin/user', ['bin/user/lastrain.py',
