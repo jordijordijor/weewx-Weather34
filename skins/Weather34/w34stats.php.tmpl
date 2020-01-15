@@ -105,7 +105,7 @@ $baromunits =  "--";
 $rainunits =   "--";
 $last5minwind = "$span($time_delta=300).windSpeed.avg.format(add_label=False, $localize=False)";
 $last60minbaromavg = "$span($hour_delta=1).barometer.avg.format(add_label=False, $localize=False)";
-$monthrainsum = "$month.rain.maxsum.format(add_label=False, $localize=False)";
+$monthrainsum = "$month.rain.sum.format(add_label=False, $localize=False)";
 $yearrainsum = "$rainyear.rain.sum.format(add_label=False, $localize=False)";
 $yesterdayrainsum = "$yesterday.rain.sum.format(add_label=False, $localize=False)";
 $nowintemp = "$current.inTemp.format(add_label=False, $localize=False)";
@@ -287,3 +287,4 @@ $rain_year_end = "$time.strftime("%b %Y", $almost_end_tt)";
 	
 
     ?>
+
