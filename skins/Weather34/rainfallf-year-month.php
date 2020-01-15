@@ -7,7 +7,7 @@ else  echo "<topblue1>".$weather["rainmmax"]  ;echo "<smallwindunit>".$weather["
 ?>
 </div></smallwindunit>
 <div class="minword"><?php echo date('M')?></div></div>
-<div class="mintimedate">Total
+<div class="mintimedate">Max 
 </div>  
 
 <div class="yearwordbig"><?php echo date('Y')?></div>
@@ -18,4 +18,4 @@ else  echo "<topblue1>".$weather["rainymax"]  ;echo "<smallwindunit>".$weather["
 ?>
 </div></smallwindunit>
 <div class="maxword"><?php echo date('Y')?></div></div>
-<div class="maxtimedate">Total</div> 
+<div class="maxtimedate">Max</div> 
