@@ -369,7 +369,7 @@ class ForecastData():
     def __init__(self, filename):
         try:
             with open(filename, "r" ) as read_file:
-                config_list = [line.rstrip(';\n') for line in read_file]
+                config_list = [line.replace(" ","").rstrip(';\n') for line in read_file]
         except Exception as err:
             logerr("Failed to open config file: %s, Error: %s" % (filename, err))
             return
@@ -384,11 +384,11 @@ class ForecastData():
                 thread.start()
                 
     def find_variable(self, config_list, var, default = None):
-        variable = [i for i in config_list if "$" + var in i and ("$" + var) == i.split("=")[0].replace(" ","")]
+        variable = [i for i in config_list if "$" + var in i and ("$" + var) == i.split("=")[0]]
         if variable == None or len(variable) == 0:
             loginf("PHP variable: %s not found" % (var,))
             return default
-        return "=".join(variable[0].split("=")[1:]).replace(" ","").replace('"','')
+        return "=".join(variable[0].split("=")[1:]).replace('"','')
     
     def replace_variables(self, config_list, var):
         if var == None: return None
@@ -886,3 +886,4 @@ class CachedValues(object):
         for k in self.values:
             pkt[k] = self.get_value(k, ts, stale_age)
         return pkt
+
