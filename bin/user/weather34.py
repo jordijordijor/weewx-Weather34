@@ -1,5 +1,5 @@
-# $Id: weather34.py for Weather34 by Ian Millard and Jerry Dietrich building on crt.py by mwall $
-# Weather34 WebServices and retained loop data caching added by Jerry Dietrich
+# $Id: weather34.py mofied for Weather34 by Ian Millard based on crt.py by mwall $
+# Weather34 WebServices added by Jerry Dietrich
 # Copyright 2013-2016 Matthew Wall
 
 """Emit loop data to file in Weather34 realtime format.
@@ -524,7 +524,7 @@ class Weather34RealTime(StdService):
         	except Exception as e:
 			logerr(str(e))	
         event.originalPacket = event.packet
-        logdbg("Event packet before: %s" % (event.packet,))
+        # logdbg("Event packet before: %s" % (event.packet,))
         # replace the values in the retained packet if they have a value other than None or the field is listed in excludeFields
         self.retainedLoopValues.update( dict((k,v) for k,v in event.packet.iteritems() if (v is not None or k in self.excludeFields)) )
         # if the new packet doesn't contain one of the excludeFields then remove it from the retainedLoopValues
@@ -532,7 +532,7 @@ class Weather34RealTime(StdService):
             if k in self.retainedLoopValues:
                 self.retainedLoopValues.pop(k)
         event.packet = self.retainedLoopValues.copy()
-        logdbg("Event packet after: %s" % (event.packet,))
+        # logdbg("Event packet after: %s" % (event.packet,))
         try:
         	with open(self.cache_file, 'w') as out_file:
         		out_file.write(str(self.retainedLoopValues))
