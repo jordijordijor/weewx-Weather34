@@ -41,7 +41,7 @@
       
       <li class="header">ADMIN</li>
       <li>
-        <a href="easyW34skinsetup.php" target="_blank" title="WEATHERSTATION SETTINGS PAGE">
+        <a href="easyW34skinSetup.php" target="_blank" title="WEATHERSTATION SETTINGS PAGE">
           <weather34menumarkeryellow></weather34menumarkeryellow> <?php echo $lang['Settings'];?>
         </a>
       </li>
