@@ -1,6 +1,6 @@
-# $Id: weather34.py mofied for Weather34 by Ian Millard based on crt.py by mwall $
-# Weather34 WebServices added by Jerry Dietrich
-# Copyright 2013-2016 Matthew Wall
+# $Id: weather34.py for Weather34 by Ian Millard built on crt.py by mwall $
+# Weather34 WebServices and imcomplete loop data caching added by Jerry Dietrich
+# crt.py is Copyright 2013-2020 of Matthew Wall
 
 """Emit loop data to file in Weather34 realtime format.
 
@@ -367,62 +367,51 @@ class ZambrettiForecast():
       
 class ForecastData():    
     def __init__(self, filename):
+        config_dict = {}
         try:
             with open(filename, "r" ) as read_file:
-                config_list = [line.replace(" ","").rstrip(';\n') for line in read_file]
+                config_strings = [line.replace(" ","").replace(".'","").replace("'.","").replace(".\\","").replace("\\.","").replace("\'", "").replace("\\", "").replace('"',"").rstrip(";\n") for line in read_file if "=" in line]
         except Exception as err:
-            logerr("Failed to open config file: %s, Error: %s" % (filename, err))
+            logerr("Failed to open config file or parsing: %s, Error: %s" % (filename, err))
             return
-        service_list = self.find_variable(config_list, "services")
-        if service_list <> None and len(service_list) > 0:
-            service_dir = self.find_variable(config_list, "servicesWriteDir") 
-            service_list = service_list.split(".")
+        for c in config_strings:
+            parts = c.split("=", 1)
+            config_dict.update({parts[0] : parts[1]})
+        service_str = self.replace_variables(config_dict, "services")
+        if service_str <> None and len(service_str) > 0:
+            service_dir = self.replace_variables(config_dict, "servicesWriteDir") 
+            service_list = service_str.split(".")
             for service in service_list:
-                service_filename = service_dir + service + ".txt" if service_dir <> None else None
-                thread = threading.Thread(target = self.get_website_data, args = (service, self.replace_variables(config_list, self.find_variable(config_list, service + "_url")), self.replace_variables(config_list, self.find_variable(config_list, service + "_filename", service_filename)), self.find_variable(config_list, service + "_interval", "3600"), self.replace_variables(config_list, self.find_variable(config_list, service + "_header", "'User-Agent':'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3'")).split(":")))
-                thread.setDaemon(True)
-                thread.start()
-                
-    def find_variable(self, config_list, var, default = None):
-        variable = [i for i in config_list if "$" + var in i and ("$" + var) == i.split("=")[0]]
-        if variable == None or len(variable) == 0:
-            loginf("PHP variable: %s not found" % (var,))
-            return default
-        return "=".join(variable[0].split("=")[1:]).replace('"','')
-    
-    def replace_variables(self, config_list, var):
-        if var == None: return None
-        if ".$" not in var: return var 
-        variables = self.parse_data(var, (".$", "."))
-        for v in variables:
-            var = var.replace(".$" + v + ".", self.find_variable(config_list, v))
-        return var.replace("'","")
-    
-    def parse_data(self, data, delimeters):
-        res = []
-        end = 0
-        while True:
-            start = data.find(delimeters[0], end)
-            if start == -1: break
-            end = data.find(delimeters[1], start + len(delimeters[0]))
-            if end == -1: end = len(data)
-            res.append(data[start + len(delimeters[0]):end])
-            end += len(delimeters[1])
-        return res
-        
+                try:
+                    service_filename = service_dir + service + ".txt" if service_dir <> None else None
+                    thread = threading.Thread(target = self.get_website_data, args = (service, self.replace_variables(config_dict, service + "_url"), self.replace_variables(config_dict, service + "_filename", service_filename), self.replace_variables(config_dict, service + "_interval", "3600"), self.replace_variables(config_dict, service + "_header", "'User-Agent':'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3'").split(":")))
+                    thread.setDaemon(True)
+                    thread.start()
+                except Exception as err:
+                    logerr("Failed to start service: %s, Error: %s" % (service, err))
+                   
+    def replace_variables(self, config_dict, var, default = None):
+        var_str = config_dict.get("$" + var)
+        if var_str == None: return default
+        if "$" in var_str:
+            for k in sorted(config_dict.keys(), key = lambda key : len(key), reverse = True):
+                if k in var_str:
+                    var_str = var_str.replace(k, config_dict.get(k))
+        return var_str
+               
     def get_website_data(self, service, url, filename, time_interval, header):
         if url == None or filename == None or time_interval == None or header == None:
             logerr("Error Invalid Webservice Data: %s, %s, %s %s" % (url, filename, time_interval, header))
             return
         loginf("Web Service: %s is installed" % (service,))
+        time.sleep(60) # delay to give time for network interfaces to be established
         while True:
             try:
-                request = urllib2.Request(url, None, {header[0]:":".join(header[1:])})
-                response = urllib2.urlopen(request)
+                response = urllib2.urlopen(urllib2.Request(url, None, {header[0]:":".join(header[1:])}))
                 page = response.read()
                 response.close()
             except Exception as err:
-                logerr("Failed getting web service data. URL: %s, Error: %s" % (url, err))
+                logerr("Failed getting web service data. URL: %s Header: %s, Error: %s" % (url, header, err))
                 time.sleep(int(time_interval))
                 continue
             try:
