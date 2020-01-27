@@ -13,22 +13,9 @@ $downchevron = '<svg id="i-chevron-bottom" viewBox="0 0 32 32" width="10" height
 <path d="M30 12 L16 24 2 12" />
 </svg>';
 $_POST["showDate"] = "false";
-$_POST["ds_url"] = "https://api.forecast.io/forecast/$apikey/$lat,$lon?lang=$language&units=$darkskyunit";
-$_POST["ds_filename"] = "$jsondatapath/darksky.txt";
-$_POST["wu_url"] = "https://api.weather.com/v3/wx/forecast/daily/5day?geocode=$lat,$lon&language=$language&format=json&units=$wuapiunit&apiKey=$wuapikey";
-$_POST["wu_filename"] = "$jsondatapath/wuforecast.txt";
-$_POST["eq_url"] = "https://earthquake-report.com/feeds/recent-eq?json";
-$_POST["eq_filename"] = "$jsondatapath/eqnotification.txt";
-$_POST["ki_url"] = "https://services.swpc.noaa.gov/products/geospace/planetary-k-index-dst.json";
-$_POST["ki_filename"] = "$jsondatapath/kindex.txt";
-$_POST["me_url"] = "https://api.checkwx.com/metar/$icao1/decoded";
-$_POST["me_header"] = "'X-API-Key':$metarapikey";
-$_POST["me_filename"] = "$jsondatapath/metar34.txt";
-$_POST["aq_url"] = "https://api.waqi.info/feed/geo:$lat;$lon/?token=$aqitoken";
-$_POST["aq_filename"] = "$jsondatapath/aqi.txt";
-$_POST["pu_url"] = "https://www.purpleair.com/json?show=$purpleairID";
-$_POST["pu_filename"] = "$jsondatapath/purpleair.txt";
-$_POST["services"] = "ds.wu.eq.ki.me.aq.pu";
+
+
+
 // HOMEWEATHERSTATION EASY SETUP AUGUST 2016 //
  // SIMPLE EASY PHP BASED AND CSS //
  // DEVELOPED BY BRIAN UNDERDOWN //
@@ -243,13 +230,20 @@ if (isset($_POST['submit_pwd'])){    $pass = isset($_POST['passwd']) ? $_POST['p
    exit();
 }
 ?>
-
+ 
 
 </div>
 <div span style="width:390px;margin:0 auto;margin-top:10px;text-align:center;color:#4a636f;background:0;font-family:arial;padding:20px;border-radius:4px;border:1px solid rgba(74, 99, 111, 0.4);">
 <img src='img/easyweathersetupweather34.svg' width='120px'>
 <img src='img/icon-weewx.svg' width='120px' style="float:none;">
-<br/>
+
+  
+
+
+  <input type="hidden" name="ds_url" value="https://api.forecast.io/forecast/$apikey/$lat,$lon?lang=$language&units=$darkskyunit"/><br/>
+  
+ 
+         
 
 Welcome you have logged into the WeeWX WEATHER34 Skin setup screen <?php echo date("M jS Y H:i"); ?>
 </span>
@@ -2303,10 +2297,23 @@ Weatherflow Map Zoom</div>
     #########                        Start of Web Services Sidebar                          #########
     ##########################################################################################-->
 
-   <div class="weatheroptionssidebar"><svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+  <div class="weatheroptionssidebar"><svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M12 30 L24 16 12 2" />
-</svg> Set the update frequency for Web Services in seconds<br/><br/>
-     0 = disabled<br/>
+</svg> Web Services Codes<br/><br/>
+    
+     me = Metar<br/>
+     ds = Dark Sky Forecast<br/>
+     wu = Weather Underground Forecast<br/>
+     eq = Eartquake Notification<br/>
+     ki = Planetary KP-Index<br/>
+     aq = Air Quality Service<br/>
+     pu = Purple Air<br/><br/><br/><br/> 
+  <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <path d="M12 30 L24 16 12 2" />
+</svg> 
+  
+ Set the update frequency for Web Services in seconds<br/><br/>
+     
      300 = 5minutes<br/>
      600 = 10minutes<br/>
      900 = 15minutes<br/>
@@ -2325,10 +2332,32 @@ double check again
    </div>
 
 <!--##########################################################################################
-    #########                        Start of Webservices Section                          #########
+    #########                        Start of Webservices Section     $_POST["services"] = "ds.wu.eq.ki.me.aq.pu";                     #########
     ##########################################################################################-->
 
 <div class="weatheroptions">
+  
+  <div class="weathersectiontitle">Web Service Selection</div><br/>
+<span style="color:rgba(236, 87, 27, 1.000);">
+    <div class="stationvalue">Select web service codes</div>
+ <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <path d="M12 30 L24 16 12 2" />
+</svg>
+  <select id="services" name="services" class="choose1">
+        	<option><?php echo $services ;?></option>
+            <option>ds.me.eq.ki</option>
+            <option>ds.me.eq.ki.wu</option>
+          	<option>ds.me.eq.ki.wu.aq</option>
+            <option>ds.me.eq.ki.wu.pu</option>
+            <option>ds.me.eq.ki.wu.aq.pu</option>
+          	<option>ds.me.eq.ki.pu</option>
+            <option>ds.me.eq.ki.aq</option>
+        </select><br/>
+  </span>
+           <span style="color:#777;">
+            please note <span style="color:rgba(236, 87, 27, 1.000);">ds.me.eq.ki </span>is the minimum requirement for full functionality </span><br/>
+    
+   <br/><br/>
 
   <div class="weathersectiontitle">
   <svg id="i-settings" viewBox="0 0 32 32" width="12" height="12" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
@@ -2360,9 +2389,8 @@ double check again
 </svg>
         <select id="wu_interval" name="wu_interval" class="choose1">
             <option><?php echo $ds_interval ;?></option>
-          	<option>0</option>  
-          	<option>300</option>
-            <option>600</option>
+          	  
+          	
           	<option>900</option>
             <option>1800</option>
           	<option>3600</option>
@@ -2404,8 +2432,7 @@ double check again
 </svg>
         <select id="me_interval" name="me_interval" class="choose1">
          <option><?php echo $me_interval ;?></option>  
-          	<option>300</option>
-            <option>600</option>
+          	
           	<option>900</option>
             <option>1800</option>
           	<option>3600</option>
@@ -2422,7 +2449,7 @@ double check again
 </svg>
         <select id="aq_interval" name="aq_interval" class="choose1">
         <option><?php echo $aq_interval ;?></option>
-            <option>0</option>  
+              
           	<option>300</option>
             <option>600</option>
           	<option>900</option>
@@ -2439,7 +2466,7 @@ double check again
 </svg>
         <select id="pu_interval" name="pu_interval" class="choose1">
          <option><?php echo $pu_interval ;?></option>
-            <option>0</option>  
+              
           	<option>300</option>
             <option>600</option>
           	<option>900</option>
@@ -2449,8 +2476,38 @@ double check again
         </select>
 
         <br/>
+  <div class="hiddenweatheroptions">
 
-        
+    <input id="ds_url" type="hidden" name="ds_url" value="https://api.forecast.io/forecast/$apikey/$lat,$lon?lang=$language&units=$darkskyunit"/><br/>
+  </div>
+  <input id="ds_filename" type="hidden" name="ds_filename" value="$jsondatapath/darksky.txt"/><br/>
+  </div>
+  <input id="wu_url" type="hidden" name="wu_url" value="https://api.weather.com/v3/wx/forecast/daily/5day?geocode=$lat,$lon&language=$language&format=json&units=$wuapiunit&apiKey=$wuapikey"/><br/>
+  </div>
+  <input id="wu_filename" type="hidden" name="wu_filename" value="$jsondatapath/wuforecast.txt"/><br/>
+  </div>
+  <input id="eq_url" type="hidden" name="eq_url" value="https://earthquake-report.com/feeds/recent-eq?json"/><br/>
+  </div>
+  <input id="eq_filename" type="hidden" name="eq_filename" value="$jsondatapath/eqnotification.txt"/><br/>
+  </div>
+  <input id="ki_url" type="hidden" name="ki_url" value="https://services.swpc.noaa.gov/products/geospace/planetary-k-index-dst.json"/><br/>
+  </div>
+  <input id="ki_filename" type="hidden" name="ki_filename" value="$jsondatapath/kindex.txt"/><br/>
+  </div>
+  <input id="me_url" type="hidden" name="me_url" value="https://api.checkwx.com/metar/$icao1/decoded"/><br/>
+  </div>
+  <input id="me_header" type="hidden" name="me_header" value="X-API-Key:$metarapikey"/><br/>
+  </div>
+  <input id="me_filename" type="hidden" name="me_filename" value="$jsondatapath/metar34.txt"/><br/>
+  </div>
+  <input id="aq_url" type="hidden" name="aq_url" value="https://api.waqi.info/feed/geo:$lat;$lon/?token=$aqitoken"/><br/>
+  </div>
+  <input id="aq_filename" type="hidden" name="aq_filename" value="$jsondatapath/aqi.txt"/><br/>
+  </div>
+  <input id="pu_url" type="hidden" name="pu_url" value="https://www.purpleair.com/json?show=$purpleairID"/><br/>
+  </div>
+  <input id="pu_filename" type="hidden" name="pu_filename" value="purpleair.txt"/><br/>
+  </div>  
 
 
 <!--##########################################################################################
@@ -2475,6 +2532,8 @@ now check the weather
 </svg>
 </div>
 </div>
+  
+
 
 <!--##########################################################################################
     #########                        Start of Submit Button Section                  #########
@@ -2484,7 +2543,8 @@ now check the weather
 
     <input type="submit" name="Submit" value="Save Configuration" class="button"><br/><br/><span style="color:#777;font-size:12px;padding:5px;line-height:16px;">
   <svg id="i-alert" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-    <path d="M16 3 L30 29 2 29 Z M16 11 L16 19 M16 23 L16 25" /> </svg> Click "save configuration" if everything looks ok and dont forget to set the password.</span>
+    <path d="M16 3 L30 29 2 29 Z M16 11 L16 19 M16 23 L16 25" /> </svg> Click "save configuration" if everything looks ok and dont forget to set the password. <span style="color:rgba(236, 87, 27, 1.000);">As some of the settings in this setup page affect weewx.conf you
+  <br/>must restart WeeWX after you have saved the configuration.</span>
 
   </div>
   <br/>
@@ -2496,5 +2556,6 @@ now check the weather
 </svg> WeeWX Weather34 Skin EASY SETUP &copy; 2015-<?php echo date('Y');?> Dashboard MB-UB40-IHVN</span><br/>
 <center><a href="http://weewx.com" title="http://weewx.com" target="_blank"><img src="img/icon-weewx.svg" width="120" /></a></center><br/>
 
+ 
 </form></div>
 </div>
