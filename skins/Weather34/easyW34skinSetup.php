@@ -2337,7 +2337,7 @@ double check again
 
 <div class="weatheroptions">
   
-  <div class="weathersectiontitle">Web Service Selection</div><br/>
+  <div class="weathersectiontitle">Web Service Selection (Python Method)</div><br/>
 <span style="color:rgba(236, 87, 27, 1.000);">
     <div class="stationvalue">Select web service codes</div>
  <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
@@ -2345,6 +2345,7 @@ double check again
 </svg>
   <select id="services" name="services" class="choose1">
         	<option><?php echo $services ;?></option>
+    		<option></option>
             <option>ds.me.eq.ki</option>
             <option>ds.me.eq.ki.wu</option>
           	<option>ds.me.eq.ki.wu.aq</option>
@@ -2355,7 +2356,7 @@ double check again
         </select><br/>
   </span>
            <span style="color:#777;">
-            please note <span style="color:rgba(236, 87, 27, 1.000);">ds.me.eq.ki </span>is the minimum requirement for full functionality </span><br/>
+            please note <span style="color:rgba(236, 87, 27, 1.000);">ds.me.eq.ki </span>is the minimum requirement for full functionality.<br/>Select blank if using weewcron method </span><br/>
     
    <br/><br/>
 
