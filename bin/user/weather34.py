@@ -1,6 +1,6 @@
-# $Id: weather34.py for Weather34 by Ian Millard built on crt.py by mwall $
-# Weather34 WebServices and imcomplete loop data caching added by Jerry Dietrich
-# crt.py is Copyright 2013-2020 of Matthew Wall
+# $Id: weather34.py mofied for Weather34 by Ian Millard based on crt.py by mwall $
+# Weather34 WebServices added by Jerry Dietrich
+# Copyright 2013-2016 Matthew Wall
 
 """Emit loop data to file in Weather34 realtime format.
 
@@ -369,19 +369,16 @@ class ForecastData():
     def __init__(self, filename):
         config_dict = {}
         try:
+            replchars = (" ",""),(".'",""),("'.",""),(".\\",""),("\\.",""),("\'", ""),("\\", ""),('"',""),(";\n", "")
             with open(filename, "r" ) as read_file:
-                config_strings = [line.replace(" ","").replace(".'","").replace("'.","").replace(".\\","").replace("\\.","").replace("\'", "").replace("\\", "").replace('"',"").rstrip(";\n") for line in read_file if "=" in line]
+                config_dict = dict(x.split('=', 1) for x in [reduce(lambda a, kv: a.replace(*kv), replchars, line) for line in read_file if "=" in line])
         except Exception as err:
-            logerr("Failed to open config file or parsing: %s, Error: %s" % (filename, err))
+            logerr("Failed to open config file or create dictionary: %s, Error: %s" % (filename, err))
             return
-        for c in config_strings:
-            parts = c.split("=", 1)
-            config_dict.update({parts[0] : parts[1]})
         service_str = self.replace_variables(config_dict, "services")
         if service_str <> None and len(service_str) > 0:
             service_dir = self.replace_variables(config_dict, "servicesWriteDir") 
-            service_list = service_str.split(".")
-            for service in service_list:
+            for service in service_str.split("."):
                 try:
                     service_filename = service_dir + service + ".txt" if service_dir <> None else None
                     thread = threading.Thread(target = self.get_website_data, args = (service, self.replace_variables(config_dict, service + "_url"), self.replace_variables(config_dict, service + "_filename", service_filename), self.replace_variables(config_dict, service + "_interval", "3600"), self.replace_variables(config_dict, service + "_header", "'User-Agent':'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3'").split(":")))
@@ -401,7 +398,7 @@ class ForecastData():
                
     def get_website_data(self, service, url, filename, time_interval, header):
         if url == None or filename == None or time_interval == None or header == None:
-            logerr("Error Invalid Webservice Data: %s, %s, %s %s" % (url, filename, time_interval, header))
+            logerr("Error Invalid Webservice Data: %s, %s, %s, %s" % (url, filename, time_interval, header))
             return
         loginf("Web Service: %s is installed" % (service,))
         time.sleep(60) # delay to give time for network interfaces to be established
