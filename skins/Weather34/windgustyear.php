@@ -20,7 +20,13 @@
  else if ($weather["wind_units"]=='m/s' && $weather["windmmax"]>8.3){echo "<topyellow1>",$weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
  else if ($weather["wind_units"]=='m/s' && $weather["windmmax"]>2.7){ echo "<topgreen1>", $weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
  else if ($weather["wind_units"]=='m/s' && $weather["windmmax"]>-50){ echo "<topblue1>", $weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
- 
+ //wind  kts
+ if ($weather["wind_units"]=='kts' && $weather["windmmax"]>32.40){echo "<topred1>",$weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windmmax"]>21.60){echo "<toporange1>",$weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windmmax"]>16.20){echo "<topyellow1>",$weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windmmax"]>5.40){ echo "<topgreen1>", $weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windmmax"]>-0){ echo "<topblue1>", $weather["windmmax"]."<smallwindunit>".$weather["wind_units"] ; }
+
 ?>
 </div></smalluvunit>
 
@@ -49,7 +55,13 @@
  else if ($weather["wind_units"]=='m/s' && $weather["windymax"]>8.3){echo "<topyellow1>",$weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
  else if ($weather["wind_units"]=='m/s' && $weather["windymax"]>2.7){ echo "<topgreen1>", $weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
  else if ($weather["wind_units"]=='m/s' && $weather["windymax"]>-50){ echo "<topblue1>", $weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
- ?>
+ //wind kts
+ if ($weather["wind_units"]=='kts' && $weather["windymax"]>32.4){echo "<topred1>",$weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windymax"]>21.6){echo "<toporange1>",$weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windymax"]>16.2){echo "<topyellow1>",$weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windymax"]>5.4){ echo "<topgreen1>", $weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
+ else if ($weather["wind_units"]=='kts' && $weather["windymax"]>-0){ echo "<topblue1>", $weather["windymax"]."<smallwindunit>".$weather["wind_units"] ; }
+?>
 </div></smalluvunit>
 <div class="maxword"><?php echo date('Y')?></div></div>
 <div class="maxtimedate"><?php echo $weather["windymaxtime2"]?>
