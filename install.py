@@ -147,7 +147,7 @@ class Weather34Installer(ExtensionInstaller):
                                                 'skins/Weather34/davisconsoleoutlook.php',
                                                 'skins/Weather34/dsuvindex.php',
                                                 'skins/Weather34/earthquake.php',
-                                                'skins/Weather34/easyW34skinSetup.php',
+                                                'skins/Weather34/easywxsetup.php',
                                                 'skins/Weather34/eq.php',
                                                 'skins/Weather34/eqlist.php',
                                                 'skins/Weather34/favicon.ico',
